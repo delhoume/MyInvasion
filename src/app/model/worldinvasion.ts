@@ -55,7 +55,6 @@ export class WorldInvasion {
         for (let c = 0; c < this.sorted_cities_codes.length; ++c) {
             const city_code = this.sorted_cities_codes[c];
             let city = this.cities[city_code];
-            this.num_invaders + city.invaders;
             if (this.flasher.isCityFlashed(city_code)) {
                 this.sorted_flashed_cities_codes.push(city_code);
                 for (let si_code in city.invaders) {
@@ -69,13 +68,19 @@ export class WorldInvasion {
 
             for (let si_code in city.invaders) {
                 const si = city.invaders[si_code];
-                si.sprite = SpaceInvader.BuildSprite(si_code, si.state, this.flasher.isInvaderFlashed(si_code));
-                si.sprite.on('pointerup', (event) => {
-                    const gallery = engine().stage.getChildByLabel(/Gallery/, true);
-                    if (gallery) {
-                        gallery.toggleFlashed(si);
-                    }
-                });
+                if (si) {
+
+                    si.sprite = SpaceInvader.BuildSprite(si_code,
+                        "state" in si ? si.state : "U", this.flasher.isInvaderFlashed(si_code));
+                    si.sprite.on('pointerup', (event) => {
+                        const gallery = engine().stage.getChildByLabel(/Gallery/, true);
+                        if (gallery) {
+                            gallery.toggleFlashed(si);
+                        }
+                    });
+                } else {
+                    console.log("no such:", si_code);
+                }
             }
         }
     }

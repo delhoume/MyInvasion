@@ -31,6 +31,7 @@ export class SpaceInvader {
         sprite.anchor.set(0);
         //   console.log(si_info);
         if (status != "A") {
+            console.log(si_code, status);
             let ssprite = new Sprite({ texture: Texture.from(status), anchor: 0 });
             ssprite.x = sprite.width - ssprite.width;
             ssprite.anchor.set(0, 0);

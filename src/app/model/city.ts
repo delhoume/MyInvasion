@@ -1,3 +1,4 @@
+import { Assets } from "pixi.js";
 import { SpaceInvader } from "./spaceinvader";
 import { Utils } from "./utils";
 
@@ -19,16 +20,24 @@ export class City {
         this.isocountry = params.iso;
         this.num_invaders = params.invaders;
         this.points = params.pts;
-    
+
+
+        const statuses = Assets.get("invaders.json");
         for (let i = 0; i < this.num_invaders; ++i) {
-             const invader_code = City.InvaderCode(this.prefix, i);
+            const invader_code = City.InvaderCode(this.prefix, i);
             this.invaders[invader_code] = new SpaceInvader(invader_code);
+            if (invader_code in statuses && invader_code in this.invaders) {
+                if ("status" in statuses[invader_code])
+                    this.invaders[invader_code].state = statuses[invader_code].status;
+                else
+                    this.invaders[invader_code].state = "A";
+            }
         }
     }
-    
-    static InvaderCode(city_code: string, order: number) : string {
-         if (city_code != "LIL")
+
+    static InvaderCode(city_code: string, order: number): string {
+        if (city_code != "LIL")
             order++;
-       return `${city_code}_${Utils.InvaderFormat(order)}`;
+        return `${city_code}_${Utils.InvaderFormat(order)}`;
     }
 }
