@@ -1,0 +1,16 @@
+
+        @font-face {
+            font-family: 'ITCMachine';
+            src: url('fonts/ITC-Machine-Medium.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'SpaceInvaders';
+            src: url('fonts/space_invaders.ttf') format('ttf');
+
+        }
+
+        @font-face {
+            font-family: 'PixelInvaders';
+            src: url('fonts/pixel_invaders.ttf') format('ttf');
+        }

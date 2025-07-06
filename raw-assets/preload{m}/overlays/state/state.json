@@ -1,0 +1,42 @@
+{
+  "frames": {
+    "H": {
+      "frame": { "x": 0, "y": 0, "w":32, "h":32 },
+      "sourceSize": { "w":32, "h":32 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w":32, "h":32 }
+    },
+    "F": {
+      "frame": { "x":32, "y": 0, "w":32, "h":32 },
+      "sourceSize": { "w":32, "h":32 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w":32, "h":32 }
+    },
+    "DG": {
+      "frame": { "x": 64, "y": 0, "w":32, "h":32 },
+      "sourceSize": { "w":32, "h":32 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w":32, "h":32 }
+    },
+    "DD": {
+      "frame": { "x": 96, "y": 0, "w":32, "h":32 },
+      "sourceSize": { "w":32, "h":32 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w":32, "h":32 }
+    },
+    "U": {
+      "frame": { "x": 128, "y": 0, "w":32, "h":32 },
+      "sourceSize": { "w":32, "h":32 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w":32, "h":32 }
+    },
+    "D": {
+      "frame": { "x": 160, "y": 0, "w":32, "h":32 },
+      "sourceSize": { "w":32, "h":32 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w":32, "h":32 }
+    }
+  },
+  "meta": {
+    "app": "PixiJS",
+    "version": "5.0.0",
+    "image": "status.avif",
+    "format": "RGBA8888",
+    "size": { "w": 192, "h":32 },
+    "scale": "1"
+  }
+}

@@ -1,0 +1,626 @@
+{
+    "provider": "awazleon.space",
+    "timestamp": "2025-06-18",
+    "cities": {
+        "number": 88,
+        "details": {
+            "BRL": {
+                "prefix": "BRL",
+                "name": "Berlin",
+                "country": "de",
+                "invaders": 12,
+                "pts": 300
+            },
+            "FKF": {
+                "prefix": "FKF",
+                "name": "Frankfurt",
+                "country": "de",
+                "invaders": 14,
+                "pts": 430
+            },
+            "KLN": {
+                "prefix": "KLN",
+                "name": "Cologne",
+                "country": "de",
+                "invaders": 27,
+                "pts": 670
+            },
+            "MUN": {
+                "prefix": "MUN",
+                "name": "Munich",
+                "country": "de",
+                "invaders": 18,
+                "pts": 710
+            },
+            "MLB": {
+                "prefix": "MLB",
+                "name": "Melbourne",
+                "country": "au",
+                "invaders": 25,
+                "pts": 440
+            },
+            "PRT": {
+                "prefix": "PRT",
+                "name": "Perth",
+                "country": "au",
+                "invaders": 26,
+                "pts": 400
+            },
+            "WN": {
+                "prefix": "WN",
+                "name": "Wien",
+                "country": "at",
+                "invaders": 56,
+                "pts": 1220
+            },
+            "DHK": {
+                "prefix": "DHK",
+                "name": "Dakha",
+                "country": "bd",
+                "invaders": 6,
+                "pts": 200
+            },
+            "ANVR": {
+                "prefix": "ANVR",
+                "name": "Antwerp",
+                "country": "be",
+                "invaders": 2,
+                "pts": 20
+            },
+            "BXL": {
+                "prefix": "BXL",
+                "name": "Brussels",
+                "country": "be",
+                "invaders": 42,
+                "pts": 1210
+            },
+            "CHAR": {
+                "prefix": "CHAR",
+                "name": "Charleroi",
+                "country": "be",
+                "invaders": 1,
+                "pts": 100
+            },
+            "RDU": {
+                "prefix": "RDU",
+                "name": "Redu",
+                "country": "be",
+                "invaders": 6,
+                "pts": 280
+            },
+            "BT": {
+                "prefix": "BT",
+                "name": "Bhutan",
+                "country": "bt",
+                "invaders": 11,
+                "pts": 490
+            },
+            "POTI": {
+                "prefix": "POTI",
+                "name": "Potosi",
+                "country": "bo",
+                "invaders": 53,
+                "pts": 2030
+            },
+            "GRU": {
+                "prefix": "GRU",
+                "name": "Grude",
+                "country": "ba",
+                "invaders": 3,
+                "pts": 40
+            },
+            "SP": {
+                "prefix": "SP",
+                "name": "Sao Paulo",
+                "country": "br",
+                "invaders": 52,
+                "pts": 2130
+            },
+            "HK": {
+                "prefix": "HK",
+                "name": "Hong-Kong",
+                "country": "hk",
+                "invaders": 132,
+                "pts": 4800
+            },
+            "DJN": {
+                "prefix": "DJN",
+                "name": "Daejeon",
+                "country": "kr",
+                "invaders": 23,
+                "pts": 500
+            },
+            "SL": {
+                "prefix": "SL",
+                "name": "Seoul",
+                "country": "kr",
+                "invaders": 14,
+                "pts": 350
+            },
+            "BBO": {
+                "prefix": "BBO",
+                "name": "Bilbao",
+                "country": "es",
+                "invaders": 40,
+                "pts": 1110
+            },
+            "BRC": {
+                "prefix": "BRC",
+                "name": "Barcelone",
+                "country": "es",
+                "invaders": 17,
+                "pts": 290
+            },
+            "MEN": {
+                "prefix": "MEN",
+                "name": "Menorca",
+                "country": "es",
+                "invaders": 5,
+                "pts": 140
+            },
+            "MLGA": {
+                "prefix": "MLGA",
+                "name": "Malaga",
+                "country": "es",
+                "invaders": 29,
+                "pts": 1020
+            },
+            "LA": {
+                "prefix": "LA",
+                "name": "Los Angeles",
+                "country": "us",
+                "invaders": 214,
+                "pts": 5810
+            },
+            "MIA": {
+                "prefix": "MIA",
+                "name": "Miami",
+                "country": "us",
+                "invaders": 85,
+                "pts": 2850
+            },
+            "NY": {
+                "prefix": "NY",
+                "name": "New York",
+                "country": "us",
+                "invaders": 219,
+                "pts": 6760
+            },
+            "SD": {
+                "prefix": "SD",
+                "name": "San Diego",
+                "country": "us",
+                "invaders": 21,
+                "pts": 700
+            },
+            "AIX": {
+                "prefix": "AIX",
+                "name": "Aix-en-Provence",
+                "country": "fr",
+                "invaders": 10,
+                "pts": 160
+            },
+            "AMI": {
+                "prefix": "AMI",
+                "name": "Amiens",
+                "country": "fr",
+                "invaders": 16,
+                "pts": 540
+            },
+            "AVI": {
+                "prefix": "AVI",
+                "name": "Avignon",
+                "country": "fr",
+                "invaders": 41,
+                "pts": 710
+            },
+            "BAB": {
+                "prefix": "BAB",
+                "name": "Biarritz-Anglet-Bayonne",
+                "country": "fr",
+                "invaders": 60,
+                "pts": 2050
+            },
+            "BTA": {
+                "prefix": "BTA",
+                "name": "Bastia",
+                "country": "fr",
+                "invaders": 34,
+                "pts": 530
+            },
+            "CAPF": {
+                "prefix": "CAPF",
+                "name": "Cap-Ferret",
+                "country": "fr",
+                "invaders": 10,
+                "pts": 310
+            },
+            "CAZ": {
+                "prefix": "CAZ",
+                "name": "French Riviera",      
+                        "altname": "Côte d'Azur",
+                "country": "fr",
+                "invaders": 40,
+                "pts": 1120
+            },
+            "CLR": {
+                "prefix": "CLR",
+                "name": "Clermont-Ferrand",
+                "country": "fr",
+                "invaders": 47,
+                "pts": 1790
+            },
+            "CON": {
+                "prefix": "CON",
+                "name": "Contis-Les-Bains",
+                "country": "fr",
+                "invaders": 2,
+                "pts": 100
+            },
+            "DIJ": {
+                "prefix": "DIJ",
+                "name": "Dijon",
+                "country": "fr",
+                "invaders": 6,
+                "pts": 230
+            },
+            "FRQ": {
+                "prefix": "FRQ",
+                "name": "Forcalquier",
+                "country": "fr",
+                "invaders": 4,
+                "pts": 100
+            },
+            "FTBL": {
+                "prefix": "FTBL",
+                "name": "Fontainebleau",
+                "country": "fr",
+                "invaders": 46,
+                "pts": 1590
+            },
+            "GRN": {
+                "prefix": "GRN",
+                "name": "Grenoble",
+                "country": "fr",
+                "invaders": 57,
+                "pts": 570
+            },
+            "LBR": {
+                "prefix": "LBR",
+                "name": "Luberon",
+                "country": "fr",
+                "invaders": 8,
+                "pts": 290
+            },
+            "LCT": {
+                "prefix": "LCT",
+                "name": "La Ciotat",
+                "country": "fr",
+                "invaders": 9,
+                "pts": 280
+            },
+            "LIL": {
+                "prefix": "LIL",
+                "name": "Lille",
+                "country": "fr",
+                "invaders": 6,
+                "pts": 110
+            },
+            "LY": {
+                "prefix": "LY",
+                "name": "Lyon",
+                "country": "fr",
+                "invaders": 48,
+                "pts": 640
+            },
+            "MARS": {
+                "prefix": "MARS",
+                "name": "Marseille",
+                "country": "fr",
+                "invaders": 97,
+                "pts": 3270
+            },
+            "MPL": {
+                "prefix": "MPL",
+                "name": "Montpellier",
+                "country": "fr",
+                "invaders": 42,
+                "pts": 740
+            },
+            "MTB": {
+                "prefix": "MTB",
+                "name": "Montauban",
+                "country": "fr",
+                "invaders": 11,
+                "pts": 230
+            },
+            "NA": {
+                "prefix": "NA",
+                "name": "Nantes",
+                "country": "fr",
+                "invaders": 3,
+                "pts": 40
+            },
+            "NIM": {
+                "prefix": "NIM",
+                "name": "Nîmes",
+                "country": "fr",
+                "invaders": 5,
+                "pts": 90
+            },
+            "ORLN": {
+                "prefix": "ORLN",
+                "name": "Orléans",
+                "country": "fr",
+                "invaders": 12,
+                "pts": 390
+            },
+            "PA": {
+                "prefix": "PA",
+                "name": "Paris",
+                "country": "fr",
+                "invaders": 1545,
+                "pts": 42520
+            },
+            "PAU": {
+                "prefix": "PAU",
+                "name": "Pau",
+                "country": "fr",
+                "invaders": 10,
+                "pts": 120
+            },
+            "PRP": {
+                "prefix": "PRP",
+                "name": "Perpignan",
+                "country": "fr",
+                "invaders": 8,
+                "pts": 230
+            },
+            "REUN": {
+                "prefix": "REUN",
+                "name": "La Réunion",
+                "country": "fr",
+                "invaders": 11,
+                "pts": 320
+            },
+            "RN": {
+                "prefix": "RN",
+                "name": "Rennes",
+                "country": "fr",
+                "invaders": 4,
+                "pts": 110
+            },
+            "TLS": {
+                "prefix": "TLS",
+                "name": "Toulouse",
+                "country": "fr",
+                "invaders": 11,
+                "pts": 360
+            },
+            "VLMO": {
+                "prefix": "VLMO",
+                "name": "Valmorel",
+                "country": "fr",
+                "invaders": 3,
+                "pts": 80
+            },
+            "VRS": {
+                "prefix": "VRS",
+                "name": "Versailles",
+                "country": "fr",
+                "invaders": 42,
+                "pts": 1520
+            },
+            "LDN": {
+                "prefix": "LDN",
+                "name": "London",
+                "country": "gb",
+                "invaders": 162,
+                "pts": 4000
+            },
+            "MAN": {
+                "prefix": "MAN",
+                "name": "Manchester",
+                "country": "gb",
+                "invaders": 47,
+                "pts": 970
+            },
+            "NCL": {
+                "prefix": "NCL",
+                "name": "Newcastle",
+                "country": "gb",
+                "invaders": 25,
+                "pts": 510
+            },
+            "VRN": {
+                "prefix": "VRN",
+                "name": "Varanasi",
+                "country": "in",
+                "invaders": 14,
+                "pts": 300
+            },
+            "ELT": {
+                "prefix": "ELT",
+                "name": "Eilat",
+                "country": "il",
+                "invaders": 2,
+                "pts": 20
+            },
+            "RA": {
+                "prefix": "RA",
+                "name": "Ravenna",
+                "country": "it",
+                "invaders": 40,
+                "pts": 1550
+            },
+            "ROM": {
+                "prefix": "ROM",
+                "name": "Rome",
+                "country": "it",
+                "invaders": 75,
+                "pts": 2370
+            },
+            "TK": {
+                "prefix": "TK",
+                "name": "Tokyo",
+                "country": "jp",
+                "invaders": 138,
+                "pts": 3240
+            },
+            "MBSA": {
+                "prefix": "MBSA",
+                "name": "Mombasa",
+                "country": "ke",
+                "invaders": 10,
+                "pts": 220
+            },
+            "MRAK": {
+                "prefix": "MRAK",
+                "name": "Marrakech",
+                "country": "ma",
+                "invaders": 4,
+                "pts": 120
+            },
+            "RBA": {
+                "prefix": "RBA",
+                "name": "Rabat",
+                "country": "ma",
+                "invaders": 20,
+                "pts": 700
+            },
+            "CCU": {
+                "prefix": "CCU",
+                "name": "Cancun",
+                "country": "mx",
+                "invaders": 3,
+                "pts": 80
+            },
+            "KAT": {
+                "prefix": "KAT",
+                "name": "Katmandou",
+                "country": "np",
+                "invaders": 28,
+                "pts": 530
+            },
+            "AMS": {
+                "prefix": "AMS",
+                "name": "Amsterdam",
+                "country": "nl",
+                "invaders": 26,
+                "pts": 370
+            },
+            "NOO": {
+                "prefix": "NOO",
+                "name": "Noordwijk",
+                "country": "nl",
+                "invaders": 10,
+                "pts": 480
+            },
+            "RTD": {
+                "prefix": "RTD",
+                "name": "Rotterdam",
+                "country": "nl",
+                "invaders": 26,
+                "pts": 340
+            },
+            "FAO": {
+                "prefix": "FAO",
+                "name": "Faro",
+                "country": "pt",
+                "invaders": 4,
+                "pts": 110
+            },
+            "LJU": {
+                "prefix": "LJU",
+                "name": "Ljubljana",
+                "country": "si",
+                "invaders": 42,
+                "pts": 1180
+            },
+            "SPACE": {
+                "prefix": "SPACE",
+                "name": "Space",
+                "country": "none",
+                "invaders": 2,
+                "pts": 100
+            },
+            "HALM": {
+                "prefix": "HALM",
+                "name": "Halmstad",
+                "country": "se",
+                "invaders": 2,
+                "pts": 60
+            },
+            "VSB": {
+                "prefix": "VSB",
+                "name": "Visby",
+                "country": "se",
+                "invaders": 3,
+                "pts": 30
+            },
+            "ANZR": {
+                "prefix": "ANZR",
+                "name": "Anzère",
+                "country": "ch",
+                "invaders": 4,
+                "pts": 110
+            },
+            "BRN": {
+                "prefix": "BRN",
+                "name": "Bern",
+                "country": "ch",
+                "invaders": 29,
+                "pts": 470
+            },
+            "BSL": {
+                "prefix": "BSL",
+                "name": "Basel",
+                "country": "ch",
+                "invaders": 25,
+                "pts": 840
+            },
+            "GNV": {
+                "prefix": "GNV",
+                "name": "Genève",
+                "country": "ch",
+                "invaders": 33,
+                "pts": 530
+            },
+            "LSN": {
+                "prefix": "LSN",
+                "name": "Lausanne",
+                "country": "ch",
+                "invaders": 18,
+                "pts": 270
+            },
+            "GRTI": {
+                "prefix": "GRTI",
+                "name": "Grumeti",
+                "country": "tz",
+                "invaders": 8,
+                "pts": 280
+            },
+            "BGK": {
+                "prefix": "BGK",
+                "name": "Bangkok",
+                "country": "th",
+                "invaders": 51,
+                "pts": 890
+            },
+            "DJBA": {
+                "prefix": "DJBA",
+                "name": "Djerba",
+                "country": "tn",
+                "invaders": 58,
+                "pts": 2610
+            },
+            "IST": {
+                "prefix": "IST",
+                "name": "Istanbul",
+                "country": "tr",
+                "invaders": 20,
+                "pts": 360
+            }
+        }
+    }
+}

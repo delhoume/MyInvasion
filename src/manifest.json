@@ -1,0 +1,3039 @@
+{
+  "bundles": [
+    {
+      "name": "default",
+      "assets": [
+        {
+          "alias": [
+            "fonts/ITC-Machine-Medium.woff",
+            "ITC-Machine-Medium.woff"
+          ],
+          "src": [
+            "fonts/ITC-Machine-Medium.woff"
+          ],
+          "data": {
+            "tags": {}
+          }
+        },
+        {
+          "alias": [
+            "fonts/pixel_invaders.ttf",
+            "pixel_invaders.ttf"
+          ],
+          "src": [
+            "fonts/pixel_invaders.ttf"
+          ],
+          "data": {
+            "tags": {}
+          }
+        },
+        {
+          "alias": [
+            "fonts/space_invaders.ttf",
+            "space_invaders.ttf"
+          ],
+          "src": [
+            "fonts/space_invaders.ttf"
+          ],
+          "data": {
+            "tags": {}
+          }
+        }
+      ]
+    },
+    {
+      "name": "main",
+      "assets": [
+        {
+          "alias": [
+            "main/logo-white.svg",
+            "logo-white.svg"
+          ],
+          "src": [
+            "main/logo-white.svg"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/sounds/bgm-main.mp3",
+            "bgm-main.mp3"
+          ],
+          "src": [
+            "main/sounds/bgm-main.ogg",
+            "main/sounds/bgm-main.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/sounds/sfx-hover.wav",
+            "sfx-hover.wav"
+          ],
+          "src": [
+            "main/sounds/sfx-hover.ogg",
+            "main/sounds/sfx-hover.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/sounds/sfx-press.wav",
+            "sfx-press.wav"
+          ],
+          "src": [
+            "main/sounds/sfx-press.ogg",
+            "main/sounds/sfx-press.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "main/ui",
+            "ui"
+          ],
+          "src": [
+            "main/ui@0.5x.webp.json",
+            "main/ui@0.5x.png.json",
+            "main/ui.webp.json",
+            "main/ui.png.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true,
+              "tps": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "preload",
+      "assets": [
+        {
+          "alias": [
+            "preload/atlases/AIX_00.avif",
+            "AIX_00.avif"
+          ],
+          "src": [
+            "preload/atlases/AIX_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/AIX_00.json",
+            "AIX_00.json"
+          ],
+          "src": [
+            "preload/atlases/AIX_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/AMI_00.avif",
+            "AMI_00.avif"
+          ],
+          "src": [
+            "preload/atlases/AMI_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/AMI_00.json",
+            "AMI_00.json"
+          ],
+          "src": [
+            "preload/atlases/AMI_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/AMS_00.avif",
+            "AMS_00.avif"
+          ],
+          "src": [
+            "preload/atlases/AMS_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/AMS_00.json",
+            "AMS_00.json"
+          ],
+          "src": [
+            "preload/atlases/AMS_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/ANVR_00.avif",
+            "ANVR_00.avif"
+          ],
+          "src": [
+            "preload/atlases/ANVR_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/ANVR_00.json",
+            "ANVR_00.json"
+          ],
+          "src": [
+            "preload/atlases/ANVR_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/ANZR_00.avif",
+            "ANZR_00.avif"
+          ],
+          "src": [
+            "preload/atlases/ANZR_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/ANZR_00.json",
+            "ANZR_00.json"
+          ],
+          "src": [
+            "preload/atlases/ANZR_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/AVI_00.avif",
+            "AVI_00.avif"
+          ],
+          "src": [
+            "preload/atlases/AVI_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/AVI_00.json",
+            "AVI_00.json"
+          ],
+          "src": [
+            "preload/atlases/AVI_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BAB_00.avif",
+            "BAB_00.avif"
+          ],
+          "src": [
+            "preload/atlases/BAB_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BAB_00.json",
+            "BAB_00.json"
+          ],
+          "src": [
+            "preload/atlases/BAB_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BBO_00.avif",
+            "BBO_00.avif"
+          ],
+          "src": [
+            "preload/atlases/BBO_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BBO_00.json",
+            "BBO_00.json"
+          ],
+          "src": [
+            "preload/atlases/BBO_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BGK_00.avif",
+            "BGK_00.avif"
+          ],
+          "src": [
+            "preload/atlases/BGK_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BGK_00.json",
+            "BGK_00.json"
+          ],
+          "src": [
+            "preload/atlases/BGK_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BRC_00.avif",
+            "BRC_00.avif"
+          ],
+          "src": [
+            "preload/atlases/BRC_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BRC_00.json",
+            "BRC_00.json"
+          ],
+          "src": [
+            "preload/atlases/BRC_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BRL_00.avif",
+            "BRL_00.avif"
+          ],
+          "src": [
+            "preload/atlases/BRL_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BRL_00.json",
+            "BRL_00.json"
+          ],
+          "src": [
+            "preload/atlases/BRL_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BRN_00.avif",
+            "BRN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/BRN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BRN_00.json",
+            "BRN_00.json"
+          ],
+          "src": [
+            "preload/atlases/BRN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BSL_00.avif",
+            "BSL_00.avif"
+          ],
+          "src": [
+            "preload/atlases/BSL_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BSL_00.json",
+            "BSL_00.json"
+          ],
+          "src": [
+            "preload/atlases/BSL_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BTA_00.avif",
+            "BTA_00.avif"
+          ],
+          "src": [
+            "preload/atlases/BTA_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BTA_00.json",
+            "BTA_00.json"
+          ],
+          "src": [
+            "preload/atlases/BTA_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BT_00.avif",
+            "BT_00.avif"
+          ],
+          "src": [
+            "preload/atlases/BT_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BT_00.json",
+            "BT_00.json"
+          ],
+          "src": [
+            "preload/atlases/BT_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BXL_00.avif",
+            "BXL_00.avif"
+          ],
+          "src": [
+            "preload/atlases/BXL_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/BXL_00.json",
+            "BXL_00.json"
+          ],
+          "src": [
+            "preload/atlases/BXL_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CAPF_00.avif",
+            "CAPF_00.avif"
+          ],
+          "src": [
+            "preload/atlases/CAPF_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CAPF_00.json",
+            "CAPF_00.json"
+          ],
+          "src": [
+            "preload/atlases/CAPF_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CAZ_00.avif",
+            "CAZ_00.avif"
+          ],
+          "src": [
+            "preload/atlases/CAZ_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CAZ_00.json",
+            "CAZ_00.json"
+          ],
+          "src": [
+            "preload/atlases/CAZ_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CCU_00.avif",
+            "CCU_00.avif"
+          ],
+          "src": [
+            "preload/atlases/CCU_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CCU_00.json",
+            "CCU_00.json"
+          ],
+          "src": [
+            "preload/atlases/CCU_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CHAR_00.avif",
+            "CHAR_00.avif"
+          ],
+          "src": [
+            "preload/atlases/CHAR_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CHAR_00.json",
+            "CHAR_00.json"
+          ],
+          "src": [
+            "preload/atlases/CHAR_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CLR_00.avif",
+            "CLR_00.avif"
+          ],
+          "src": [
+            "preload/atlases/CLR_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CLR_00.json",
+            "CLR_00.json"
+          ],
+          "src": [
+            "preload/atlases/CLR_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CON_00.avif",
+            "CON_00.avif"
+          ],
+          "src": [
+            "preload/atlases/CON_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/CON_00.json",
+            "CON_00.json"
+          ],
+          "src": [
+            "preload/atlases/CON_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/DHK_00.avif",
+            "DHK_00.avif"
+          ],
+          "src": [
+            "preload/atlases/DHK_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/DHK_00.json",
+            "DHK_00.json"
+          ],
+          "src": [
+            "preload/atlases/DHK_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/DIJ_00.avif",
+            "DIJ_00.avif"
+          ],
+          "src": [
+            "preload/atlases/DIJ_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/DIJ_00.json",
+            "DIJ_00.json"
+          ],
+          "src": [
+            "preload/atlases/DIJ_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/DJBA_00.avif",
+            "DJBA_00.avif"
+          ],
+          "src": [
+            "preload/atlases/DJBA_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/DJBA_00.json",
+            "DJBA_00.json"
+          ],
+          "src": [
+            "preload/atlases/DJBA_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/DJN_00.avif",
+            "DJN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/DJN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/DJN_00.json",
+            "DJN_00.json"
+          ],
+          "src": [
+            "preload/atlases/DJN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/ELT_00.avif",
+            "ELT_00.avif"
+          ],
+          "src": [
+            "preload/atlases/ELT_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/ELT_00.json",
+            "ELT_00.json"
+          ],
+          "src": [
+            "preload/atlases/ELT_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/FAO_00.avif",
+            "FAO_00.avif"
+          ],
+          "src": [
+            "preload/atlases/FAO_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/FAO_00.json",
+            "FAO_00.json"
+          ],
+          "src": [
+            "preload/atlases/FAO_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/FKF_00.avif",
+            "FKF_00.avif"
+          ],
+          "src": [
+            "preload/atlases/FKF_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/FKF_00.json",
+            "FKF_00.json"
+          ],
+          "src": [
+            "preload/atlases/FKF_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/FRQ_00.avif",
+            "FRQ_00.avif"
+          ],
+          "src": [
+            "preload/atlases/FRQ_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/FRQ_00.json",
+            "FRQ_00.json"
+          ],
+          "src": [
+            "preload/atlases/FRQ_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/FTBL_00.avif",
+            "FTBL_00.avif"
+          ],
+          "src": [
+            "preload/atlases/FTBL_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/FTBL_00.json",
+            "FTBL_00.json"
+          ],
+          "src": [
+            "preload/atlases/FTBL_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/GNV_00.avif",
+            "GNV_00.avif"
+          ],
+          "src": [
+            "preload/atlases/GNV_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/GNV_00.json",
+            "GNV_00.json"
+          ],
+          "src": [
+            "preload/atlases/GNV_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/GRN_00.avif",
+            "GRN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/GRN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/GRN_00.json",
+            "GRN_00.json"
+          ],
+          "src": [
+            "preload/atlases/GRN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/GRTI_00.avif",
+            "GRTI_00.avif"
+          ],
+          "src": [
+            "preload/atlases/GRTI_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/GRTI_00.json",
+            "GRTI_00.json"
+          ],
+          "src": [
+            "preload/atlases/GRTI_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/GRU_00.avif",
+            "GRU_00.avif"
+          ],
+          "src": [
+            "preload/atlases/GRU_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/GRU_00.json",
+            "GRU_00.json"
+          ],
+          "src": [
+            "preload/atlases/GRU_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/HALM_00.avif",
+            "HALM_00.avif"
+          ],
+          "src": [
+            "preload/atlases/HALM_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/HALM_00.json",
+            "HALM_00.json"
+          ],
+          "src": [
+            "preload/atlases/HALM_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/HK_00.avif",
+            "HK_00.avif"
+          ],
+          "src": [
+            "preload/atlases/HK_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/HK_00.json",
+            "HK_00.json"
+          ],
+          "src": [
+            "preload/atlases/HK_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/IST_00.avif",
+            "IST_00.avif"
+          ],
+          "src": [
+            "preload/atlases/IST_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/IST_00.json",
+            "IST_00.json"
+          ],
+          "src": [
+            "preload/atlases/IST_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/KAT_00.avif",
+            "KAT_00.avif"
+          ],
+          "src": [
+            "preload/atlases/KAT_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/KAT_00.json",
+            "KAT_00.json"
+          ],
+          "src": [
+            "preload/atlases/KAT_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/KLN_00.avif",
+            "KLN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/KLN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/KLN_00.json",
+            "KLN_00.json"
+          ],
+          "src": [
+            "preload/atlases/KLN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LA_00.avif",
+            "LA_00.avif"
+          ],
+          "src": [
+            "preload/atlases/LA_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LA_00.json",
+            "LA_00.json"
+          ],
+          "src": [
+            "preload/atlases/LA_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LBR_00.avif",
+            "LBR_00.avif"
+          ],
+          "src": [
+            "preload/atlases/LBR_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LBR_00.json",
+            "LBR_00.json"
+          ],
+          "src": [
+            "preload/atlases/LBR_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LCT_00.avif",
+            "LCT_00.avif"
+          ],
+          "src": [
+            "preload/atlases/LCT_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LCT_00.json",
+            "LCT_00.json"
+          ],
+          "src": [
+            "preload/atlases/LCT_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LDN_00.avif",
+            "LDN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/LDN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LDN_00.json",
+            "LDN_00.json"
+          ],
+          "src": [
+            "preload/atlases/LDN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LIL_00.avif",
+            "LIL_00.avif"
+          ],
+          "src": [
+            "preload/atlases/LIL_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LIL_00.json",
+            "LIL_00.json"
+          ],
+          "src": [
+            "preload/atlases/LIL_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LJU_00.avif",
+            "LJU_00.avif"
+          ],
+          "src": [
+            "preload/atlases/LJU_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LJU_00.json",
+            "LJU_00.json"
+          ],
+          "src": [
+            "preload/atlases/LJU_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LSN_00.avif",
+            "LSN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/LSN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LSN_00.json",
+            "LSN_00.json"
+          ],
+          "src": [
+            "preload/atlases/LSN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LY_00.avif",
+            "LY_00.avif"
+          ],
+          "src": [
+            "preload/atlases/LY_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/LY_00.json",
+            "LY_00.json"
+          ],
+          "src": [
+            "preload/atlases/LY_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MAN_00.avif",
+            "MAN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/MAN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MAN_00.json",
+            "MAN_00.json"
+          ],
+          "src": [
+            "preload/atlases/MAN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MARS_00.avif",
+            "MARS_00.avif"
+          ],
+          "src": [
+            "preload/atlases/MARS_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MARS_00.json",
+            "MARS_00.json"
+          ],
+          "src": [
+            "preload/atlases/MARS_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MBSA_00.avif",
+            "MBSA_00.avif"
+          ],
+          "src": [
+            "preload/atlases/MBSA_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MBSA_00.json",
+            "MBSA_00.json"
+          ],
+          "src": [
+            "preload/atlases/MBSA_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MEN_00.avif",
+            "MEN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/MEN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MEN_00.json",
+            "MEN_00.json"
+          ],
+          "src": [
+            "preload/atlases/MEN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MIA_00.avif",
+            "MIA_00.avif"
+          ],
+          "src": [
+            "preload/atlases/MIA_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MIA_00.json",
+            "MIA_00.json"
+          ],
+          "src": [
+            "preload/atlases/MIA_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MLB_00.avif",
+            "MLB_00.avif"
+          ],
+          "src": [
+            "preload/atlases/MLB_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MLB_00.json",
+            "MLB_00.json"
+          ],
+          "src": [
+            "preload/atlases/MLB_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MLGA_00.avif",
+            "MLGA_00.avif"
+          ],
+          "src": [
+            "preload/atlases/MLGA_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MLGA_00.json",
+            "MLGA_00.json"
+          ],
+          "src": [
+            "preload/atlases/MLGA_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MPL_00.avif",
+            "MPL_00.avif"
+          ],
+          "src": [
+            "preload/atlases/MPL_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MPL_00.json",
+            "MPL_00.json"
+          ],
+          "src": [
+            "preload/atlases/MPL_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MRAK_00.avif",
+            "MRAK_00.avif"
+          ],
+          "src": [
+            "preload/atlases/MRAK_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MRAK_00.json",
+            "MRAK_00.json"
+          ],
+          "src": [
+            "preload/atlases/MRAK_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MTB_00.avif",
+            "MTB_00.avif"
+          ],
+          "src": [
+            "preload/atlases/MTB_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MTB_00.json",
+            "MTB_00.json"
+          ],
+          "src": [
+            "preload/atlases/MTB_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MUN_00.avif",
+            "MUN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/MUN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/MUN_00.json",
+            "MUN_00.json"
+          ],
+          "src": [
+            "preload/atlases/MUN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/NA_00.avif",
+            "NA_00.avif"
+          ],
+          "src": [
+            "preload/atlases/NA_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/NA_00.json",
+            "NA_00.json"
+          ],
+          "src": [
+            "preload/atlases/NA_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/NCL_00.avif",
+            "NCL_00.avif"
+          ],
+          "src": [
+            "preload/atlases/NCL_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/NCL_00.json",
+            "NCL_00.json"
+          ],
+          "src": [
+            "preload/atlases/NCL_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/NIM_00.avif",
+            "NIM_00.avif"
+          ],
+          "src": [
+            "preload/atlases/NIM_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/NIM_00.json",
+            "NIM_00.json"
+          ],
+          "src": [
+            "preload/atlases/NIM_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/NOO_00.avif",
+            "NOO_00.avif"
+          ],
+          "src": [
+            "preload/atlases/NOO_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/NOO_00.json",
+            "NOO_00.json"
+          ],
+          "src": [
+            "preload/atlases/NOO_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/NY_00.avif",
+            "NY_00.avif"
+          ],
+          "src": [
+            "preload/atlases/NY_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/NY_00.json",
+            "NY_00.json"
+          ],
+          "src": [
+            "preload/atlases/NY_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/ORLN_00.avif",
+            "ORLN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/ORLN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/ORLN_00.json",
+            "ORLN_00.json"
+          ],
+          "src": [
+            "preload/atlases/ORLN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PAU_00.avif",
+            "PAU_00.avif"
+          ],
+          "src": [
+            "preload/atlases/PAU_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PAU_00.json",
+            "PAU_00.json"
+          ],
+          "src": [
+            "preload/atlases/PAU_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PA_00.avif",
+            "PA_00.avif"
+          ],
+          "src": [
+            "preload/atlases/PA_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PA_00.json",
+            "PA_00.json"
+          ],
+          "src": [
+            "preload/atlases/PA_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PA_01.avif",
+            "PA_01.avif"
+          ],
+          "src": [
+            "preload/atlases/PA_01.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PA_01.json",
+            "PA_01.json"
+          ],
+          "src": [
+            "preload/atlases/PA_01.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PA_02.avif",
+            "PA_02.avif"
+          ],
+          "src": [
+            "preload/atlases/PA_02.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PA_02.json",
+            "PA_02.json"
+          ],
+          "src": [
+            "preload/atlases/PA_02.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PA_03.avif",
+            "PA_03.avif"
+          ],
+          "src": [
+            "preload/atlases/PA_03.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PA_03.json",
+            "PA_03.json"
+          ],
+          "src": [
+            "preload/atlases/PA_03.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/POTI_00.avif",
+            "POTI_00.avif"
+          ],
+          "src": [
+            "preload/atlases/POTI_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/POTI_00.json",
+            "POTI_00.json"
+          ],
+          "src": [
+            "preload/atlases/POTI_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PRP_00.avif",
+            "PRP_00.avif"
+          ],
+          "src": [
+            "preload/atlases/PRP_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PRP_00.json",
+            "PRP_00.json"
+          ],
+          "src": [
+            "preload/atlases/PRP_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PRT_00.avif",
+            "PRT_00.avif"
+          ],
+          "src": [
+            "preload/atlases/PRT_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/PRT_00.json",
+            "PRT_00.json"
+          ],
+          "src": [
+            "preload/atlases/PRT_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/RA_00.avif",
+            "RA_00.avif"
+          ],
+          "src": [
+            "preload/atlases/RA_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/RA_00.json",
+            "RA_00.json"
+          ],
+          "src": [
+            "preload/atlases/RA_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/RBA_00.avif",
+            "RBA_00.avif"
+          ],
+          "src": [
+            "preload/atlases/RBA_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/RBA_00.json",
+            "RBA_00.json"
+          ],
+          "src": [
+            "preload/atlases/RBA_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/RDU_00.avif",
+            "RDU_00.avif"
+          ],
+          "src": [
+            "preload/atlases/RDU_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/RDU_00.json",
+            "RDU_00.json"
+          ],
+          "src": [
+            "preload/atlases/RDU_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/REUN_00.avif",
+            "REUN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/REUN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/REUN_00.json",
+            "REUN_00.json"
+          ],
+          "src": [
+            "preload/atlases/REUN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/RN_00.avif",
+            "RN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/RN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/RN_00.json",
+            "RN_00.json"
+          ],
+          "src": [
+            "preload/atlases/RN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/ROM_00.avif",
+            "ROM_00.avif"
+          ],
+          "src": [
+            "preload/atlases/ROM_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/ROM_00.json",
+            "ROM_00.json"
+          ],
+          "src": [
+            "preload/atlases/ROM_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/RTD_00.avif",
+            "RTD_00.avif"
+          ],
+          "src": [
+            "preload/atlases/RTD_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/RTD_00.json",
+            "RTD_00.json"
+          ],
+          "src": [
+            "preload/atlases/RTD_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/SD_00.avif",
+            "SD_00.avif"
+          ],
+          "src": [
+            "preload/atlases/SD_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/SD_00.json",
+            "SD_00.json"
+          ],
+          "src": [
+            "preload/atlases/SD_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/SL_00.avif",
+            "SL_00.avif"
+          ],
+          "src": [
+            "preload/atlases/SL_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/SL_00.json",
+            "SL_00.json"
+          ],
+          "src": [
+            "preload/atlases/SL_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/SPACE_00.avif",
+            "SPACE_00.avif"
+          ],
+          "src": [
+            "preload/atlases/SPACE_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/SPACE_00.json",
+            "SPACE_00.json"
+          ],
+          "src": [
+            "preload/atlases/SPACE_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/SP_00.avif",
+            "SP_00.avif"
+          ],
+          "src": [
+            "preload/atlases/SP_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/SP_00.json",
+            "SP_00.json"
+          ],
+          "src": [
+            "preload/atlases/SP_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/TK_00.avif",
+            "TK_00.avif"
+          ],
+          "src": [
+            "preload/atlases/TK_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/TK_00.json",
+            "TK_00.json"
+          ],
+          "src": [
+            "preload/atlases/TK_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/TLS_00.avif",
+            "TLS_00.avif"
+          ],
+          "src": [
+            "preload/atlases/TLS_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/TLS_00.json",
+            "TLS_00.json"
+          ],
+          "src": [
+            "preload/atlases/TLS_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/VLMO_00.avif",
+            "VLMO_00.avif"
+          ],
+          "src": [
+            "preload/atlases/VLMO_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/VLMO_00.json",
+            "VLMO_00.json"
+          ],
+          "src": [
+            "preload/atlases/VLMO_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/VRN_00.avif",
+            "VRN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/VRN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/VRN_00.json",
+            "VRN_00.json"
+          ],
+          "src": [
+            "preload/atlases/VRN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/VRS_00.avif",
+            "VRS_00.avif"
+          ],
+          "src": [
+            "preload/atlases/VRS_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/VRS_00.json",
+            "VRS_00.json"
+          ],
+          "src": [
+            "preload/atlases/VRS_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/VSB_00.avif",
+            "VSB_00.avif"
+          ],
+          "src": [
+            "preload/atlases/VSB_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/VSB_00.json",
+            "VSB_00.json"
+          ],
+          "src": [
+            "preload/atlases/VSB_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/WN_00.avif",
+            "WN_00.avif"
+          ],
+          "src": [
+            "preload/atlases/WN_00.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/atlases/WN_00.json",
+            "WN_00.json"
+          ],
+          "src": [
+            "preload/atlases/WN_00.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/cities.json",
+            "cities.json"
+          ],
+          "src": [
+            "preload/cities.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/flashers/all.txt",
+            "all.txt"
+          ],
+          "src": [
+            "preload/flashers/all.txt"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/flashers/awazleon.txt",
+            "awazleon.txt"
+          ],
+          "src": [
+            "preload/flashers/awazleon.txt"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/flashers/delhoume_latest.txt",
+            "delhoume_latest.txt"
+          ],
+          "src": [
+            "preload/flashers/delhoume_latest.txt"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/flashers/invadest_dec2024.txt",
+            "invadest_dec2024.txt"
+          ],
+          "src": [
+            "preload/flashers/invadest_dec2024.txt"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/flashers/ninatheo_03_juillet_2025.txt",
+            "ninatheo_03_juillet_2025.txt"
+          ],
+          "src": [
+            "preload/flashers/ninatheo_03_juillet_2025.txt"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/invaders.json",
+            "invaders.json"
+          ],
+          "src": [
+            "preload/invaders.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/logo.svg",
+            "logo.svg"
+          ],
+          "src": [
+            "preload/logo.svg"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/overlays/state/blue.png",
+            "blue.png"
+          ],
+          "src": [
+            "preload/overlays/state/blue@0.5x.webp",
+            "preload/overlays/state/blue@0.5x.png",
+            "preload/overlays/state/blue.webp",
+            "preload/overlays/state/blue.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/overlays/state/green.png",
+            "green.png"
+          ],
+          "src": [
+            "preload/overlays/state/green@0.5x.webp",
+            "preload/overlays/state/green@0.5x.png",
+            "preload/overlays/state/green.webp",
+            "preload/overlays/state/green.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/overlays/state/orange.png",
+            "orange.png"
+          ],
+          "src": [
+            "preload/overlays/state/orange@0.5x.webp",
+            "preload/overlays/state/orange@0.5x.png",
+            "preload/overlays/state/orange.webp",
+            "preload/overlays/state/orange.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/overlays/state/red.png",
+            "red.png"
+          ],
+          "src": [
+            "preload/overlays/state/red@0.5x.webp",
+            "preload/overlays/state/red@0.5x.png",
+            "preload/overlays/state/red.webp",
+            "preload/overlays/state/red.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/overlays/state/state.json",
+            "state.json"
+          ],
+          "src": [
+            "preload/overlays/state/state.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/overlays/state/status.avif",
+            "status.avif"
+          ],
+          "src": [
+            "preload/overlays/state/status.avif"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/overlays/state/white.png",
+            "white.png"
+          ],
+          "src": [
+            "preload/overlays/state/white@0.5x.webp",
+            "preload/overlays/state/white@0.5x.png",
+            "preload/overlays/state/white.webp",
+            "preload/overlays/state/white.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/overlays/state/yellow.png",
+            "yellow.png"
+          ],
+          "src": [
+            "preload/overlays/state/yellow@0.5x.webp",
+            "preload/overlays/state/yellow@0.5x.png",
+            "preload/overlays/state/yellow.webp",
+            "preload/overlays/state/yellow.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/sounds/tutulululu.mp3",
+            "tutulululu.mp3"
+          ],
+          "src": [
+            "preload/sounds/tutulululu.ogg",
+            "preload/sounds/tutulululu.mp3"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/black_filled_round_rect.png",
+            "black_filled_round_rect.png"
+          ],
+          "src": [
+            "preload/ui/black_filled_round_rect@0.5x.webp",
+            "preload/ui/black_filled_round_rect@0.5x.png",
+            "preload/ui/black_filled_round_rect.webp",
+            "preload/ui/black_filled_round_rect.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/pattern_round_rect.png",
+            "pattern_round_rect.png"
+          ],
+          "src": [
+            "preload/ui/pattern_round_rect@0.5x.webp",
+            "preload/ui/pattern_round_rect@0.5x.png",
+            "preload/ui/pattern_round_rect.webp",
+            "preload/ui/pattern_round_rect.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/round_rect.png",
+            "round_rect.png"
+          ],
+          "src": [
+            "preload/ui/round_rect@0.5x.webp",
+            "preload/ui/round_rect@0.5x.png",
+            "preload/ui/round_rect.webp",
+            "preload/ui/round_rect.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider-bg.png",
+            "slider-bg.png"
+          ],
+          "src": [
+            "preload/ui/slider-bg@0.5x.webp",
+            "preload/ui/slider-bg@0.5x.png",
+            "preload/ui/slider-bg.webp",
+            "preload/ui/slider-bg.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider.png",
+            "slider.png"
+          ],
+          "src": [
+            "preload/ui/slider@0.5x.webp",
+            "preload/ui/slider@0.5x.png",
+            "preload/ui/slider.webp",
+            "preload/ui/slider.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/white_filled_round_rect.png",
+            "white_filled_round_rect.png"
+          ],
+          "src": [
+            "preload/ui/white_filled_round_rect@0.5x.webp",
+            "preload/ui/white_filled_round_rect@0.5x.png",
+            "preload/ui/white_filled_round_rect.webp",
+            "preload/ui/white_filled_round_rect.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
