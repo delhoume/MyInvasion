@@ -12,7 +12,7 @@ export class Gallery extends Container {
   private camera: Camera;
   private firstShake: any;
   public mode: string = "flashed";
-  static shake_intensity: number = 4;
+  static shake_intensity: number = 6;
   static shake_duration: number = 500;
 
 
@@ -71,7 +71,9 @@ export class Gallery extends Container {
     }
   }
 
-  public layout() {
+  // future : start nlayout from a given city
+  // currenty layout the whole thing again (fast enough)...
+  public layout(start_city_code: string | null) {
     // gcompute tilesize
     const tpr = userSettings.getTilesPerRow();
     const app = engine();
@@ -79,9 +81,12 @@ export class Gallery extends Container {
     const tilesize = (windowWidth - ((tpr + 1) * GraphicsCity.tileoffset)) / tpr;
     const world_invasion = WorldInvasion.GetInstance();
     var cy = 0;
+    let found_start: boolean= false;
+
     for (let c = 0; c < world_invasion.sorted_cities_codes.length; ++c) {
       const city_code = world_invasion.sorted_cities_codes[c];
-      const city = world_invasion.cities[city_code];
+      found_start = start_city_code && start_city_code == city_code;
+           const city = world_invasion.cities[city_code];
       const cityContainer = this.getChildByLabel(city_code);
 
       if (this.mode == "flashed" && !world_invasion.flasher.isCityFlashed(city_code)) {
@@ -176,8 +181,11 @@ export class Gallery extends Container {
     newSprite.on('pointerup', (_) => {
       this.toggleFlashed(si);
     });
-
     this.updateCityText(si.city_code);
+    if (this.mode != "all") {
+      this.layout(si.city_code);
+    }
+
   }
 
   public remove(): void { }

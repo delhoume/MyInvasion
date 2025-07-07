@@ -142,14 +142,17 @@ export class MainScreen extends Container {
   public exportFlashes() {
     const world_invasion = WorldInvasion.GetInstance();
     const flasher = world_invasion.flasher;
-console.log(flasher.getFlashFile());
+    const fileflash = flasher.getFlashFile();
+    console.log(fileflash);
+    // copy toclipboard
+    navigator.clipboard.writeText(fileflash);
   }
 
   public updateButtons() {
     this.modeButton.text = `\u27F3 ${this.capitalize(this.mode)} mode`;
-    this.modeButton.visible = this.editMode == false;
+ //   this.modeButton.visible = this.editMode == false;
     this.editButton.text = this.editMode ? "Done" : "Edit";
-    this.editButton.visible = this.mode == "all";
+ //   this.editButton.visible = this.mode == "all";
     const world_invasion = WorldInvasion.GetInstance();
     const num_invaders = world_invasion.num_invaders;
     const num_cities = world_invasion.sorted_cities_codes.length;
@@ -207,7 +210,7 @@ console.log(flasher.getFlashFile());
 
   /** Show screen with animations */
   public async show(): Promise<void> {
-   
+
     const elementsToAnimate = [
       this.infoButton,
       this.editButton,

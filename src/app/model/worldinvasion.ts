@@ -27,7 +27,7 @@ export class WorldInvasion {
             return WorldInvasion.singleton;
         WorldInvasion.singleton = new WorldInvasion();
         WorldInvasion.singleton.initFrom(Assets.get("cities.json"));
-        WorldInvasion.singleton.initFromFlasher("ninatheo_03_juillet_2025")
+        WorldInvasion.singleton.initFromFlasher("delhoume_latest"); //ninatheo_03_juillet_2025")
         return WorldInvasion.singleton;
     }
 
@@ -71,7 +71,8 @@ export class WorldInvasion {
                 if (si) {
 
                     si.sprite = SpaceInvader.BuildSprite(si_code,
-                        "state" in si ? si.state : "U", this.flasher.isInvaderFlashed(si_code));
+                        "state" in si ? si.state : "U", 
+                        this.flasher.isInvaderFlashed(si_code));
                     si.sprite.on('pointerup', (event) => {
                         const gallery = engine().stage.getChildByLabel(/Gallery/, true);
                         if (gallery) {
