@@ -1,4 +1,4 @@
-This if a first "usable" version of a standalone (running under node.js withh a local server) graphical editor
+This if a first "usable" version of a standalone (running under node.js with a local dev server) graphical editor
 for manipulation of flashfiles (compact representations of lists of flashed mosaics in the FlashInvader game
 by street artist Invader)
 
