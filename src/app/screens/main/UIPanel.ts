@@ -20,8 +20,6 @@ export class GUIPanel extends Component {
     parent.addChild(this);
   }
 
-}
-
 
   public build() {
   this.editButton = new Button({

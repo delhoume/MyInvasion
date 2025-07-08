@@ -2,7 +2,7 @@ import { FancyButton, Slider } from "@pixi/ui";
 import { animate } from "motion";
 import type { AnimationPlaybackControls } from "motion/react";
 import type { Ticker } from "pixi.js";
-import { Container } from "pixi.js";
+import { Container, Text, Graphics, TextStyle } from "pixi.js";
 
 import { engine } from "../../getEngine";
 import { Viewport } from "pixi-viewport";
@@ -10,6 +10,7 @@ import { userSettings } from "../../utils/userSettings";
 import { Gallery } from "./Gallery.ts";
 import { WorldInvasion } from "../../model/worldinvasion.ts";
 
+import { BackdropBlurFilter } from "pixi-filters";
 
 /** The screen that holds the app */
 export class MainScreen extends Container {
@@ -18,7 +19,8 @@ export class MainScreen extends Container {
 
   public mainContainer: Container;
 
-  private infoButton: FancyButton;
+  private infoArea: Container;
+  private scoreReport: Text;
   private editButton: FancyButton;
   private modeButton: FancyButton;
   private tilesSlider: Slider;
@@ -63,14 +65,22 @@ export class MainScreen extends Container {
       },
     };
 
-    this.infoButton = new FancyButton({
-      text: "Mode : ",
-      defaultView: "white_filled_round_rect.png",
-      animations: buttonAnimations,
-    });
+    this.infoArea = new Container({ label: "UI"});
+    this.addChild(this.infoArea);
 
-    this.addChild(this.infoButton);
+    const scoreStyle = new TextStyle({
+    fontFamily: "SpaceInvaders",
+    fontSize: 25,
+    fill: 'white',
+     stroke: {
+        color: '#000000',
+        width: 5
+    }
+});
 
+    this.scoreReport = new Text({text: "score", style: scoreStyle });
+    this.infoArea.addChild(this.scoreReport);
+   
     this.editButton = new FancyButton({
       text: "Mode : ",
       defaultView: "white_filled_round_rect.png",
@@ -133,7 +143,8 @@ export class MainScreen extends Container {
       this.gallery.layout();
     });
     this.addChild(this.tilesSlider);
-  }
+
+ }
 
   public capitalize(str: string) {
     return str[0].toUpperCase() + str.slice(1);
@@ -150,16 +161,14 @@ export class MainScreen extends Container {
 
   public updateButtons() {
     this.modeButton.text = `\u27F3 ${this.capitalize(this.mode)} mode`;
- //   this.modeButton.visible = this.editMode == false;
     this.editButton.text = this.editMode ? "Done" : "Edit";
- //   this.editButton.visible = this.mode == "all";
     const world_invasion = WorldInvasion.GetInstance();
     const num_invaders = world_invasion.num_invaders;
     const num_cities = world_invasion.sorted_cities_codes.length;
     const flasher = world_invasion.flasher;
     const num_flashed = flasher.getTotalFlashes();
     const cities_flashed = flasher.getNumFlashedCities();
-    this.infoButton.text = `Flashes:  ${num_flashed} / ${num_invaders} - Cities: ${cities_flashed} /  ${num_cities}`;
+    this.scoreReport.text = `Flashes:  ${num_flashed} / ${num_invaders} - Cities: ${cities_flashed} /  ${num_cities}`;
   }
   /** Prepare the screen just before showing */
   public prepare() {
@@ -187,11 +196,6 @@ export class MainScreen extends Container {
     const componentsheight = 32;
 
 
-    this.infoButton.x = xoffset;
-    this.infoButton.y = componentsy - componentspos + 20;
-    this.infoButton.width = width - 2 * xoffset;
-    this.infoButton.height = componentsheight
-
     this.modeButton.x = xoffset;
     this.modeButton.y = componentsy;
     this.modeButton.width = modebuttonwidth;
@@ -205,6 +209,12 @@ export class MainScreen extends Container {
     this.tilesSlider.height = componentsheight;
     this.tilesSlider.y = componentsy + 10;
 
+    this.infoArea.x = xoffset;
+    this.infoArea.y = componentsy - componentspos + 20;
+  //  this.infoArea.width = editbuttonwidth + modebuttonwidth + sliderwidth + 2 * xoffset;
+  //  this.infoArea.height = componentsheight / 2
+
+
     this.gallery.layout();
   }
 
@@ -212,7 +222,7 @@ export class MainScreen extends Container {
   public async show(): Promise<void> {
 
     const elementsToAnimate = [
-      this.infoButton,
+      this.scoreReport,
       this.editButton,
       this.modeButton,
       this.tilesSlider
