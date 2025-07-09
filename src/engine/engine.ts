@@ -6,7 +6,6 @@ import type {
 } from "pixi.js";
 import { Application, Assets, extensions, ResizePlugin } from "pixi.js";
 import "pixi.js/app";
-import { LayoutSystem } from '@pixi/layout';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore - This is a dynamically generated file by AssetPack

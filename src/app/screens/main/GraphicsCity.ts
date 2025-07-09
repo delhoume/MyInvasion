@@ -1,9 +1,6 @@
-import { Sprite, Text, Container } from "pixi.js";
+import { Text, Container } from "pixi.js";
 import { userSettings } from "../../utils/userSettings";
 import { engine } from "../../getEngine";
-import { Flasher } from "../../model/flasher";
-import { MainScreen } from "./MainScreen";
-import { SpaceInvader } from "../../model/spaceinvader";
 import { WorldInvasion } from "../../model/worldinvasion";
 import { City } from "../../model/city";
 

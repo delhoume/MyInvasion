@@ -3,7 +3,6 @@ import { City } from './city';
 import { SpaceInvader } from './spaceinvader';
 import { Assets } from 'pixi.js';
 import { Flasher } from './flasher';
-import { GraphicsCity } from '../screens/main/GraphicsCity';
 import { engine } from '../getEngine';
 
 export class WorldInvasion {
@@ -11,7 +10,7 @@ export class WorldInvasion {
     public num_cities: number;
     public num_invaders: number;
     public sorted_cities_codes: any;
-    public flasher: Flasher;
+    public flasher!: Flasher;
     public sorted_flashed_cities_codes: any;
 
     private static singleton: WorldInvasion;
@@ -73,8 +72,8 @@ export class WorldInvasion {
                     si.sprite = SpaceInvader.BuildSprite(si_code,
                         "state" in si ? si.state : "U", 
                         this.flasher.isInvaderFlashed(si_code));
-                    si.sprite.on('pointerup', (event) => {
-                        const gallery = engine().stage.getChildByLabel(/Gallery/, true);
+                    si.sprite.on('pointerup', (_: any) => {
+                        const gallery: any = engine().stage.getChildByLabel(/Gallery/, true);
                         if (gallery) {
                             gallery.toggleFlashed(si);
                         }
@@ -93,14 +92,14 @@ export class WorldInvasion {
         this.initFrom(world_description);
     }
 
-    saveToFile(filename: string) {
-        // const contents = JSON.stringify(this);
-        // console.log(filename, contents);
-        console.log(this);
-    }
+    // saveToFile(filename?: string) {
+    //      const contents = JSON.stringify(this);
+    //     console.log(filename, contents);
+    //     console.log(this);
+    // }
 
     invader(invader_code: string): SpaceInvader {
-        const { city_code, order } = SpaceInvader.CodeToParts(invader_code);
+        const { city_code } = SpaceInvader.CodeToParts(invader_code);
         const city = this.cities[city_code];
         const ret = city.invaders[invader_code];
         return ret;

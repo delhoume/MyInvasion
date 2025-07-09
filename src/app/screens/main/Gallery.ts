@@ -1,12 +1,11 @@
 import { GraphicsCity } from "./GraphicsCity";
-import { Assets, Container } from "pixi.js";
+import { Assets, Container, Sprite } from "pixi.js";
 import { Camera, Shake } from "pixi-game-camera";
 import { engine } from "../../getEngine";
 import { WorldInvasion } from "../../model/worldinvasion";
 import { SpaceInvader } from "../../model/spaceinvader";
 import { City } from "../../model/city";
 import { userSettings } from "../../utils/userSettings";
-import { Sound } from '@pixi/sound';
 
 export class Gallery extends Container {
   private camera: Camera;
@@ -73,7 +72,7 @@ export class Gallery extends Container {
 
   // future : start nlayout from a given city
   // currenty layout the whole thing again (fast enough)...
-  public layout(start_city_code: string | null) {
+  public layout(start_city_code?: string | null) {
     // gcompute tilesize
     const tpr = userSettings.getTilesPerRow();
     const app = engine();
@@ -81,14 +80,14 @@ export class Gallery extends Container {
     const tilesize = (windowWidth - ((tpr + 1) * GraphicsCity.tileoffset)) / tpr;
     const world_invasion = WorldInvasion.GetInstance();
     var cy = 0;
-    let found_start: boolean= false;
+    let found_start: boolean = false;
 
     for (let c = 0; c < world_invasion.sorted_cities_codes.length; ++c) {
       const city_code = world_invasion.sorted_cities_codes[c];
-      found_start = start_city_code && start_city_code == city_code;
-           const city = world_invasion.cities[city_code];
+      found_start = start_city_code != null && start_city_code == city_code;
+      const city = world_invasion.cities[city_code];
       const cityContainer = this.getChildByLabel(city_code);
-
+      if (!cityContainer) continue;
       if (this.mode == "flashed" && !world_invasion.flasher.isCityFlashed(city_code)) {
         cityContainer.visible = false;
         continue;
@@ -101,11 +100,11 @@ export class Gallery extends Container {
       cityContainer.position.set(0, cy);
       const cityHeaderContainer = cityContainer.getChildByLabel(`${city_code}_header`);
       const cityInvadersContainer = cityContainer.getChildByLabel(`${city_code}_invaders`);
-      cityHeaderContainer.position.set(0, 0);
+      cityHeaderContainer?.position.set(0, 0);
 
       // does not depend on tilesize
       cy += GraphicsCity.cityoffset;
-      cityInvadersContainer.position.set(0, GraphicsCity.cityoffset);
+      cityInvadersContainer?.position.set(0, GraphicsCity.cityoffset);
       var y = 0;
       var x = 0;
       for (let i = 0; i < city.num_invaders; ++i) {
@@ -144,15 +143,15 @@ export class Gallery extends Container {
     const world_invasion = WorldInvasion.GetInstance();
     const city = world_invasion.cities[city_code];
     const cityContainer = this.getChildByLabel(city_code);
-    const cityHeaderContainer = cityContainer.getChildByLabel(`${city_code}_header`);
-    const citytext = cityHeaderContainer.getChildAt(0);
+    const cityHeaderContainer = cityContainer?.getChildByLabel(`${city_code}_header`);
+    const citytext = cityHeaderContainer?.getChildAt(0);
     const num_invaders = city.num_invaders;
     const num_flashed = world_invasion.flasher.isCityFlashed(city_code) ?
       world_invasion.flasher.flashedCities[city_code].length : 0;
-    if (this.mode == "missing") {
-      citytext.text = `${city.name}: missing ${num_invaders - num_flashed} / ${num_invaders}`;
-    } else {
-      citytext.text = `${city.name}:  ${num_flashed} / ${num_invaders}`;
+      const isInMissingMode = this.mode == "missing";
+    const ttext = `${city.name}: ${this.mode == "missing" ? "missing" : ""} ${isInMissingMode ?  num_invaders - num_flashed  : num_flashed} / ${num_invaders}`;
+    if (citytext && "text" in citytext) {
+      (citytext as {text:  any}).text = ttext;
     }
   }
 

@@ -2,15 +2,13 @@ import { FancyButton, Slider } from "@pixi/ui";
 import { animate } from "motion";
 import type { AnimationPlaybackControls } from "motion/react";
 import type { Ticker } from "pixi.js";
-import { Container, Text, Graphics, TextStyle } from "pixi.js";
+import { Container, Text, TextStyle } from "pixi.js";
 
 import { engine } from "../../getEngine";
 import { Viewport } from "pixi-viewport";
 import { userSettings } from "../../utils/userSettings";
 import { Gallery } from "./Gallery.ts";
 import { WorldInvasion } from "../../model/worldinvasion.ts";
-
-import { BackdropBlurFilter } from "pixi-filters";
 
 /** The screen that holds the app */
 export class MainScreen extends Container {
@@ -49,21 +47,6 @@ export class MainScreen extends Container {
     viewport.worldHeight = this.mainContainer.height;
     this.viewport = viewport;
     this.gallery.initAllGraphics();
-
-    const buttonAnimations = {
-      hover: {
-        prsops: {
-          scale: { x: 1.1, y: 1.1 },
-        },
-        duration: 100,
-      },
-      pressed: {
-        props: {
-          scale: { x: 0.9, y: 0.9 },
-        },
-        duration: 100,
-      },
-    };
 
     this.infoArea = new Container({ label: "UI"});
     this.addChild(this.infoArea);

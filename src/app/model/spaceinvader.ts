@@ -1,5 +1,4 @@
 import { Container, Sprite, Texture } from "pixi.js";
-import { City } from "./city";
 import { engine } from "../getEngine";
 
 export class SpaceInvader {
@@ -8,7 +7,7 @@ export class SpaceInvader {
     public order: number;
     public state: string = "A";
     public date: string = "";
-    public sprite: Sprite;
+    public sprite!: Sprite;
 
     constructor(si_code: string) {
         this.code = si_code;
