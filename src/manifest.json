@@ -2,44 +2,7 @@
   "bundles": [
     {
       "name": "default",
-      "assets": [
-        {
-          "alias": [
-            "fonts/ITC-Machine-Medium.woff",
-            "ITC-Machine-Medium.woff"
-          ],
-          "src": [
-            "fonts/ITC-Machine-Medium.woff"
-          ],
-          "data": {
-            "tags": {}
-          }
-        },
-        {
-          "alias": [
-            "fonts/pixel_invaders.ttf",
-            "pixel_invaders.ttf"
-          ],
-          "src": [
-            "fonts/pixel_invaders.ttf"
-          ],
-          "data": {
-            "tags": {}
-          }
-        },
-        {
-          "alias": [
-            "fonts/space_invaders.ttf",
-            "space_invaders.ttf"
-          ],
-          "src": [
-            "fonts/space_invaders.ttf"
-          ],
-          "data": {
-            "tags": {}
-          }
-        }
-      ]
+      "assets": []
     },
     {
       "name": "main",

@@ -52,8 +52,8 @@ export class MainScreen extends Container {
     this.addChild(this.infoArea);
 
     const scoreStyle = new TextStyle({
-    fontFamily: "SpaceInvaders",
-    fontSize: 25,
+    fontFamily: "Space Invaders",
+    fontSize: 30,
     fill: 'white',
      stroke: {
         color: '#000000',
@@ -69,6 +69,7 @@ export class MainScreen extends Container {
       defaultView: "white_filled_round_rect.png",
       pressedView: "black_filled_round_rect.png"
     });
+    this.editButton.text.
     this.editButton.anchor.set(0);
     this.addChild(this.editButton);
     this.editButton.onPress.connect(() => {
@@ -115,7 +116,7 @@ export class MainScreen extends Container {
       fill: 'pattern_round_rect.png',
       slider: 'slider.png',
       min: 3,
-      max: 18,
+      max: 33,
       value: tpr,
       step: 1
     });

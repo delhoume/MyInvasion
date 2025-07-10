@@ -7,6 +7,7 @@ import { City } from "../../model/city";
 export class GraphicsCity {
   static tileoffset: number = 2;
   static cityoffset : number = 40;
+  static maxTileSize: number = 100; 
   constructor() {
   }
 
@@ -17,9 +18,8 @@ export class GraphicsCity {
     //   text = `${name}: missing ${num_invaders - num_flashed_invaders} / ${num_invaders}`;
     const gtext = new Text({
       text: text,
-      style: { fill: "white", fontSize: 20, fontFamily: "SpaceInvaders" }
+      style: { fill: "white", fontSize: 26, fontFamily: "Space Invaders" }
     });
-    gtext.position.set(0, 0);
     return gtext;
   }
 
