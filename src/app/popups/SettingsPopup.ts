@@ -26,7 +26,7 @@ export class SettingsPopup extends Container {
   private versionLabel: Text;
   /** Layout that organises the UI components */
   private layout: List;
-   /** Slider that changes background music volume */
+  /** Slider that changes background music volume */
   private tilesPerrowSlider: VolumeSlider;
   /** Slider that changes sound effects volume */
   private sfxSlider: VolumeSlider;
@@ -76,7 +76,6 @@ export class SettingsPopup extends Container {
     this.layout.y = -80;
     this.panel.addChild(this.layout);
 
-   
     this.sfxSlider = new VolumeSlider("SFX Volume");
     this.sfxSlider.onUpdate.connect((v) => {
       userSettings.setSfxVolume(v / 100);
@@ -85,7 +84,7 @@ export class SettingsPopup extends Container {
 
     this.tilesPerrowSlider = new VolumeSlider("Thumbs per Row", 3, 10, 3);
     this.tilesPerrowSlider.onUpdate.connect((v) => {
-      userSettings.setTilesPerRow(v);;
+      userSettings.setTilesPerRow(v);
     });
     this.layout.addChild(this.tilesPerrowSlider);
   }
@@ -100,7 +99,7 @@ export class SettingsPopup extends Container {
 
   /** Set things up just before showing the popup */
   public prepare() {
-     this.sfxSlider.value = userSettings.getSfxVolume() * 100;
+    this.sfxSlider.value = userSettings.getSfxVolume() * 100;
   }
 
   /** Present the popup, animated */

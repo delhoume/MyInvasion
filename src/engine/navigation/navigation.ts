@@ -41,7 +41,7 @@ export class Navigation {
   public app!: CreationEngine;
 
   /** Container for screens */
-  public container = new Container({label: "de cadix"});
+  public container = new Container({ label: "de cadix" });
 
   /** Application width */
   public width = 0;

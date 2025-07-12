@@ -48,34 +48,33 @@ export class MainScreen extends Container {
     this.viewport = viewport;
     this.gallery.initAllGraphics();
 
-    this.infoArea = new Container({ label: "UI"});
+    this.infoArea = new Container({ label: "UI" });
     this.addChild(this.infoArea);
 
     const scoreStyle = new TextStyle({
-    fontFamily: "Space Invaders",
-    fontSize: 30,
-    fill: 'white',
-     stroke: {
-        color: '#000000',
-        width: 5
-    }
-});
+      fontFamily: "Space Invaders",
+      fontSize: 18,
+      fill: "white",
+      stroke: {
+        color: "#000000",
+        width: 5,
+      },
+    });
 
-    this.scoreReport = new Text({text: "score", style: scoreStyle });
+    this.scoreReport = new Text({ text: "score", style: scoreStyle });
     this.infoArea.addChild(this.scoreReport);
-   
+
     this.editButton = new FancyButton({
       text: "Mode : ",
       defaultView: "white_filled_round_rect.png",
-      pressedView: "black_filled_round_rect.png"
+      pressedView: "black_filled_round_rect.png",
     });
     this.editButton.text.
     this.editButton.anchor.set(0);
     this.addChild(this.editButton);
     this.editButton.onPress.connect(() => {
       this.editMode = !this.editMode;
-      if (this.editMode)
-        this.gallery.startShaking();
+      if (this.editMode) this.gallery.startShaking();
       else {
         this.gallery.stopShaking();
         this.exportFlashes();
@@ -83,12 +82,10 @@ export class MainScreen extends Container {
       this.updateButtons();
     });
 
-
-
     this.modeButton = new FancyButton({
       text: "Mode : ",
       defaultView: "white_filled_round_rect.png",
-      pressedView: "black_filled_round_rect.png"
+      pressedView: "black_filled_round_rect.png",
     });
     this.modeButton.onPress.connect(() => {
       switch (this.mode) {
@@ -110,15 +107,15 @@ export class MainScreen extends Container {
     this.modeButton.anchor.set(0);
     this.addChild(this.modeButton);
     this.updateButtons();
-    var tpr = userSettings.getTilesPerRow();
+    const tpr = userSettings.getTilesPerRow();
     this.tilesSlider = new Slider({
-      bg: 'pattern_round_rect.png',
-      fill: 'pattern_round_rect.png',
-      slider: 'slider.png',
+      bg: "pattern_round_rect.png",
+      fill: "pattern_round_rect.png",
+      slider: "slider.png",
       min: 3,
       max: 33,
       value: tpr,
-      step: 1
+      step: 1,
     });
 
     this.tilesSlider.onUpdate.connect((v) => {
@@ -127,8 +124,7 @@ export class MainScreen extends Container {
       this.gallery.layout();
     });
     this.addChild(this.tilesSlider);
-
- }
+  }
 
   public capitalize(str: string) {
     return str[0].toUpperCase() + str.slice(1);
@@ -151,13 +147,15 @@ export class MainScreen extends Container {
     const num_cities = world_invasion.sorted_cities_codes.length;
     const flasher = world_invasion.flasher;
     const num_flashed = flasher.getTotalFlashes();
+     const cities_complete = flasher.getNumCompleteCities();
     const cities_flashed = flasher.getNumFlashedCities();
-    this.scoreReport.text = `Flashes:  ${num_flashed} / ${num_invaders} - Cities: ${cities_flashed} /  ${num_cities}`;
+    if (this.mode == "missing") {
+      this.scoreReport.text = `Missing Invaders: ${num_invaders - num_flashed} / ${num_invaders} -  Missing cities ${num_cities - cities_flashed}, incomplete ${num_cities - cities_complete} / ${num_cities}`;
+    } else {
+      this.scoreReport.text = `Flashed Invaders: ${num_flashed} / ${num_invaders} - Cities: flashed : ${cities_flashed} (complete ${cities_complete}) / ${num_cities}}`;
+    }
   }
-  /** Prepare the screen just before showing */
-  public prepare() {
-
-  }
+  /** Prepare the screen just before showing *  public prepare() { }
 
   /** Update the screen */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -179,7 +177,6 @@ export class MainScreen extends Container {
     const componentsy = height - componentspos;
     const componentsheight = 32;
 
-
     this.modeButton.x = xoffset;
     this.modeButton.y = componentsy;
     this.modeButton.width = modebuttonwidth;
@@ -188,28 +185,26 @@ export class MainScreen extends Container {
     this.editButton.width = editbuttonwidth;
     this.editButton.height = componentsheight;
     this.editButton.y = componentsy;
-    this.tilesSlider.x = 3 * xoffset + modebuttonwidth + editbuttonwidth
+    this.tilesSlider.x = 3 * xoffset + modebuttonwidth + editbuttonwidth;
     this.tilesSlider.width = sliderwidth;
     this.tilesSlider.height = componentsheight;
     this.tilesSlider.y = componentsy + 10;
 
     this.infoArea.x = xoffset;
     this.infoArea.y = componentsy - componentspos + 20;
-  //  this.infoArea.width = editbuttonwidth + modebuttonwidth + sliderwidth + 2 * xoffset;
-  //  this.infoArea.height = componentsheight / 2
-
+    //  this.infoArea.width = editbuttonwidth + modebuttonwidth + sliderwidth + 2 * xoffset;
+    //  this.infoArea.height = componentsheight / 2
 
     this.gallery.layout();
   }
 
   /** Show screen with animations */
   public async show(): Promise<void> {
-
     const elementsToAnimate = [
       this.scoreReport,
       this.editButton,
       this.modeButton,
-      this.tilesSlider
+      this.tilesSlider,
     ];
 
     let finalPromise!: AnimationPlaybackControls;
@@ -222,7 +217,6 @@ export class MainScreen extends Container {
       );
     }
     await finalPromise;
-
   }
 
   /** Hide screen with animations */
@@ -233,9 +227,7 @@ export class MainScreen extends Container {
     return;
   }
 
-  static InvaderFormat = ((num: number) => {
+  static InvaderFormat = (num: number) => {
     return num < 10 ? "0" + num : "" + num;
-
-  });
-
+  };
 }

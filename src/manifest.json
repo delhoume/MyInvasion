@@ -2,7 +2,19 @@
   "bundles": [
     {
       "name": "default",
-      "assets": []
+      "assets": [
+        {
+          "alias": [
+            "space_invaders.ttf"
+          ],
+          "src": [
+            "space_invaders.ttf"
+          ],
+          "data": {
+            "tags": {}
+          }
+        }
+      ]
     },
     {
       "name": "main",
@@ -2714,6 +2726,20 @@
           ],
           "src": [
             "preload/flashers/ninatheo_03_juillet_2025.txt"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/flashers/pariscmagic_10juillet_2025.txt",
+            "pariscmagic_10juillet_2025.txt"
+          ],
+          "src": [
+            "preload/flashers/pariscmagic_10juillet_2025.txt"
           ],
           "data": {
             "tags": {

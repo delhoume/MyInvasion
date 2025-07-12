@@ -23,7 +23,6 @@ class UserSettings {
     storage.setNumber(KEY_TILES_PER_ROW, value);
   }
 
-
   /** Get sound effects volume */
   public getSfxVolume() {
     return storage.getNumber(KEY_VOLUME_SFX) ?? 1;

@@ -39,9 +39,9 @@ export class CreationEngine extends Application {
     opts.resizeTo ??= window;
     opts.resolution ??= getResolution();
     opts.layout = {
-        autoUpdate: true,
-        enableDebug: false,
-        throttle: 100,
+      autoUpdate: true,
+      enableDebug: false,
+      throttle: 100,
     };
 
     await super.init(opts);
