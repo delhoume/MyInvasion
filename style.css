@@ -4,11 +4,11 @@
             src: url('fonts/ITC-Machine-Medium.woff') format('woff');
         }
 
-        /* @font-face {
-            font-family: 'SpaceInvaders';
+        @font-face {
+            font-family: 'Space Invaders';
             src: url('fonts/space_invaders.woff2') format('woff2');
 
-        } */
+        }
 
         @font-face {
             font-family: 'PixelInvaders';

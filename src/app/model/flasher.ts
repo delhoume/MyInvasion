@@ -47,11 +47,13 @@ export class Flasher {
 
   public getNumCompleteCities(): number {
     let total = 0;
-     for (const c in this.flashedCities) {
-             if (this.flashedCities[c].length ==
-        WorldInvasion.GetInstance().cities[c].num_invaders)
+    for (const c in this.flashedCities) {
+      if (
+        this.flashedCities[c].length ==
+        WorldInvasion.GetInstance().cities[c].num_invaders
+      )
         total++;
-     }
+    }
     return total;
   }
 

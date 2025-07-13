@@ -2,13 +2,14 @@ import { FancyButton, Slider } from "@pixi/ui";
 import { animate } from "motion";
 import type { AnimationPlaybackControls } from "motion/react";
 import type { Ticker } from "pixi.js";
-import { Container, Text, TextStyle } from "pixi.js";
+import { Container, Graphics, RenderLayer, Text, TextStyle } from "pixi.js";
 
 import { engine } from "../../getEngine";
 import { Viewport } from "pixi-viewport";
 import { userSettings } from "../../utils/userSettings";
 import { Gallery } from "./Gallery.ts";
 import { WorldInvasion } from "../../model/worldinvasion.ts";
+import { BackdropBlurFilter } from "pixi-filters";
 
 /** The screen that holds the app */
 export class MainScreen extends Container {
@@ -16,7 +17,7 @@ export class MainScreen extends Container {
   public static assetBundles = ["main"];
 
   public mainContainer: Container;
-
+public graphics: Graphics;
   private infoArea: Container;
   private scoreReport: Text;
   private editButton: FancyButton;
@@ -24,7 +25,8 @@ export class MainScreen extends Container {
   private tilesSlider: Slider;
   private gallery: Gallery;
 
-  private mode: string = "flashed";
+  public static DefaultMode: string = "flashedonly";
+  private mode: string = MainScreen.DefaultMode; // "all", "missing", "flashedonly", "fullcity"
   private editMode: boolean = false;
   public viewport: Viewport;
 
@@ -50,14 +52,22 @@ export class MainScreen extends Container {
 
     this.infoArea = new Container({ label: "UI" });
     this.addChild(this.infoArea);
+     this.graphics = new Graphics();
+  this.graphics
+    .rect(0, 0, 500, 200)
+    .fill({ color: 0xffffff, alpha: 0.01 });
+  const filter = new BackdropBlurFilter({ strength: 4 });
+  this.graphics.filters = [filter];
+    this.infoArea.addChild(this.graphics);
+
 
     const scoreStyle = new TextStyle({
       fontFamily: "Space Invaders",
-      fontSize: 18,
+      fontSize: 15,
       fill: "white",
       stroke: {
         color: "#000000",
-        width: 5,
+        width: 3,
       },
     });
 
@@ -69,7 +79,7 @@ export class MainScreen extends Container {
       defaultView: "white_filled_round_rect.png",
       pressedView: "black_filled_round_rect.png",
     });
-    this.editButton.text.
+
     this.editButton.anchor.set(0);
     this.addChild(this.editButton);
     this.editButton.onPress.connect(() => {
@@ -83,19 +93,22 @@ export class MainScreen extends Container {
     });
 
     this.modeButton = new FancyButton({
-      text: "Mode : ",
+      text: "Mode    : ",
       defaultView: "white_filled_round_rect.png",
       pressedView: "black_filled_round_rect.png",
     });
     this.modeButton.onPress.connect(() => {
       switch (this.mode) {
         case "missing":
-          this.mode = "flashed";
+          this.mode = "flashedonly";
           break;
-        case "flashed":
+        case "flashedonly":
           this.mode = "all";
           break;
         case "all":
+          this.mode = "fullcity";
+          break;
+        case "fullcity":
           this.mode = "missing";
           break;
       }
@@ -147,87 +160,93 @@ export class MainScreen extends Container {
     const num_cities = world_invasion.sorted_cities_codes.length;
     const flasher = world_invasion.flasher;
     const num_flashed = flasher.getTotalFlashes();
-     const cities_complete = flasher.getNumCompleteCities();
+    const cities_complete = flasher.getNumCompleteCities();
     const cities_flashed = flasher.getNumFlashedCities();
-    if (this.mode == "missing") {
-      this.scoreReport.text = `Missing Invaders: ${num_invaders - num_flashed} / ${num_invaders} -  Missing cities ${num_cities - cities_flashed}, incomplete ${num_cities - cities_complete} / ${num_cities}`;
-    } else {
-      this.scoreReport.text = `Flashed Invaders: ${num_flashed} / ${num_invaders} - Cities: flashed : ${cities_flashed} (complete ${cities_complete}) / ${num_cities}}`;
-    }
+    const cities_displayed = this.gallery.num_displayed_cities;
+    const invaders_displayed = this.gallery.num_displayed_invaders
+    this.scoreReport.text = `Cities: invaded ${num_cities} - displayed ${cities_displayed} - missing  ${num_cities - cities_flashed} - incomplete ${num_cities - cities_complete} \n\nInvaders: total ${num_invaders} - flashed ${num_flashed} - displayed ${invaders_displayed} `;
   }
+
   /** Prepare the screen just before showing *  public prepare() { }
 
   /** Update the screen */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public update(_time: Ticker) {
-    this.gallery.update();
-    this.updateButtons();
-  }
+  this.gallery.update();
+  this.updateButtons();
+}
 
   /** Fully reset */
   public reset() { }
 
   /** Resize the screen, fired whenever window size changes */
   public resize(width: number, height: number) {
-    const xoffset = 10;
-    const modebuttonwidth = 200;
-    const editbuttonwidth = 200;
-    const sliderwidth = 256;
-    const componentspos = 64;
-    const componentsy = height - componentspos;
-    const componentsheight = 32;
+  const xoffset = 10;
+  const modebuttonwidth = 200;
+  const editbuttonwidth = 200;
+  const sliderwidth = 256;
+  const componentspos = 64;
+  const componentsy = height - componentspos;
+  const componentsheight = 32;
 
-    this.modeButton.x = xoffset;
-    this.modeButton.y = componentsy;
-    this.modeButton.width = modebuttonwidth;
-    this.modeButton.height = componentsheight;
-    this.editButton.x = 2 * xoffset + modebuttonwidth;
-    this.editButton.width = editbuttonwidth;
-    this.editButton.height = componentsheight;
-    this.editButton.y = componentsy;
-    this.tilesSlider.x = 3 * xoffset + modebuttonwidth + editbuttonwidth;
-    this.tilesSlider.width = sliderwidth;
-    this.tilesSlider.height = componentsheight;
-    this.tilesSlider.y = componentsy + 10;
+  
+  this.modeButton.x = xoffset;
+  this.modeButton.y = componentsy;
+  this.modeButton.width = modebuttonwidth;
+  this.modeButton.height = componentsheight;
+  this.editButton.x = 2 * xoffset + modebuttonwidth;
+  this.editButton.width = editbuttonwidth;
+  this.editButton.height = componentsheight;
+  this.editButton.y = componentsy;
+  this.tilesSlider.x = 3 * xoffset + modebuttonwidth + editbuttonwidth;
+  this.tilesSlider.width = sliderwidth;
+  this.tilesSlider.height = componentsheight;
+  this.tilesSlider.y = componentsy + 10;
 
-    this.infoArea.x = xoffset;
-    this.infoArea.y = componentsy - componentspos + 20;
-    //  this.infoArea.width = editbuttonwidth + modebuttonwidth + sliderwidth + 2 * xoffset;
-    //  this.infoArea.height = componentsheight / 2
+  this.scoreReport.x = xoffset;
+  this.scoreReport.y = 10;
+  this.infoArea.x = 0;
+  this.infoArea.y = componentsy - componentspos;
+  //  this.infoArea.width = editbuttonwidth + modebuttonwidth + sliderwidth + 2 * xoffset;
+  //  this.infoArea.height = componentsheight / 2
 
-    this.gallery.layout();
-  }
+  this.graphics.position.set(0, 0);
+  this.graphics.width = this.tilesSlider.x + this.tilesSlider.width + xoffset;
+  this.graphics.height = height - this.infoArea.y;
+
+  this.gallery.layout();
+}
 
   /** Show screen with animations */
-  public async show(): Promise<void> {
-    const elementsToAnimate = [
-      this.scoreReport,
-      this.editButton,
-      this.modeButton,
-      this.tilesSlider,
-    ];
+  public async show(): Promise < void> {
+  const elementsToAnimate = [
+    this.scoreReport,
+    this.editButton,
+    this.modeButton,
+    this.tilesSlider,
+  ];
 
-    let finalPromise!: AnimationPlaybackControls;
-    for (const element of elementsToAnimate) {
-      element.alpha = 0;
-      finalPromise = animate(
-        element,
-        { alpha: 1 },
-        { duration: 0.3, delay: 0.75, ease: "backOut" },
-      );
-    }
-    await finalPromise;
+  let finalPromise!: AnimationPlaybackControls;
+  for(const element of elementsToAnimate) {
+    element.alpha = 0;
+    finalPromise = animate(
+      element,
+      { alpha: 1 },
+      { duration: 0.3, delay: 0.75, ease: "backOut" },
+    );
   }
+    await finalPromise;
+}
 
   /** Hide screen with animations */
   public async hide() { }
 
   /** Auto pause the app when window go out of focus */
   public blur() {
-    return;
-  }
+  return;
+}
 
   static InvaderFormat = (num: number) => {
-    return num < 10 ? "0" + num : "" + num;
-  };
+  return num < 10 ? "0" + num : "" + num;
+};
 }

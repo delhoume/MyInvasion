@@ -3,11 +3,12 @@ import { userSettings } from "../../utils/userSettings";
 import { engine } from "../../getEngine";
 import { WorldInvasion } from "../../model/worldinvasion";
 import { City } from "../../model/city";
+import { MouseEdges } from "pixi-viewport";
 
 export class GraphicsCity {
   static tileoffset: number = 2;
   static cityoffset: number = 40;
-  constructor() {}
+  constructor() { }
 
   static BuildCityName(
     name: string,
@@ -19,9 +20,9 @@ export class GraphicsCity {
     //   text = `${name}: missing ${num_invaders - num_flashed_invaders} / ${num_invaders}`;
     const gtext = new Text({
       text: text,
-      style: { fill: "white", fontSize: 26, fontFamily: "Space Invaders" }
+      style: { fill: "white", fontSize: 22, fontFamily: "Space Invaders" },
     });
-    gtext.position.set(0, 18);
+    gtext.position.set(0, 16);
     return gtext;
   }
 
@@ -48,19 +49,8 @@ export class GraphicsCity {
       const si_code = City.InvaderCode(city_code, i);
       const invader = world_invasion.invader(si_code);
 
-      let showInvader = true; // "all" mode
-      if (
-        mode == "flashed" &&
-        !world_invasion.flasher.isInvaderFlashed(si_code)
-      ) {
-        showInvader = false;
-      } else if (
-        mode == "missing" &&
-        world_invasion.flasher.isInvaderFlashed(si_code)
-      ) {
-        showInvader = false;
-      }
       invader.sprite.visible = showInvader;
+      if (!showInvader) continue;
       invader.sprite.position.set(
         curx * (tile_size + GraphicsCity.tileoffset),
         cury * (tile_size + GraphicsCity.tileoffset),
@@ -74,5 +64,19 @@ export class GraphicsCity {
       }
     }
     return matrix;
+  }
+
+  static IsInvaderVisible(mode: string, si_code: string): boolean {
+    const city_code = si_code.split("_")[0];
+    if (City.IsCityVisible(mode, city_code))  {
+          const world_invasion = WorldInvasion.GetInstance();
+      switch(mode) {
+        case "flashedonly": return world_invasion.flasher.isInvaderFlashed(si_code);
+        case "missing":   return !world_invasion.flasher.isInvaderFlashed(si_code);
+        case "fullcity": return true;
+        case "all": return true;
+      }
+    }
+    return false;
   }
 }

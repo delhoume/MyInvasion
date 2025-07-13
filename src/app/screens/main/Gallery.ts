@@ -6,13 +6,17 @@ import { WorldInvasion } from "../../model/worldinvasion";
 import { SpaceInvader } from "../../model/spaceinvader";
 import { City } from "../../model/city";
 import { userSettings } from "../../utils/userSettings";
+import { MainScreen } from "./MainScreen";
 
 export class Gallery extends Container {
   private camera: Camera;
   private firstShake: Shake | undefined;
-  public mode: string = "flashed";
+  public mode: string = MainScreen.DefaultMode;
   static shake_intensity: number = 6;
   static shake_duration: number = 500;
+  public num_displayed_cities: number = 0;
+  public num_displayed_invaders: number = 0;
+
 
   constructor() {
     super({ label: "Gallery" });
@@ -86,27 +90,19 @@ export class Gallery extends Container {
     const tilesize = (windowWidth - (tpr + 1) * GraphicsCity.tileoffset) / tpr;
     const world_invasion = WorldInvasion.GetInstance();
     let cy = 0;
+    this.num_displayed_cities = 0;
+    this.num_displayed_invaders = 0;
 
     for (let c = 0; c < world_invasion.sorted_cities_codes.length; ++c) {
       const city_code = world_invasion.sorted_cities_codes[c];
       const city = world_invasion.cities[city_code];
       const cityContainer = this.getChildByLabel(city_code);
       if (!cityContainer) continue;
-      if (
-        this.mode == "flashed" &&
-        !world_invasion.flasher.isCityFlashed(city_code)
-      ) {
-        cityContainer.visible = false;
+      cityContainer.visible = City.IsCityVisible(this.mode, city_code);
+      if (!cityContainer.visible) {
         continue;
-      }
-      if (
-        this.mode == "missing" &&
-        world_invasion.flasher.isCityFullyFlashed(city_code)
-      ) {
-        cityContainer.visible = false;
-        continue;
-      }
-      cityContainer.visible = true;
+    }
+      this.num_displayed_cities++;
       cityContainer.position.set(0, cy);
       const cityHeaderContainer = cityContainer.getChildByLabel(
         `${city_code}_header`,
@@ -126,17 +122,11 @@ export class Gallery extends Container {
         const invader = world_invasion.invader(invader_code);
         const sprite = invader.sprite;
 
-        if (
-          (world_invasion.flasher.isInvaderFlashed(invader_code) == false &&
-            this.mode == "flashed") ||
-          (world_invasion.flasher.isInvaderFlashed(invader_code) == true &&
-            this.mode == "missing")
-        ) {
-          sprite.visible = false;
-          continue;
-        }
-        sprite.visible = true;
-        //    console.log(sprite);
+        const isvisibleinvader = GraphicsCity.IsInvaderVisible(this.mode, invader_code);
+        sprite.visible = isvisibleinvader;
+         if (!isvisibleinvader) continue
+        this.num_displayed_invaders++;
+       //    console.log(sprite);
         sprite.position.set(
           x * (tilesize + GraphicsCity.tileoffset),
           y * (tilesize + GraphicsCity.tileoffset),
@@ -175,7 +165,7 @@ export class Gallery extends Container {
     const isInMissingMode = this.mode == "missing";
     const ttext = `${city.name}: ${this.mode == "missing" ? "missing" : ""} ${isInMissingMode ? num_invaders - num_flashed : num_flashed} / ${num_invaders}`;
     if (citytext && "text" in citytext) {
-      (citytext as { text: any; Text }).text = ttext;
+      (citytext as { text: any; Text }).text = ttext.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
   }
 
@@ -215,11 +205,11 @@ export class Gallery extends Container {
     }
   }
 
-  public remove(): void {}
+  public remove(): void { }
 
   public update(): void {
     this.restartShake();
   }
 
-  public resize(): void {}
+  public resize(): void { }
 }

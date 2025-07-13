@@ -1,6 +1,7 @@
 import { Assets } from "pixi.js";
 import { SpaceInvader } from "./spaceinvader";
 import { Utils } from "./utils";
+import { WorldInvasion } from "./worldinvasion";
 
 export class City {
   public name: string;
@@ -41,5 +42,20 @@ export class City {
   static InvaderCode(city_code: string, order: number): string {
     if (city_code != "LIL") order++;
     return `${city_code}_${Utils.InvaderFormat(order)}`;
+  }
+
+  static IsCityVisible(mode: string, city_code: string): boolean {
+    const world_invasion = WorldInvasion.GetInstance();
+    switch (mode) {
+      case "flashedonly":
+        return world_invasion.flasher.isCityFlashed(city_code);
+      case "missing":
+        return !world_invasion.flasher.isCityFullyFlashed(city_code)
+      case "fullcity":
+        return world_invasion.flasher.isCityFullyFlashed(city_code);
+      case "all":
+        return true;
+    }
+    return false;
   }
 }
