@@ -122,7 +122,11 @@ export class Gallery extends Container {
         const invader = world_invasion.invader(invader_code);
         const sprite = invader.sprite;
 
-        const isvisibleinvader = GraphicsCity.IsInvaderVisible(this.mode, invader_code);
+        if (x >= tpr) {
+          x = 0;
+          y++;
+        }
+       const isvisibleinvader = GraphicsCity.IsInvaderVisible(this.mode, invader_code);
         sprite.visible = isvisibleinvader;
          if (!isvisibleinvader) continue
         this.num_displayed_invaders++;
@@ -135,11 +139,7 @@ export class Gallery extends Container {
         sprite.height = tilesize;
         sprite.visible = true;
         x++;
-        if (x >= tpr) {
-          x = 0;
-          y++;
-        }
-      }
+       }
       cy += (y + 1) * (tilesize + GraphicsCity.tileoffset);
     }
   }

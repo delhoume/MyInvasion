@@ -1,9 +1,6 @@
 import { Text, Container } from "pixi.js";
-import { userSettings } from "../../utils/userSettings";
-import { engine } from "../../getEngine";
 import { WorldInvasion } from "../../model/worldinvasion";
 import { City } from "../../model/city";
-import { MouseEdges } from "pixi-viewport";
 
 export class GraphicsCity {
   static tileoffset: number = 2;
@@ -26,45 +23,6 @@ export class GraphicsCity {
     return gtext;
   }
 
-  //  todo: update city name
-
-  static LayoutInvaders(
-    city_code: string,
-    starty: number,
-    mode: string,
-  ): Container {
-    // build container
-    const matrix = new Container({ label: "matrix" });
-    const tpr = userSettings.getTilesPerRow();
-    const app = engine();
-    const windowWidth = app.screen.width;
-    const tile_size = windowWidth / tpr - GraphicsCity.tileoffset;
-
-    let cury = starty;
-    let curx = 0;
-
-    const world_invasion = WorldInvasion.GetInstance();
-    const city = world_invasion.cities[city_code];
-    for (let i = 0; i < city.num_invaders; ++i) {
-      const si_code = City.InvaderCode(city_code, i);
-      const invader = world_invasion.invader(si_code);
-
-      invader.sprite.visible = showInvader;
-      if (!showInvader) continue;
-      invader.sprite.position.set(
-        curx * (tile_size + GraphicsCity.tileoffset),
-        cury * (tile_size + GraphicsCity.tileoffset),
-      );
-      invader.sprite.width = tile_size;
-      invader.sprite.height = tile_size;
-      curx++;
-      if (curx >= tpr) {
-        curx = 0;
-        cury++;
-      }
-    }
-    return matrix;
-  }
 
   static IsInvaderVisible(mode: string, si_code: string): boolean {
     const city_code = si_code.split("_")[0];
