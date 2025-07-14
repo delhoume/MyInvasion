@@ -32,8 +32,10 @@ export class MainScreen extends Container {
   private mode: string = MainScreen.DefaultMode; // "all", "missing", "flashedonly", "fullcity"
   private editMode: boolean = false;
   public viewport: Viewport;
-  private dragTarget : any = null;
-private dragStarpoint ; Point = new Point(0, 0);
+  private dragTarget: any = null;
+  private dragStarpoint: Point = new Point(0, 0);
+  public savedFlashed: string = "";
+
   constructor() {
     super();
     const app = engine();
@@ -56,49 +58,48 @@ private dragStarpoint ; Point = new Point(0, 0);
 
     this.infoArea = new Container({ label: "UI" });
     this.addChild(this.infoArea);
- 
-     this.graphics = new Graphics();
-  this.graphics
+
+    this.graphics = new Graphics();
+    this.graphics
       .rect(0, 0, 600, 200)
       .fill({ color: 0xffffff, alpha: 0.1 });
-    const filter = new BackdropBlurFilter({ strength: 10 });
+    const filter = new BackdropBlurFilter({ strength: 5 });
     this.graphics.filters = [filter];
     this.infoArea.addChild(this.graphics);
-this.graphics.eventMode = 'static';
+    this.graphics.eventMode = 'static';
 
     this.graphics.on('pointerup', onDragEnd);
-  this.graphics.on('pointerupoutside', onDragEnd);
-this.graphics.on('pointerdown', onDragStart, this.infoArea);
-const t = this;
-  function onDragMove(event: any) {
-            if (t.dragTarget) {   
-const xdiff = event.global.x - t.dragStarpoint.x ;
-const ydiff = event.global.y - t.dragStarpoint.y;
-     t.dragTarget.position.set(t.dragTarget.x + xdiff,
-        t.dragTarget.y + ydiff);
+    this.graphics.on('pointerupoutside', onDragEnd);
+    this.graphics.on('pointerdown', onDragStart, this.infoArea);
+    const t = this;
+    function onDragMove(event: any) {
+      if (t.dragTarget) {
+        const xdiff = event.global.x - t.dragStarpoint.x;
+        const ydiff = event.global.y - t.dragStarpoint.y;
+        t.dragTarget.position.set(t.dragTarget.x + xdiff,
+          t.dragTarget.y + ydiff);
         t.dragStarpoint = new Point(event.global.x, event.global.y);
-      
+
+      }
     }
-  }
 
-  function onDragStart(event: any) {
-     // Store a reference to the data
-    // * The reason for this is because of multitouch *
-    // * We want to track the movement of this particular touch *
-    t.dragTarget = t.infoArea ;
-    t.dragStarpoint = new Point(event.global.x, event.global.y);
-     t.graphics.on('pointermove', onDragMove);
-  }
-
-  function onDragEnd() {
-    if (t.dragTarget) {
-       t.graphics.off('pointermove', onDragMove);
-      t.dragTarget = null;
+    function onDragStart(event: any) {
+      // Store a reference to the data
+      // * The reason for this is because of multitouch *
+      // * We want to track the movement of this particular touch *
+      t.dragTarget = t.infoArea;
+      t.dragStarpoint = new Point(event.global.x, event.global.y);
+      t.graphics.on('pointermove', onDragMove);
     }
-  }
+
+    function onDragEnd() {
+      if (t.dragTarget) {
+        t.graphics.off('pointermove', onDragMove);
+        t.dragTarget = null;
+      }
+    }
 
 
-      this.infoArea.position.set(300, 300);
 
     const scoreStyle = new TextStyle({
       fontFamily: "Space Invaders",
@@ -132,10 +133,10 @@ const ydiff = event.global.y - t.dragStarpoint.y;
     this.infoArea.addChild(this.editButton);
     this.editButton.onPress.connect(() => {
       this.editMode = !this.editMode;
-      if (this.editMode) this.gallery.startShaking();
-      else {
-        this.gallery.stopShaking();
-        this.exportFlashes();
+      if (this.editMode) {
+        this.gallery.startShaking();
+        this.saveCurrentFlashes();
+      } else {
       }
       this.updateScore();
     });
@@ -146,7 +147,8 @@ const ydiff = event.global.y - t.dragStarpoint.y;
 
     this.infoArea.addChild(this.doneButton);
     this.doneButton.onPress.connect(() => {
-      console.log("done")
+      this.gallery.stopShaking();
+      this.exportFlashes();
     });
 
     this.cancelButton = new MyButton({ text: "Cancel", width: subeditbuttonwidth, height: 24 });
@@ -155,10 +157,11 @@ const ydiff = event.global.y - t.dragStarpoint.y;
     this.infoArea.addChild(this.cancelButton);
 
     this.cancelButton.onPress.connect(() => {
-      console.log("cancel")
+      this.gallery.stopShaking();
+      this.restoreFlashes();
     });
 
-    
+
     this.modeButton.onPress.connect(() => {
       switch (this.mode) {
         case "missing":
@@ -201,6 +204,7 @@ const ydiff = event.global.y - t.dragStarpoint.y;
     this.tilesSlider.width = modewidth + editwidth + xoffset;
     this.tilesSlider.height = 50;
     this.infoArea.addChild(this.tilesSlider);
+    this.infoArea.position.set(10, engine().screen.height - this.infoArea.height);
   }
 
   public capitalize(str: string) {
@@ -216,8 +220,10 @@ const ydiff = event.global.y - t.dragStarpoint.y;
     navigator.clipboard.writeText(fileflash);
   }
 
+  static  modeToString : any = { flashedonly: "Flashed", all: "All",
+    fullcity: "Complete cities", missing: "Not Flashed"};
   public updateScore() {
-    this.modeButton.text = `${this.capitalize(this.mode)}`;
+    this.modeButton.text = `${MainScreen.modeToString[this.mode]}`;
 
     const world_invasion = WorldInvasion.GetInstance();
     const num_invaders = world_invasion.num_invaders;
@@ -231,7 +237,20 @@ const ydiff = event.global.y - t.dragStarpoint.y;
     this.scoreReport.text = `Cities: invaded ${num_cities} - displayed ${cities_displayed} - missing  ${num_cities - cities_flashed} - incomplete ${num_cities - cities_complete} \n\nInvaders: total ${num_invaders} - flashed ${num_flashed} - displayed ${invaders_displayed} `;
   }
 
-  /** Prepare the screen just before showing *  public prepare() { }
+
+  public saveCurrentFlashes() {
+    const world_invasion = WorldInvasion.GetInstance();
+    const flasher = world_invasion.flasher;
+    const fileflash = flasher.getFlashFile();
+    this.savedFlashed = fileflash;
+  }
+
+  public restoreFlashes() {
+  const world_invasion = WorldInvasion.GetInstance();
+    const flasher = world_invasion.flasher;
+ flasher.init(this.savedFlashed);
+ this.gallery.layout();
+  }
 
   /** Update the screen */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -245,48 +264,6 @@ const ydiff = event.global.y - t.dragStarpoint.y;
 
   /** Resize the screen, fired whenever window size changes */
   public resize(width: number, height: number) {
-    /*
-        const xoffset = 10;
-        const modebuttonwidth = 300;
-        const editbuttonwidth = 150;
-        const sliderwidth = 256;
-        const componentspos = 64;
-    
-        const bottom_phone_offset = 100; const componentsy = height - componentspos - bottom_phone_offset;;
-        const componentsheight = 24;
-    
-        const allheight = 200;
-    
-        const firstrow = height - allheight;
-        const secondrow = firstrow + 40;
-        this.modeButton.x = xoffset;
-        this.modeButton.y = firstrow;;
-        this.modeButton.width = modebuttonwidth;
-        this.editButton.x = 2 * xoffset + modebuttonwidth;
-        this.editButton.width = editbuttonwidth;
-        this.editButton.y = firstrow;
-        this.tilesSlider.x = 3 * xoffset + modebuttonwidth + editbuttonwidth;
-        this.tilesSlider.width = sliderwidth;
-        this.tilesSlider.height = componentsheight;
-        this.tilesSlider.y = secondrow;
-    
-       // this.cancelButton.width = this.editButton.width / 2 - xoffset;
-        this.cancelButton.x = this.editButton.x - ((this.editButton.width / 3) + xoffset);
-       // this.cancelButton.y = secondrow;
-    
-    
-        //this.doneButton.x = this.editButton.x + (this.editButton.width / 3 + xoffset);
-        //this.doneButton.y = secondrow;
-        this.doneButton.width = this.cancelButton.width;
-    
-        this.graphics.position.set(0, 0);
-        this.graphics.width = this.tilesSlider.x + this.tilesSlider.width + xoffset;
-        this.graphics.height = 200;
-        this.scoreReport.x = xoffset;
-        this.scoreReport.y = 10;
-        this.infoArea.x = 0;
-        this.infoArea.y = componentsy - componentspos;
-    */
     this.gallery.layout();
   }
 

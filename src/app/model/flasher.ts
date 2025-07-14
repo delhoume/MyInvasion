@@ -11,10 +11,8 @@ export class Flasher {
     this.flashedCities = {};
   }
 
-  public load() {
-    const flashfile = Assets.get(`${this.name}.txt`);
-    //  console.log(flashfile);
-    if (flashfile) {
+  public init(flashfile: string) {
+   if (flashfile) {
       const ff = new FlashFileParser();
       const tokens = ff.decodeString(flashfile);
       const cities: any = {};
@@ -27,7 +25,13 @@ export class Flasher {
       });
       this.flashedCities = cities;
     }
+
   }
+
+  public load() {
+    const flashfile = Assets.get(`${this.name}.txt`);
+    this.init(flashfile);
+   }
 
   public getTotalFlashes(): number {
     let total = 0;
