@@ -6,13 +6,13 @@ export class MyButton extends FancyButton {
     super({
       defaultView: new Graphics()
         .roundRect(0, 0, options.width, options.height, options.radius)
-        .fill({ color: "SkyBlue" }),
+        .fill({ color: "white" }).stroke({width: 1, color: 0x0000000 }),
       hoverView: new Graphics()
         .roundRect(0, 0, options.width, options.height, options.radius)
-        .fill({ color: "LightBlue" }),
+        .fill({ color: "white" }),
       pressedView: new Graphics()
         .roundRect(0, 0, options.width, options.height, options.radius)
-        .fill({ color: "LightCoral" }),
+        .fill({ color: "black" }),
       disabledView: new Graphics()
         .roundRect(0, 0, options.width, options.height, options.radius)
         .fill({ color: "DarkGray" }),

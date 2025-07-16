@@ -2,19 +2,7 @@
   "bundles": [
     {
       "name": "default",
-      "assets": [
-        {
-          "alias": [
-            "space_invaders.ttf"
-          ],
-          "src": [
-            "space_invaders.ttf"
-          ],
-          "data": {
-            "tags": {}
-          }
-        }
-      ]
+      "assets": []
     },
     {
       "name": "main",
@@ -2749,6 +2737,62 @@
         },
         {
           "alias": [
+            "preload/fonts/Los Altos.ttf",
+            "Los Altos.ttf"
+          ],
+          "src": [
+            "preload/fonts/Los Altos.ttf"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/fonts/Valencia.ttf",
+            "Valencia.ttf"
+          ],
+          "src": [
+            "preload/fonts/Valencia.ttf"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/fonts/pixelinvaders.ttf",
+            "pixelinvaders.ttf"
+          ],
+          "src": [
+            "preload/fonts/pixelinvaders.ttf"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/fonts/spaceinvaders.ttf",
+            "spaceinvaders.ttf"
+          ],
+          "src": [
+            "preload/fonts/spaceinvaders.ttf"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
             "preload/invaders.json",
             "invaders.json"
           ],
@@ -2939,6 +2983,40 @@
         },
         {
           "alias": [
+            "preload/ui/ninesplicebutton.png",
+            "ninesplicebutton.png"
+          ],
+          "src": [
+            "preload/ui/ninesplicebutton@0.5x.webp",
+            "preload/ui/ninesplicebutton@0.5x.png",
+            "preload/ui/ninesplicebutton.webp",
+            "preload/ui/ninesplicebutton.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/ninesplicebutton2.png",
+            "ninesplicebutton2.png"
+          ],
+          "src": [
+            "preload/ui/ninesplicebutton2@0.5x.webp",
+            "preload/ui/ninesplicebutton2@0.5x.png",
+            "preload/ui/ninesplicebutton2.webp",
+            "preload/ui/ninesplicebutton2.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
             "preload/ui/pattern_round_rect.png",
             "pattern_round_rect.png"
           ],
@@ -2998,6 +3076,176 @@
             "preload/ui/slider@0.5x.png",
             "preload/ui/slider.webp",
             "preload/ui/slider.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider_bg_filled_white.png",
+            "slider_bg_filled_white.png"
+          ],
+          "src": [
+            "preload/ui/slider_bg_filled_white@0.5x.webp",
+            "preload/ui/slider_bg_filled_white@0.5x.png",
+            "preload/ui/slider_bg_filled_white.webp",
+            "preload/ui/slider_bg_filled_white.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider_bg_outline.png",
+            "slider_bg_outline.png"
+          ],
+          "src": [
+            "preload/ui/slider_bg_outline@0.5x.webp",
+            "preload/ui/slider_bg_outline@0.5x.png",
+            "preload/ui/slider_bg_outline.webp",
+            "preload/ui/slider_bg_outline.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider_filled_black.png",
+            "slider_filled_black.png"
+          ],
+          "src": [
+            "preload/ui/slider_filled_black@0.5x.webp",
+            "preload/ui/slider_filled_black@0.5x.png",
+            "preload/ui/slider_filled_black.webp",
+            "preload/ui/slider_filled_black.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider_filled_white.png",
+            "slider_filled_white.png"
+          ],
+          "src": [
+            "preload/ui/slider_filled_white@0.5x.webp",
+            "preload/ui/slider_filled_white@0.5x.png",
+            "preload/ui/slider_filled_white.webp",
+            "preload/ui/slider_filled_white.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider_invader.png",
+            "slider_invader.png"
+          ],
+          "src": [
+            "preload/ui/slider_invader@0.5x.webp",
+            "preload/ui/slider_invader@0.5x.png",
+            "preload/ui/slider_invader.webp",
+            "preload/ui/slider_invader.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider_invader_black.png",
+            "slider_invader_black.png"
+          ],
+          "src": [
+            "preload/ui/slider_invader_black@0.5x.webp",
+            "preload/ui/slider_invader_black@0.5x.png",
+            "preload/ui/slider_invader_black.webp",
+            "preload/ui/slider_invader_black.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider_invader_white.png",
+            "slider_invader_white.png"
+          ],
+          "src": [
+            "preload/ui/slider_invader_white@0.5x.webp",
+            "preload/ui/slider_invader_white@0.5x.png",
+            "preload/ui/slider_invader_white.webp",
+            "preload/ui/slider_invader_white.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider_outline.png",
+            "slider_outline.png"
+          ],
+          "src": [
+            "preload/ui/slider_outline@0.5x.webp",
+            "preload/ui/slider_outline@0.5x.png",
+            "preload/ui/slider_outline.webp",
+            "preload/ui/slider_outline.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider_outline_inverted.png",
+            "slider_outline_inverted.png"
+          ],
+          "src": [
+            "preload/ui/slider_outline_inverted@0.5x.webp",
+            "preload/ui/slider_outline_inverted@0.5x.png",
+            "preload/ui/slider_outline_inverted.webp",
+            "preload/ui/slider_outline_inverted.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/slider_transp.png",
+            "slider_transp.png"
+          ],
+          "src": [
+            "preload/ui/slider_transp@0.5x.webp",
+            "preload/ui/slider_transp@0.5x.png",
+            "preload/ui/slider_transp.webp",
+            "preload/ui/slider_transp.png"
           ],
           "data": {
             "tags": {
