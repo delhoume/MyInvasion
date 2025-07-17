@@ -1,5 +1,6 @@
-import { Assets, Container, Sprite, Texture } from "pixi.js";
+import { Assets, Container, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { engine } from "../getEngine";
+import { WorldInvasion } from "./worldinvasion";
 
 export class SpaceInvader {
   public code: string;
@@ -49,6 +50,10 @@ export class SpaceInvader {
       fsprite.y = sprite.height - fsprite.height;
       fsprite.anchor.set(0, 0);
       container.addChild(fsprite);
+      // const bb : Rectangle = sprite.getBounds();
+      // const g = new Graphics().rect(bb.left, bb.top, bb.width, bb.height).
+      // stroke({ width: 10, color: "green"});
+      // container.addChild(g);
     }
     container.cacheAsTexture(true);
     const bakedtexture = engine().renderer.generateTexture(container);

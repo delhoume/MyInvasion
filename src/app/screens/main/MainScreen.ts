@@ -48,7 +48,8 @@ export class MainScreen extends Container {
   public savedFlashed: string = "";
 
   public static MinTilesPerRow: number = 3;
-  public static MaxTilesPerRow: number = 100;
+  public static MaxTilesPerRow: number = 30;
+  public static TilesPerRowStep: number = 1; // smooth
 
   constructor() {
     super();
@@ -311,7 +312,7 @@ this.tilesSlider = new Slider({
   min: MainScreen.MinTilesPerRow,
   max: MainScreen.MaxTilesPerRow,
   value: tpr,
-  step: 1,
+  step: MainScreen.TilesPerRowStep,
   valueTextStyle: {
     fill: "white",
     fontSize: 14,
