@@ -59,7 +59,7 @@ export class MainScreen extends Container {
     });
 
     this.mainContainer = new Container({ label: "Main" });
-    this.gallery = new Gallery();
+    this.gallery = new Gallery(viewport);
     this.mainContainer.addChild(this.gallery);
     this.addChild(viewport);
     viewport.drag().bounce().decelerate();

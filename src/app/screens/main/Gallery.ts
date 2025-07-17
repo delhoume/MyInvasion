@@ -7,6 +7,7 @@ import { SpaceInvader } from "../../model/spaceinvader";
 import { City } from "../../model/city";
 import { userSettings } from "../../utils/userSettings";
 import { MainScreen } from "./MainScreen";
+import { Viewport } from "pixi-viewport";
 
 export class Gallery extends Container {
   private camera: Camera;
@@ -16,11 +17,11 @@ export class Gallery extends Container {
   static shake_duration: number = 500;
   public num_displayed_cities: number = 0;
   public num_displayed_invaders: number = 0;
+  private viewport: Viewport;
 
-
-  constructor() {
+  constructor(viewport: Viewport) {
     super({ label: "Gallery" });
-
+    this.viewport = viewport;
     this.camera = new Camera({
       ticker: engine().ticker,
     });
@@ -80,15 +81,17 @@ export class Gallery extends Container {
     }
   }
 
-  // future : start nlayout from a given city
-  // currenty layout the whole thing again (fast enough)...
+  // currenty layout the whole thing for each change (fast enough)...
   public layout() {
+    // get viewport location
+    const pos = this.viewport.top / this.viewport.worldHeight;
+
     // gcompute tilesize
     const tpr = userSettings.getTilesPerRow();
     const app = engine();
     const windowWidth = app.screen.width;
     const tilesize = (windowWidth - (tpr + 1) * GraphicsCity.tileoffset) / tpr;
-    const ratio = (tpr - MainScreen.MinTilesPerRow) / (MainScreen.MaxTilesPerRow - MainScreen.MinTilesPerRow); 
+    const ratio = (tpr - MainScreen.MinTilesPerRow) / (MainScreen.MaxTilesPerRow - MainScreen.MinTilesPerRow);
     const mintileoffset = 10; // GraphicsCity.cityoffset / 3;
     const maxtileoffset = 30; // GraphicsCity.cityoffset;
     const minfontsize = 8;
@@ -119,9 +122,9 @@ export class Gallery extends Container {
         `${city_code}_invaders`,
       );
       cityHeaderContainer?.position.set(0, 0);
-     this.updateCityFontSize(cityHeaderContainer, computed_font_size);
+      this.updateCityFontSize(cityHeaderContainer, computed_font_size);
       // does not depend on tilesize
-     // cy += computed_offset;
+      // cy += computed_offset;
       cityInvadersContainer?.position.set(0, computed_offset);
 
       let y = 0;
@@ -149,11 +152,13 @@ export class Gallery extends Container {
       }
       cy += (y + 1) * (tilesize + GraphicsCity.tileoffset) + computed_offset;
     }
+    // restore location
+    this.viewport.top = pos * this.viewport.worldHeight;
   }
 
-  public  updateCityFontSize(city_header_container: any, computed_font_size: number) {
+  public updateCityFontSize(city_header_container: any, computed_font_size: number) {
     const citytext: Text = city_header_container?.getChildAt(0);
-   citytext.style.fontSize = computed_font_size;
+    citytext.style.fontSize = computed_font_size;
   }
 
   public updateCitiesTexts() {

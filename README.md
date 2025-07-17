@@ -30,19 +30,18 @@ There are a number of issues and opened questions as this is WIP
   - where to load / save the flashlist (could be integrated with well know sites (awazleon, invaderspotter) that allow storage of flashed state
 
  ## TODO first
+    - fix CORS and us awazleon.space APIs
+    - often there are issues with not loaded fonts
+    - have visual feedbak of actions 
     - 
-    - often there are issues with not loaded 
-    - when number of thumbnails per row change, a full layout is recomputed, so current vertical location is lost and is reset to top.
-    it should be possible to find which city is first visible one  (or what % of full height we are on) and estore it after the layout.
-    - have visual feedbak of actiions 
-    - 
+    
   - useful features lacking
    - ability to declare ranges of swap flash status (long press ?) / multiple selection.
  
 - performance is very good thanks to the Pixi.js library used here.
 - about 4300 sprites are displayed in real-time on a 2020 mac mini.
 
-If you are intersted in developing this project feel free to contact me.
+If you are interested in developing this project feel free to contact me.
 
 How to run ?
 - you have to install node.js
