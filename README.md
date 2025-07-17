@@ -4,7 +4,7 @@ by street artist Invader)
 
 the offical FlashInvaders app does not allow exporting its flashes so this editor provides a way to edit them.
 
-In this first POC we have
+## In this POC we have
 
 - all known to date space invaders with accurate status gathered from an API available on Awazleon web site
 - a graphical view of these mosaics in 4 modes (flashed, all, complete cities, missing) with a 4 state button (bottom  left)
@@ -20,7 +20,7 @@ In this first POC we have
 - there is no external dependency, so all info for the invasion stats is in he repo, as well as all graphics
  (11 Mo only for all files).
 
-- all invasion info is static o  now but will usethe awazleon.space API when I will find out how to fix  the CORS  issue
+- all invasion info is static for  now but will use the awazleon.space APIs when I will find out how to fix  the CORS  issue
 
 
 There are a number of issues and opened questions as this is WIP
@@ -29,7 +29,7 @@ There are a number of issues and opened questions as this is WIP
   - be notified / or check for changes in REST apis fo new invaders  / status change
   - where to load / save the flashlist (could be integrated with well know sites (awazleon, invaderspotter) that allow storage of flashed state
 
-  - TODO first
+ ## TODO first
     - 
     - often there are issues with not loaded 
     - when number of thumbnails per row change, a full layout is recomputed, so current vertical location is lost and is reset to top.
@@ -53,4 +53,5 @@ How to run ?
 - deployment use a static web server with the dist folder
 - npx vite build
  
-    <img width="854" alt="image" src="https://github.com/user-attachments/assets/3212be35-9149-41fc-a27e-c41502a75b76" />
+    <img width="854" alt="image" src="ht<img width="751" height="1024" alt="image" src="https://github.com/user-attachments/assets/b78ccbff-7ad0-4194-96ee-6905eff9a935" />
+tps://github.com/user-attachments/assets/3212be35-9149-41fc-a27e-c41502a75b76" />
