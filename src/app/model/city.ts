@@ -27,6 +27,12 @@ export class City {
     this.num_invaders = params.invaders;
     this.points = params.pts;
 
+    // will use
+    // await fetch(`https://awazleon.space/cities/info
+    // and
+    // await fetch(`https://awazleon.space/invaders/${city_code}/city`
+    // to: regular polling and automatic updates.
+    // same for flasher
     const statuses = Assets.get("invaders.json");
     for (let i = 0; i < this.num_invaders; ++i) {
       const invader_code = City.InvaderCode(this.prefix, i);
