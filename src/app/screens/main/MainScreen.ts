@@ -18,6 +18,7 @@ import { userSettings } from "../../utils/userSettings";
 import { Gallery } from "./Gallery.ts";
 import { WorldInvasion } from "../../model/worldinvasion.ts";
 import { BackdropBlurFilter } from "pixi-filters";
+import { Flasher } from "../../model/flasher.ts";
 
 /** The screen that holds the app */
 export class MainScreen extends Container {
@@ -198,8 +199,11 @@ export class MainScreen extends Container {
           navigator.clipboard.readText().then((text) => {
             console.log("text", text);
             const world_invasion = WorldInvasion.GetInstance();
-            const flasher = world_invasion.flasher;
+            const flasher = new Flasher("NoName")
             flasher.init(text);
+            world_invasion.initFromFlasher(flasher);
+            this.gallery.updateAllSprites();
+            this.updateScore();
             this.gallery.layout();
           });
         } else {
@@ -360,7 +364,8 @@ this.infoArea.position.set(
   const cities_flashed = flasher.getNumFlashedCities();
   const cities_displayed = this.gallery.num_displayed_cities;
   const invaders_displayed = this.gallery.num_displayed_invaders;
-  this.scoreReport.text = `Cities: invaded ${num_cities} - displayed ${cities_displayed} - missing  ${num_cities - cities_flashed} - incomplete ${num_cities - cities_complete} \n\nInvaders: total ${num_invaders} - flashed ${num_flashed} - displayed ${invaders_displayed} `;
+  const completecitiesmsg = this.mode == "missing" ? `incomplete ${num_cities - cities_complete}` : `complete ${cities_complete}`;
+  this.scoreReport.text = `Cities: invaded ${num_cities} - displayed ${cities_displayed} - missing  ${num_cities - cities_flashed} - ${completecitiesmsg} \n\nInvaders: total ${num_invaders} - flashed ${num_flashed} - displayed ${invaders_displayed} `;
 }
 
   public saveCurrentFlashes() {

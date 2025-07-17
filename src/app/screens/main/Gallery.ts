@@ -1,5 +1,5 @@
 import { GraphicsCity } from "./GraphicsCity";
-import { Assets, Container, Sprite } from "pixi.js";
+import { Assets, Container, Sprite, Texture } from "pixi.js";
 import { Camera, Shake } from "pixi-game-camera";
 import { engine } from "../../getEngine";
 import { WorldInvasion } from "../../model/worldinvasion";
@@ -8,6 +8,7 @@ import { City } from "../../model/city";
 import { userSettings } from "../../utils/userSettings";
 import { MainScreen } from "./MainScreen";
 import { Viewport } from "pixi-viewport";
+import { Flasher } from "../../model/flasher";
 
 export class Gallery extends Container {
   private camera: Camera;
@@ -42,20 +43,34 @@ export class Gallery extends Container {
       cityHeaderContainer.addChild(
         GraphicsCity.BuildCityName(
           city.name,
-          city.invaders,
+          city.num_invaders,
           world_invasion.flasher.getCityFlashedNum(c),
         ),
       );
       const cityInvadersContainer = new Container({ label: `${c}_invaders` });
       cityContainer.addChild(cityHeaderContainer, cityInvadersContainer);
       for (let i = 0; i < city.num_invaders; ++i) {
-        const invader = world_invasion.invader(City.InvaderCode(c, i));
+        const invader_code = City.InvaderCode(c, i);
+        const invader = world_invasion.invader(invader_code);
+        const texture: Texture = SpaceInvader.BuildTexture(invader_code, invader.state,
+          world_invasion.flasher.isInvaderFlashed(invader_code));
+        const sprite = new Sprite(texture);
+        sprite.label = invader_code;
+        invader.sprite = sprite;
+        sprite.eventMode = "static";
+        sprite.on("pointerup", () => {
+          this.toggleFlashed(invader_code);
+          this.updateCityText(c);
+          this.layout();
+        });
+        this.updateCityText(c);
         cityInvadersContainer.addChild(invader.sprite);
       }
       this.addChild(cityContainer);
-      this.updateCityText(c);
     }
   }
+
+
   public startShaking() {
     this.firstShake = undefined;
     const containers = this.getChildrenByLabel(/_invaders/, true);
@@ -179,47 +194,31 @@ export class Gallery extends Container {
     const num_flashed = world_invasion.flasher.isCityFlashed(city_code)
       ? world_invasion.flasher.flashedCities[city_code].length
       : 0;
-    const isInMissingMode = this.mode == "missing";
-    const ttext = `${city.name}: ${this.mode == "missing" ? "missing" : ""} ${isInMissingMode ? num_invaders - num_flashed : num_flashed} / ${num_invaders}`;
+    var ttext = `${city.name}: ${num_flashed} / ${num_invaders}`;
+    if (this.mode == "missing") {
+      ttext = `${city.name}: missing ${num_invaders - num_flashed} / ${num_invaders}`;
+    }
+
     if (citytext && "text" in citytext) {
       (citytext as { text: any; Text }).text = ttext.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
   }
 
-  public toggleFlashed(si: SpaceInvader) {
+  public toggleFlashed(si_code: string) {
     if (!this.firstShake)
       // not in edit mode
       return;
     const world_invasion = WorldInvasion.GetInstance();
     const flasher = world_invasion.flasher;
-    const flashed = flasher.isInvaderFlashed(si.code);
+    const flashed = flasher.isInvaderFlashed(si_code);
     if (flashed) {
-      flasher.unflash(si.code);
+      flasher.unflash(si_code);
     } else {
       const tutulululu = Assets.get("tutulululu.mp3");
       tutulululu.play();
-      flasher.flash(si.code);
+      flasher.flash(si_code);
     }
-    const oldSprite = si.sprite;
-    const newSprite: Sprite = SpaceInvader.BuildSprite(
-      si.code,
-      si.state,
-      !flashed,
-    );
-    const parent = oldSprite.parent;
-    newSprite.position = oldSprite.position;
-    newSprite.width = oldSprite.width;
-    newSprite.height = oldSprite.height;
-    parent.removeChild(<Sprite>oldSprite);
-    parent.addChild(newSprite);
-    si.sprite = newSprite;
-    newSprite.on("pointerup", () => {
-      this.toggleFlashed(si);
-    });
-    this.updateCityText(si.city_code);
-    if (this.mode != "all") {
-      this.layout();
-    }
+    this.updateSprite(si_code);
   }
 
   public remove(): void { }
@@ -229,4 +228,26 @@ export class Gallery extends Container {
   }
 
   public resize(): void { }
+
+  public updateAllSprites() {
+    const world_invasion = WorldInvasion.GetInstance();
+    for (let city_code in world_invasion.cities) {
+      for (let si_code in world_invasion.cities[city_code].invaders) {
+        this.updateSprite(si_code);
+      }
+    }
+  }
+
+
+  public updateSprite(si_code: string) {
+    const world_invasion = WorldInvasion.GetInstance();
+    const flasher = world_invasion.flasher;
+    const si = world_invasion.invader(si_code);
+    const newTexture = SpaceInvader.BuildTexture(
+      si_code,
+      si.state,
+      flasher.isInvaderFlashed(si_code),
+    );
+    si.sprite.texture = newTexture;
+  }
 }

@@ -1,4 +1,4 @@
-import { Container, Sprite, Texture } from "pixi.js";
+import { Assets, Container, Sprite, Texture } from "pixi.js";
 import { engine } from "../getEngine";
 
 export class SpaceInvader {
@@ -9,11 +9,15 @@ export class SpaceInvader {
   public date: string = "";
   public sprite!: Sprite;
 
+
+
   constructor(si_code: string) {
     this.code = si_code;
     const { city_code, order } = SpaceInvader.CodeToParts(si_code);
     this.city_code = city_code;
     this.order = order;
+    const texture = Assets.get("missing.jpg");
+    this.sprite  = new Sprite(texture);
   }
 
   static CodeToParts(invader_code: string): {
@@ -24,14 +28,12 @@ export class SpaceInvader {
     return { city_code: parts[0], order: Number(parts[1]) };
   }
 
-  static BuildSprite(
-    si_code: string,
-    status: string,
-    flashed: boolean,
-  ): Sprite {
-    const container = new Container();
-
-    const sprite = new Sprite({ texture: Texture.from(si_code) });
+  static BuildTexture(si_code: string, status: string, flashed: boolean): Texture {
+   const container = new Container();
+   var texture = Texture.from(si_code);
+   if (!texture)
+    texture = Assets.get("missing.jpg");
+    const sprite = new Sprite({ texture: texture });
     //console.log(sprite.width, sprite.height);
     container.addChild(sprite);
     sprite.anchor.set(0);
@@ -50,13 +52,11 @@ export class SpaceInvader {
     }
     container.cacheAsTexture(true);
     const bakedtexture = engine().renderer.generateTexture(container);
-    const finalSprite = new Sprite(bakedtexture);
-    finalSprite.anchor.set(0, 0);
-    //  console.log(finalSI.width, finalSI.height);
+    return bakedtexture;
+  }
 
-    finalSprite.label = si_code;
-    finalSprite.eventMode = "static";
-
-    return finalSprite;
+  static GetState(si_code: string) {
+    const si = WorldInvasion.GetInstance().invader(si_code);
+    return si.state;
   }
 }

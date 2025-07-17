@@ -25,11 +25,13 @@ export class WorldInvasion {
     if (WorldInvasion.singleton) return WorldInvasion.singleton;
     WorldInvasion.singleton = new WorldInvasion();
     WorldInvasion.singleton.initFrom(Assets.get("cities.json"));
-    WorldInvasion.singleton.initFromFlasher("pariscmagic_10juillet_2025"); //ninatheo_03_juillet_2025")
+    const flasher = new Flasher("delhoume_latest");
+    flasher.load();
+    WorldInvasion.singleton.initFromFlasher(flasher);
     return WorldInvasion.singleton;
   }
 
-  initFrom(desc: any) {
+  public initFrom(desc: any) {
     this.num_cities = desc.cities.number;
     this.num_invaders = 0;
     for (const c in desc.cities.details) {
@@ -44,10 +46,31 @@ export class WorldInvasion {
     });
   }
 
-  initFromFlasher(flasher_name: string) {
-    this.flasher = new Flasher(flasher_name);
-    this.flasher.load();
+  public initFromFlasher(flasher: Flasher) {
+    this.flasher = flasher;
     this.sorted_flashed_cities_codes = [];
+    // TODO handle case where flashed are not in our list
+    for (let c in flasher.flashedCities) {
+      if (!(c in this.cities)) {
+        // create new city with code as name and find higher si for number
+        const finvaders = flasher.flashedCities[c];
+        var maxnuminv = 0;
+        for (let i = 0; i < finvaders.length; i++) {
+          const invader_code = finvaders[i];
+          const { city_code, order } = SpaceInvader.CodeToParts(invader_code);
+          if (order > maxnuminv) maxnuminv = order;
+        }
+        const newcity = new City({
+          prefix: c,
+          name: c,
+          country: "",
+          invaders: maxnuminv,
+          pts: 0
+        });
+        this.cities[c] = newcity;
+        this.sorted_cities_codes.push(c);
+      }
+    }
     //same order to filter
     for (let c = 0; c < this.sorted_cities_codes.length; ++c) {
       const city_code = this.sorted_cities_codes[c];
@@ -66,29 +89,16 @@ export class WorldInvasion {
       for (const si_code in city.invaders) {
         const si = city.invaders[si_code];
         if (si) {
-          si.sprite = SpaceInvader.BuildSprite(
-            si_code,
-            "state" in si ? si.state : "U",
-            this.flasher.isInvaderFlashed(si_code),
-          );
-          si.sprite.on("pointerup", (_: any) => {
-            const gallery: any = engine().stage.getChildByLabel(
-              /Gallery/,
-              true,
-            );
-            if (gallery) {
-              gallery.toggleFlashed(si);
-            }
-          });
-        } else {
-          console.log("no such:", si_code);
+          const texture = SpaceInvader.BuildTexture(si_code, "state" in si ? si.state : "U", this.flasher.isInvaderFlashed(si_code));
+          si.sprite.texture = texture;
         }
       }
     }
   }
 
+
   // https://awazleon.space/cities/info
-  initFromFile(filename: string) {
+  public initFromFile(filename: string) {
     const contents = fs.readFileSync(filename, { encoding: "utf8" });
     const world_description = JSON.parse(contents);
     this.initFrom(world_description);
@@ -100,7 +110,7 @@ export class WorldInvasion {
   //     console.log(this);
   // }
 
-  invader(invader_code: string): SpaceInvader {
+  public invader(invader_code: string): SpaceInvader {
     const { city_code } = SpaceInvader.CodeToParts(invader_code);
     const city = this.cities[city_code];
     const ret = city.invaders[invader_code];
