@@ -40,7 +40,7 @@ export class MainScreen extends Container {
   private gallery: Gallery;
 
   public static DefaultMode: string = "flashedonly";
-  private mode: string = MainScreen.DefaultMode; // "all", "missing", "flashedonly", "fullcity"
+  private mode: string = MainScreen.DefaultMode; // "all", "flashable', "missing", "flashedonly", "fullcity"
   private editMode: boolean = false;
   public viewport: Viewport;
   private dragTarget: any = null;
@@ -193,16 +193,14 @@ export class MainScreen extends Container {
 
     this.infoArea.addChild(this.importButton);
     this.importButton.onPress.connect(() => {
-      console.log("import");
       navigator.permissions.query({ name: "clipboard-read", requestedOrigin: window.location.origin }).then((result) => {
         if (result.state === "granted") {
           console.log("permission read granted");
           navigator.clipboard.readText().then((text) => {
-            console.log("text", text);
             const world_invasion = WorldInvasion.GetInstance();
             const flasher = new Flasher("NoName")
             flasher.init(text);
-            world_invasion.initFromFlasher(flasher);
+            world_invasion.initFromFlasher(flasher, this.mode);
             this.gallery.updateAllSprites();
             this.updateScore();
             this.gallery.layout();
@@ -213,221 +211,227 @@ export class MainScreen extends Container {
       });
     });
 
-  const exportText = new Text({ text: "export", style: buttonsStyle });
+    const exportText = new Text({ text: "export", style: buttonsStyle });
     this.exportButton = new FancyButton({
-    text: exportText,
-    defaultView: "ninesplicebutton.png",
-    nineSliceSprite: [12, 12, 12, 12],
-  });
-this.exportButton.width = subeditbuttonwidth;
-this.exportButton.height = buttonheight;
-this.exportButton.position.set(
-  this.modeButton.x + subeditbuttonwidth + xoffset,
-  buttonstarty + buttonrowheight
-);
-this.exportButton.anchor.set(0);
+      text: exportText,
+      defaultView: "ninesplicebutton.png",
+      nineSliceSprite: [12, 12, 12, 12]
+    });
+    this.exportButton.width = subeditbuttonwidth;
+    this.exportButton.height = buttonheight;
+    this.exportButton.position.set(
+      this.modeButton.x + subeditbuttonwidth + xoffset,
+      buttonstarty + buttonrowheight
+    );
+    this.exportButton.anchor.set(0);
 
-this.infoArea.addChild(this.exportButton);
-this.exportButton.onPress.connect(() => {
-  const world_invasion = WorldInvasion.GetInstance();
-  const flasher = world_invasion.flasher;
-  const contents = flasher.getFlashFile();
-  console.log(contents);
-  navigator.permissions.query({ name: "clipboard-write", requestedOrigin: window.location.origin }).then((result) => {
-    if (result.state === "granted") {
-      navigator.clipboard.writeText(contents).then(() => { })
-    };
-  });
-});
-const doneText = new Text({ text: "Done", style: buttonsStyle });
-this.doneButton = new FancyButton({
-  text: doneText,
-  defaultView: "ninesplicebutton.png",
-  nineSliceSprite: [12, 12, 12, 12],
-});
-this.doneButton.width = subeditbuttonwidth;
-this.doneButton.height = buttonheight;
-this.doneButton.position.set(
-  this.editButton.x,
-  buttonstarty + buttonrowheight
-);
-this.doneButton.anchor.set(0);
+    this.infoArea.addChild(this.exportButton);
+    this.exportButton.onPress.connect(() => {
+      const world_invasion = WorldInvasion.GetInstance();
+      const flasher = world_invasion.flasher;
+      const contents = flasher.getFlashFile();
+      navigator.permissions.query({ name: "clipboard-write", requestedOrigin: window.location.origin }).then((result) => {
+        if (result.state === "granted") {
+          navigator.clipboard.writeText(contents).then(() => { })
+        };
+      });
+    });
+    const doneText = new Text({ text: "Done", style: buttonsStyle });
+    this.doneButton = new FancyButton({
+      text: doneText,
+      defaultView: "ninesplicebutton.png",
+      nineSliceSprite: [12, 12, 12, 12],
+    });
+    this.doneButton.width = subeditbuttonwidth;
+    this.doneButton.height = buttonheight;
+    this.doneButton.position.set(
+      this.editButton.x,
+      buttonstarty + buttonrowheight
+    );
+    this.doneButton.anchor.set(0);
 
-this.infoArea.addChild(this.doneButton);
-this.doneButton.onPress.connect(() => {
-  this.gallery.stopShaking();
-});
+    this.infoArea.addChild(this.doneButton);
+    this.doneButton.onPress.connect(() => {
+      this.gallery.stopShaking();
+    });
 
-const cancelText = new Text({ text: "Cancel", style: buttonsStyle });
-this.cancelButton = new FancyButton({
-  text: cancelText,
-  defaultView: "ninesplicebutton.png",
-  nineSliceSprite: [12, 12, 12, 12],
-});
+    const cancelText = new Text({ text: "Cancel", style: buttonsStyle });
+    this.cancelButton = new FancyButton({
+      text: cancelText,
+      defaultView: "ninesplicebutton.png",
+      nineSliceSprite: [12, 12, 12, 12],
+    });
 
-this.cancelButton.width = subeditbuttonwidth;
-this.cancelButton.height = buttonheight;
-this.cancelButton.position.set(
-  this.doneButton.x + this.doneButton.width + xoffset,
-  buttonstarty + buttonrowheight
-);
-this.infoArea.addChild(this.cancelButton);
+    this.cancelButton.width = subeditbuttonwidth;
+    this.cancelButton.height = buttonheight;
+    this.cancelButton.position.set(
+      this.doneButton.x + this.doneButton.width + xoffset,
+      buttonstarty + buttonrowheight
+    );
+    this.infoArea.addChild(this.cancelButton);
 
-this.cancelButton.onPress.connect(() => {
-  this.gallery.stopShaking();
-  this.restoreFlashes();
-});
+    this.cancelButton.onPress.connect(() => {
+      this.gallery.stopShaking();
+      this.restoreFlashes();
+    });
 
-this.modeButton.onPress.connect(() => {
-  switch (this.mode) {
-    case "missing":
-      this.mode = "flashedonly";
-      break;
-    case "flashedonly":
-      this.mode = "all";
-      break;
-    case "all":
-      this.mode = "fullcity";
-      break;
-    case "fullcity":
-      this.mode = "missing";
-      break;
-  }
+    this.modeButton.onPress.connect(() => {
+      switch (this.mode) {
+        case "missing":
+          this.mode = "flashedonly";
+          break;
+        case "flashedonly":
+          this.mode = "all";
+          break;
+        case "all":
+          this.mode = "fullcity";
+          break;
+        case "fullcity":
+          this.mode = "flashable";
+          break;
+        case "flashable":
+          this.mode = "missing";
+          break;
+      }
 
-  this.gallery.setMode(this.mode);
-  this.gallery.layout();
-  this.updateScore();
-});
+      this.gallery.setMode(this.mode);
+      this.gallery.updateAllSprites();
+      this.gallery.layout();
+      this.updateScore();
+    });
+      this.gallery.updateAllSprites();
+    this.updateScore();
+    this.gallery.layout();
+    const tpr = userSettings.getTilesPerRow();
+    this.tilesSlider = new Slider({
+      "bg": "slider_bg_outline.png",
+      "fill": "slider_bg_filled_white.png",
+      "slider": "slider_outline_inverted.png",
+      nineSliceSprite: {
+        bg: [2, 2, 8, 8],
+        fill: [2, 2, 78, 8]
+      },
+      min: MainScreen.MinTilesPerRow,
+      max: MainScreen.MaxTilesPerRow,
+      value: tpr,
+      step: MainScreen.TilesPerRowStep,
+      valueTextStyle: {
+        fill: "white",
+        fontSize: 14,
+        fontFamily: "Space Invaders"
+      },
+      showValue: true,
+      valueTextOffset: {
+        y: 25,
+      }
+    });
 
-this.updateScore();
-const tpr = userSettings.getTilesPerRow();
-this.tilesSlider = new Slider({
-  "bg": "slider_bg_outline.png",
-  "fill": "slider_bg_filled_white.png",
-  "slider": "slider_outline_inverted.png",
-  nineSliceSprite: {
-    bg: [2, 2, 8, 8],
-    fill: [2, 2, 78, 8]
-  },
-  min: MainScreen.MinTilesPerRow,
-  max: MainScreen.MaxTilesPerRow,
-  value: tpr,
-  step: MainScreen.TilesPerRowStep,
-  valueTextStyle: {
-    fill: "white",
-    fontSize: 14,
-    fontFamily: "Space Invaders"
-  },
-  showValue: true,
-  valueTextOffset: {
-    y: 25,
-  }
-});
+    this.tilesSlider.onUpdate.connect((v) => {
+      userSettings.setTilesPerRow(v);
+      // complete layout,keep vertical location
+      this.gallery.layout();
+    });
+    this.tilesSlider.position.set(
+      xoffset,
+      buttonstarty + buttonrowheight * 2 + 2 * yoffset - 5);
+    this.tilesSlider.width = modewidth + editwidth + xoffset;
+    //    this.tilesSlider.height = 50;
 
-this.tilesSlider.onUpdate.connect((v) => {
-  userSettings.setTilesPerRow(v);
-  // complete layout,keep vertical location
-  this.gallery.layout();
-});
-this.tilesSlider.position.set(
-  xoffset,
-  buttonstarty + buttonrowheight * 2 + 2 * yoffset - 5);
-this.tilesSlider.width = modewidth + editwidth + xoffset;
-//    this.tilesSlider.height = 50;
-
-this.infoArea.addChild(this.tilesSlider);
-this.infoArea.position.set(
-  10,
-  engine().screen.height - this.infoArea.height
-);
+    this.infoArea.addChild(this.tilesSlider);
+    this.infoArea.position.set(
+      10,
+      engine().screen.height - this.infoArea.height
+    );
   }
 
   public capitalize(str: string) {
-  return str[0].toUpperCase() + str.slice(1);
-}
+    return str[0].toUpperCase() + str.slice(1);
+  }
 
 
   static modeToString: any = {
-  flashedonly: "Flashed",
-  all: "All",
-  fullcity: "Complete cities",
-  missing: "Not Flashed",
-};
-  public updateScore() {
-  this.modeButton.text = `${MainScreen.modeToString[this.mode]}`;
+    flashedonly: "Flashed",
+    all: "All",
+    fullcity: "Complete cities",
+    missing: "Not Flashed",
+    flashable: "Flashable"
+  }
 
-  const world_invasion = WorldInvasion.GetInstance();
-  const num_invaders = world_invasion.num_invaders;
-  const num_cities = world_invasion.sorted_cities_codes.length;
-  const flasher = world_invasion.flasher;
-  const num_flashed = flasher.getTotalFlashes();
-  const cities_complete = flasher.getNumCompleteCities();
-  const cities_flashed = flasher.getNumFlashedCities();
-  const cities_displayed = this.gallery.num_displayed_cities;
-  const invaders_displayed = this.gallery.num_displayed_invaders;
-  const completecitiesmsg = this.mode == "missing" ? `incomplete ${num_cities - cities_complete}` : `complete ${cities_complete}`;
-  this.scoreReport.text = `Cities: invaded ${num_cities} - displayed ${cities_displayed} - missing  ${num_cities - cities_flashed} - ${completecitiesmsg} \n\nInvaders: total ${num_invaders} - flashed ${num_flashed} - displayed ${invaders_displayed} `;
-}
+  public updateScore() {
+    this.modeButton.text = `${MainScreen.modeToString[this.mode]}`;
+
+    const world_invasion = WorldInvasion.GetInstance();
+    const num_invaders = world_invasion.num_invaders;
+    const num_cities = world_invasion.sorted_cities_codes.length;
+    const flasher = world_invasion.flasher;
+    const num_flashed = flasher.getTotalFlashes();
+    const cities_complete = flasher.getNumCompleteCities();
+    const cities_flashed = flasher.getNumFlashedCities();
+    const cities_displayed = this.gallery.num_displayed_cities;
+    const invaders_displayed = this.gallery.num_displayed_invaders;
+    const completecitiesmsg = this.mode == "missing" ? `incomplete ${num_cities - cities_complete}` : `complete ${cities_complete}`;
+    this.scoreReport.text = `Cities: invaded ${num_cities} - displayed ${cities_displayed} - missing  ${num_cities - cities_flashed} - ${completecitiesmsg} \n\nInvaders: total ${num_invaders} - flashed ${num_flashed} - displayed ${invaders_displayed} `;
+  }
 
   public saveCurrentFlashes() {
-  const world_invasion = WorldInvasion.GetInstance();
-  const flasher = world_invasion.flasher;
-  const fileflash = flasher.getFlashFile();
-  this.savedFlashed = fileflash;
-}
+    const world_invasion = WorldInvasion.GetInstance();
+    const flasher = world_invasion.flasher;
+    const fileflash = flasher.getFlashFile();
+    this.savedFlashed = fileflash;
+  }
 
   public restoreFlashes() {
-  const world_invasion = WorldInvasion.GetInstance();
-  const flasher = world_invasion.flasher;
-  flasher.init(this.savedFlashed);
-  this.gallery.layout();
-}
+    const world_invasion = WorldInvasion.GetInstance();
+    const flasher = world_invasion.flasher;
+    flasher.init(this.savedFlashed);
+    this.gallery.layout();
+  }
 
   /** Update the screen */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public update(_time: Ticker) {
-  this.gallery.update();
-  this.updateScore();
-}
+    this.gallery.update();
+    this.updateScore();
+  }
 
   /** Fully reset */
   public reset() { }
 
   /** Resize the screen, fired whenever window size changes */
   public resize(width: number, height: number) {
-  this.gallery.layout();
-}
+    this.gallery.layout();
+  }
 
   /** Show screen with animations */
-  public async show(): Promise < void> {
-  const elementsToAnimate = [
-    this.scoreReport,
-    this.editButton,
-    this.modeButton,
-    this.tilesSlider,
-  ];
+  public async show(): Promise<void> {
+    const elementsToAnimate = [
+      this.scoreReport,
+      this.editButton,
+      this.modeButton,
+      this.tilesSlider,
+    ];
 
-  let finalPromise!: AnimationPlaybackControls;
-  for(const element of elementsToAnimate) {
-    element.alpha = 0;
-    finalPromise = animate(
-      element,
-      { alpha: 1 },
-      { duration: 0.3, delay: 0.75, ease: "backOut" }
-    );
-  }
+    let finalPromise!: AnimationPlaybackControls;
+    for (const element of elementsToAnimate) {
+      element.alpha = 0;
+      finalPromise = animate(
+        element,
+        { alpha: 1 },
+        { duration: 0.3, delay: 0.75, ease: "backOut" }
+      );
+    }
     await finalPromise;
-}
+  }
 
   /** Hide screen with animations */
   public async hide() { }
 
   /** Auto pause the app when window go out of focus */
   public blur() {
-  return;
-}
+    return;
+  }
 
   static InvaderFormat = (num: number) => {
-  return num < 10 ? "0" + num : "" + num;
-};
+    return num < 10 ? "0" + num : "" + num;
+  };
 }

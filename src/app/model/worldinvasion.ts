@@ -4,6 +4,7 @@ import { SpaceInvader } from "./spaceinvader";
 import { Assets } from "pixi.js";
 import { Flasher } from "./flasher";
 import { engine } from "../getEngine";
+import { MainScreen } from "../screens/main/MainScreen";
 
 export class WorldInvasion {
   public cities: any;
@@ -25,6 +26,7 @@ export class WorldInvasion {
     if (WorldInvasion.singleton) return WorldInvasion.singleton;
     WorldInvasion.singleton = new WorldInvasion();
     WorldInvasion.singleton.initFrom(Assets.get("cities.json"));
+    //const flasher = new Flasher("pariscmagic_10juillet_2025");;
     const flasher = new Flasher("delhoume_latest");
     flasher.load();
     WorldInvasion.singleton.initFromFlasher(flasher);
@@ -89,14 +91,13 @@ export class WorldInvasion {
       for (const si_code in city.invaders) {
         const si = city.invaders[si_code];
         if (si) {
-          const texture = SpaceInvader.BuildTexture(si_code, "state" in si ? si.state : "U", this.flasher.isInvaderFlashed(si_code));
+          const texture = SpaceInvader.BuildTexture(si_code, "state" in si ? si.state : "U",
+                     this.flasher.isInvaderFlashed(si_code), MainScreen.DefaultMode);
           si.sprite.texture = texture;
         }
       }
     }
   }
-
-
   // https://awazleon.space/cities/info
   public initFromFile(filename: string) {
     const contents = fs.readFileSync(filename, { encoding: "utf8" });

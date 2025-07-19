@@ -2,6 +2,7 @@ import { Assets } from "pixi.js";
 import { SpaceInvader } from "./spaceinvader";
 import { Utils } from "./utils";
 import { WorldInvasion } from "./worldinvasion";
+import { Flasher } from "./flasher";
 
 export class City {
   public name: string;
@@ -13,6 +14,7 @@ export class City {
   public start: number = 1;
   public invaders: any = {};
   public sorted_names = [];
+  public flashablenum: number = 0;
 
   constructor(params: {
     name: string;
@@ -50,18 +52,41 @@ export class City {
     return `${city_code}_${Utils.InvaderFormat(order)}`;
   }
 
-  static IsCityVisible(mode: string, city_code: string): boolean {
+  static IsCityVisible(mode: string, city_code: string, flasher: Flasher): boolean {
     const world_invasion = WorldInvasion.GetInstance();
     switch (mode) {
       case "flashedonly":
-        return world_invasion.flasher.isCityFlashed(city_code);
+        return flasher.isCityFlashed(city_code);
       case "missing":
-        return !world_invasion.flasher.isCityFullyFlashed(city_code)
+        return !flasher.isCityFullyFlashed(city_code)
       case "fullcity":
-        return world_invasion.flasher.isCityFullyFlashed(city_code);
+        return flasher.isCityFullyFlashed(city_code);
       case "all":
         return true;
+      case "flashable":
+        return City.GetFlashableNum(city_code, flasher) > 0;;
     }
     return false;
   }
+
+  // flashable AND not flashed 
+  static GetFlashableNum(city_code: string, flasher: Flasher) : number {
+    const world_invasion = WorldInvasion.GetInstance();
+    if(world_invasion.flasher.isCityFullyFlashed(city_code)) {
+      return 0;
+    } else {
+      var flashable_num = 0;
+      for (let city_si = 0; city_si < world_invasion.cities[city_code].num_invaders; city_si++) {
+        const si_code = City.InvaderCode(city_code, city_si);
+        const invader = world_invasion.invader(si_code);
+
+        if ((invader.state == "A" || invader.state == "DG") &&
+          !flasher.isInvaderFlashed(si_code)) {
+          ++flashable_num;
+        }
+      }
+      return flashable_num;
+    }
+  }
+
 }

@@ -63,11 +63,12 @@ export class Gallery extends Container {
           this.updateCityText(c);
           this.layout();
         });
-        this.updateCityText(c);
         cityInvadersContainer.addChild(invader.sprite);
       }
       this.addChild(cityContainer);
     }
+    this.updateCitiesTexts();
+
   }
 
 
@@ -107,11 +108,11 @@ export class Gallery extends Container {
     const windowWidth = app.screen.width;
     const tilesize = (windowWidth - (tpr + 1) * GraphicsCity.tileoffset) / tpr;
     const ratio = (tpr - MainScreen.MinTilesPerRow) / (MainScreen.MaxTilesPerRow - MainScreen.MinTilesPerRow);
-    const mintileoffset = 10; // GraphicsCity.cityoffset / 3;
+    const mintileoffset = 20; // GraphicsCity.cityoffset / 3;
     const maxtileoffset = 30; // GraphicsCity.cityoffset;
     const minfontsize = 8;
-    const maxfontsize = 10;
-    const computed_offset = mintileoffset + ((1.0 - ratio) * (maxtileoffset - mintileoffset));
+    const maxfontsize = 18;
+    const computed_offset = mintileoffset + Math.abs((1.0 - ratio) * (maxtileoffset - mintileoffset)) + 10;
     const computed_font_size = minfontsize + ((1.0 - ratio) * (maxfontsize - minfontsize));
 
     const world_invasion = WorldInvasion.GetInstance();
@@ -124,48 +125,52 @@ export class Gallery extends Container {
       const city = world_invasion.cities[city_code];
       const cityContainer = this.getChildByLabel(city_code);
       if (!cityContainer) continue;
-      cityContainer.visible = City.IsCityVisible(this.mode, city_code);
-      if (!cityContainer.visible) {
-        continue;
-      }
-      this.num_displayed_cities++;
-      cityContainer.position.set(0, cy);
-      const cityHeaderContainer = cityContainer.getChildByLabel(
-        `${city_code}_header`,
-      );
-      const cityInvadersContainer = cityContainer.getChildByLabel(
-        `${city_code}_invaders`,
-      );
-      cityHeaderContainer?.position.set(0, 0);
-      this.updateCityFontSize(cityHeaderContainer, computed_font_size);
-      // does not depend on tilesize
-      // cy += computed_offset;
-      cityInvadersContainer?.position.set(0, computed_offset);
+      const flasher = world_invasion.flasher;
+      const iscitydisplayed = City.IsCityVisible(this.mode, city_code, flasher);
+      cityContainer.visible = iscitydisplayed;
+      if (iscitydisplayed) {
+        this.num_displayed_cities++;
+        cityContainer.position.set(0, cy);
+        const cityHeaderContainer = cityContainer.getChildByLabel(
+          `${city_code}_header`,
+        );
+        const cityInvadersContainer = cityContainer.getChildByLabel(
+          `${city_code}_invaders`,
+        );
+        cityHeaderContainer?.position.set(0, 0);
+        this.updateCityFontSize(cityHeaderContainer, computed_font_size);
+        // does not depend on tilesize
+        // cy += computed_offset;
+        cityInvadersContainer?.position.set(0, computed_offset);
 
-      let y = 0;
-      let x = 0;
-      for (let i = 0; i < city.num_invaders; ++i) {
-        const invader_code = City.InvaderCode(city_code, i);
-        const invader = world_invasion.invader(invader_code);
-        const sprite = invader.sprite;
+        let y = 0;
+        let x = 0;
+        for (let i = 0; i < city.num_invaders; ++i) {
+          const invader_code = City.InvaderCode(city_code, i);
+          const invader = world_invasion.invader(invader_code);
+          const sprite = invader.sprite;
 
-        if (x >= tpr) {
-          x = 0;
-          y++;
+          if (x >= tpr) {
+            x = 0;
+            y++;
+            cy += tilesize + GraphicsCity.tileoffset;
+          }
+          const isvisibleinvader = GraphicsCity.IsInvaderVisible(this.mode, invader_code);
+          sprite.visible = isvisibleinvader;
+          if (isvisibleinvader) {
+            this.num_displayed_invaders++;
+            sprite.position.set(
+              x * (tilesize + GraphicsCity.tileoffset),
+              y * (tilesize + GraphicsCity.tileoffset));
+            sprite.width = tilesize;
+            sprite.height = tilesize;
+            sprite.visible = true;
+            x++;
+          }
         }
-        const isvisibleinvader = GraphicsCity.IsInvaderVisible(this.mode, invader_code);
-        sprite.visible = isvisibleinvader;
-        if (!isvisibleinvader) continue
-        this.num_displayed_invaders++;
-        sprite.position.set(
-          x * (tilesize + GraphicsCity.tileoffset),
-          y * (tilesize + GraphicsCity.tileoffset));
-        sprite.width = tilesize;
-        sprite.height = tilesize;
-        sprite.visible = true;
-        x++;
+        //cy += (y + 1) * (tilesize + GraphicsCity.tileoffset) + computed_offset;
+        cy += tilesize + GraphicsCity.tileoffset + computed_offset;
       }
-      cy += (y + 1) * (tilesize + GraphicsCity.tileoffset) + computed_offset;
     }
     // restore location
     this.viewport.top = pos * this.viewport.worldHeight;
@@ -194,9 +199,13 @@ export class Gallery extends Container {
     const num_flashed = world_invasion.flasher.isCityFlashed(city_code)
       ? world_invasion.flasher.flashedCities[city_code].length
       : 0;
-    var ttext = `${city.name}: ${num_flashed} / ${num_invaders}`;
+    var ttext = `${city.name}: flashed ${num_flashed} / ${num_invaders}`;
     if (this.mode == "missing") {
       ttext = `${city.name}: missing ${num_invaders - num_flashed} / ${num_invaders}`;
+    } else if (this.mode == "flashable") {
+      const num_flashable = City.GetFlashableNum(city_code, world_invasion.flasher);
+
+      ttext = `${city.name}: missing ${num_invaders - num_flashed} / flashable ${num_flashable}`;
     }
 
     if (citytext && "text" in citytext) {
@@ -247,6 +256,7 @@ export class Gallery extends Container {
       si_code,
       si.state,
       flasher.isInvaderFlashed(si_code),
+      this.mode
     );
     si.sprite.texture = newTexture;
   }

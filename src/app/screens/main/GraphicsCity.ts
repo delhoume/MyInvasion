@@ -26,14 +26,14 @@ export class GraphicsCity {
 
   static IsInvaderVisible(mode: string, si_code: string): boolean {
     const city_code = si_code.split("_")[0];
-    if (City.IsCityVisible(mode, city_code))  {
-          const world_invasion = WorldInvasion.GetInstance();
+           const world_invasion = WorldInvasion.GetInstance();
       switch(mode) {
         case "flashedonly": return world_invasion.flasher.isInvaderFlashed(si_code);
         case "missing":   return !world_invasion.flasher.isInvaderFlashed(si_code);
         case "fullcity": return true;
         case "all": return true;
-      }
+        case "flashable": return (world_invasion.invader(si_code).state =="A" ||
+      world_invasion.invader(si_code).state =="DG") && !world_invasion.flasher.isInvaderFlashed(si_code);
     }
     return false;
   }
