@@ -39,7 +39,7 @@ export class MainScreen extends Container {
   private tilesSlider: Slider;
   private gallery: Gallery;
 
-  public static DefaultMode: string = "flashedonly";
+  public static DefaultMode: string = "flashable";
   private mode: string = MainScreen.DefaultMode; // "all", "flashable', "missing", "flashedonly", "fullcity"
   private editMode: boolean = false;
   public viewport: Viewport;
@@ -159,7 +159,8 @@ export class MainScreen extends Container {
     this.editButton = new FancyButton({
       text: editText,
       defaultView: "ninesplicebutton.png",
-      nineSliceSprite: [12, 12, 12, 12],
+      disabledView: "ninesplicebuttongrey.png",
+    nineSliceSprite:  [12, 12, 12, 12],
     });
     this.editButton.anchor.set(0);
     this.editButton.position.set(2 * xoffset + modewidth, buttonstarty);
@@ -168,12 +169,9 @@ export class MainScreen extends Container {
 
     this.infoArea.addChild(this.editButton);
     this.editButton.onPress.connect(() => {
-      this.editMode = !this.editMode;
-      if (this.editMode) {
-        this.gallery.startShaking();
+      if (this.editMode) return;
         this.saveCurrentFlashes();
-      } else {
-      }
+      this.setEditMode(true);
       this.updateScore();
     });
 
@@ -252,8 +250,8 @@ export class MainScreen extends Container {
 
     this.infoArea.addChild(this.doneButton);
     this.doneButton.onPress.connect(() => {
-      this.gallery.stopShaking();
-    });
+      this.setEditMode(false);
+       });
 
     const cancelText = new Text({ text: "Cancel", style: buttonsStyle });
     this.cancelButton = new FancyButton({
@@ -271,7 +269,7 @@ export class MainScreen extends Container {
     this.infoArea.addChild(this.cancelButton);
 
     this.cancelButton.onPress.connect(() => {
-      this.gallery.stopShaking();
+      this.setEditMode(false);
       this.restoreFlashes();
     });
 
@@ -284,20 +282,15 @@ export class MainScreen extends Container {
           this.mode = "all";
           break;
         case "all":
-          this.mode = "fullcity";
-          break;
-        case "fullcity":
           this.mode = "flashable";
           break;
-        case "flashable":
+            case "flashable":
           this.mode = "missing";
           break;
       }
 
       this.gallery.setMode(this.mode);
-      this.gallery.updateAllSprites();
-      this.gallery.layout();
-      this.updateScore();
+       this.updateScore();
     });
       this.gallery.updateAllSprites();
     this.updateScore();
@@ -344,6 +337,12 @@ export class MainScreen extends Container {
     );
   }
 
+  public setEditMode(value: boolean) {
+    this.editButton.enabled = !value;
+       this.editMode = value;
+      this.gallery.setEditMode(value);
+  }
+
   public capitalize(str: string) {
     return str[0].toUpperCase() + str.slice(1);
   }
@@ -352,7 +351,7 @@ export class MainScreen extends Container {
   static modeToString: any = {
     flashedonly: "Flashed",
     all: "All",
-    fullcity: "Complete cities",
+    // fullcity: "Complete cities",
     missing: "Not Flashed",
     flashable: "Flashable"
   }

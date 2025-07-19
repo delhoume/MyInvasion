@@ -1,6 +1,7 @@
 import { Assets, Container, Graphics, Rectangle, Sprite, Texture } from "pixi.js";
 import { engine } from "../getEngine";
 import { WorldInvasion } from "./worldinvasion";
+import { CheckBox } from "@pixi/ui";
 
 export class SpaceInvader {
   public code: string;
@@ -29,7 +30,8 @@ export class SpaceInvader {
     return { city_code: parts[0], order: Number(parts[1]) };
   }
 
-  static BuildTexture(si_code: string, status: string, flashed: boolean, mode: string): Texture {
+  static BuildTexture(si_code: string, status: string, flashed: boolean, mode: string,
+    editmode: boolean): Texture {
     const container = new Container();
     var texture = Texture.from(si_code);
     if (!texture)
@@ -38,6 +40,7 @@ export class SpaceInvader {
     //console.log(sprite.width, sprite.height);
     container.addChild(sprite);
     sprite.anchor.set(0);
+    const bb: Rectangle = sprite.getBounds();
     //   console.log(si_info);
     if (status != "A") {
       const ssprite = new Sprite({ texture: Texture.from(status), anchor: 0 });
@@ -47,32 +50,33 @@ export class SpaceInvader {
     }
     if (mode && mode == "all") {
       if (flashed) {
-      const flashedmethod = "tintgreen";
-      switch (flashedmethod) {
-        case "tintgreen": {
-          const bb: Rectangle = sprite.getBounds();
-          const g = new Graphics().rect(bb.left, bb.top, bb.width, bb.height).
-            fill({ color: "00ff0044" });
-          container.addChild(g);
+        //const flashedmethod = "tintgreen";
+         const flashedmethod = "greenborder";
+        switch (flashedmethod) {
+          case "tintgreen": {
+            const g = new Graphics().rect(bb.left, bb.top, bb.width, bb.height).
+              fill({ color: "00ff0044" });
+            container.addChild(g);
 
-        } break;
-        case "greenborder": {
-          const bb: Rectangle = sprite.getBounds();
-          const g = new Graphics().rect(bb.left, bb.top, bb.width, bb.height).
-            stroke({ width: 10, color: "green" });
-          container.addChild(g);
+          } break;
+          case "greenborder": {
+            const g = new Graphics().rect(bb.left, bb.top, bb.width, bb.height).
+              stroke({ width: 5, color: "green" });
+            container.addChild(g);
 
-        } break;
-        default: {
-          const fsprite = new Sprite({ texture: Texture.from("F"), anchor: 0 });
-          fsprite.y = sprite.height - fsprite.height;
-          fsprite.anchor.set(0, 0);
-          container.addChild(fsprite);
+          } break;
+          case "greencorner":
+          default: {
+            const fsprite = new Sprite({ texture: Texture.from("F"), anchor: 0 });
+            fsprite.y = sprite.height - fsprite.height;
+            fsprite.anchor.set(0, 0);
+            container.addChild(fsprite);
+          }
+            break;
         }
-          break;
+      }
     }
-    }
-  }
+
     container.cacheAsTexture(true);
     const bakedtexture = engine().renderer.generateTexture(container);
     return bakedtexture;

@@ -9,17 +9,19 @@ import { userSettings } from "../../utils/userSettings";
 import { MainScreen } from "./MainScreen";
 import { Viewport } from "pixi-viewport";
 import { Flasher } from "../../model/flasher";
+import { CheckBox } from "@pixi/ui";
 
 export class Gallery extends Container {
   private camera: Camera;
   private firstShake: Shake | undefined;
   public mode: string = MainScreen.DefaultMode;
-  static shake_intensity: number = 6;
-  static shake_duration: number = 500;
+  public editmode: boolean = false;
+  static ShakeIntensity: number = 2;
+  static ShakeDuration: number = 500;
   public num_displayed_cities: number = 0;
   public num_displayed_invaders: number = 0;
   private viewport: Viewport;
-
+  static Sizecheck: number = 15;
   constructor(viewport: Viewport) {
     super({ label: "Gallery" });
     this.viewport = viewport;
@@ -30,8 +32,19 @@ export class Gallery extends Container {
 
   setMode(mode: string) {
     this.mode = mode;
-    // update all texts (done in layout)
+    this.layout();
     this.updateCitiesTexts();
+  }
+
+  public setEditMode(editmode: boolean) {
+    this.editmode = editmode;
+    this.updateAllSprites();
+    this.layout();
+
+    if (editmode)
+      this.startShaking();
+    else
+      this.stopShaking();
   }
 
   public initAllGraphics() {
@@ -44,16 +57,21 @@ export class Gallery extends Container {
         GraphicsCity.BuildCityName(
           city.name,
           city.num_invaders,
-          world_invasion.flasher.getCityFlashedNum(c),
-        ),
+          world_invasion.flasher.getCityFlashedNum(c)
+        )
       );
       const cityInvadersContainer = new Container({ label: `${c}_invaders` });
       cityContainer.addChild(cityHeaderContainer, cityInvadersContainer);
       for (let i = 0; i < city.num_invaders; ++i) {
         const invader_code = City.InvaderCode(c, i);
         const invader = world_invasion.invader(invader_code);
-        const texture: Texture = SpaceInvader.BuildTexture(invader_code, invader.state,
-          world_invasion.flasher.isInvaderFlashed(invader_code));
+        const flashed = world_invasion.flasher.isInvaderFlashed(invader_code);
+        const texture: Texture = SpaceInvader.BuildTexture(
+          invader_code,
+          invader.state,
+          flashed, this.mode,
+          this.editmode
+        );
         const sprite = new Sprite(texture);
         sprite.label = invader_code;
         invader.sprite = sprite;
@@ -61,16 +79,20 @@ export class Gallery extends Container {
         sprite.on("pointerup", () => {
           this.toggleFlashed(invader_code);
           this.updateCityText(c);
+          this.updateSprite(invader_code);
           this.layout();
         });
         cityInvadersContainer.addChild(invader.sprite);
+        // create checkbox (in progress)
+        // invader.checkbox = new CheckBox({
+        //   style: { checked: "checked.png", unchecked: "unchecked.png" },
+        // });
+        // cityInvadersContainer.addChild(invader.checkbox);
       }
       this.addChild(cityContainer);
     }
     this.updateCitiesTexts();
-
   }
-
 
   public startShaking() {
     this.firstShake = undefined;
@@ -78,8 +100,8 @@ export class Gallery extends Container {
     containers.forEach((container) => {
       const shake = new Shake(
         container,
-        Gallery.shake_intensity,
-        Gallery.shake_duration,
+        Gallery.ShakeIntensity,
+        Gallery.ShakeDuration
       );
       if (this.firstShake == undefined) this.firstShake = shake;
       this.camera.effect(shake);
@@ -107,13 +129,19 @@ export class Gallery extends Container {
     const app = engine();
     const windowWidth = app.screen.width;
     const tilesize = (windowWidth - (tpr + 1) * GraphicsCity.tileoffset) / tpr;
-    const ratio = (tpr - MainScreen.MinTilesPerRow) / (MainScreen.MaxTilesPerRow - MainScreen.MinTilesPerRow);
+    const ratio =
+      (tpr - MainScreen.MinTilesPerRow) /
+      (MainScreen.MaxTilesPerRow - MainScreen.MinTilesPerRow);
     const mintileoffset = 20; // GraphicsCity.cityoffset / 3;
     const maxtileoffset = 30; // GraphicsCity.cityoffset;
     const minfontsize = 8;
     const maxfontsize = 18;
-    const computed_offset = mintileoffset + Math.abs((1.0 - ratio) * (maxtileoffset - mintileoffset)) + 10;
-    const computed_font_size = minfontsize + ((1.0 - ratio) * (maxfontsize - minfontsize));
+    const computed_offset =
+      mintileoffset +
+      Math.abs((1.0 - ratio) * (maxtileoffset - mintileoffset)) +
+      10;
+    const computed_font_size =
+      minfontsize + (1.0 - ratio) * (maxfontsize - minfontsize);
 
     const world_invasion = WorldInvasion.GetInstance();
     let cy = 0;
@@ -132,10 +160,10 @@ export class Gallery extends Container {
         this.num_displayed_cities++;
         cityContainer.position.set(0, cy);
         const cityHeaderContainer = cityContainer.getChildByLabel(
-          `${city_code}_header`,
+          `${city_code}_header`
         );
         const cityInvadersContainer = cityContainer.getChildByLabel(
-          `${city_code}_invaders`,
+          `${city_code}_invaders`
         );
         cityHeaderContainer?.position.set(0, 0);
         this.updateCityFontSize(cityHeaderContainer, computed_font_size);
@@ -149,26 +177,38 @@ export class Gallery extends Container {
           const invader_code = City.InvaderCode(city_code, i);
           const invader = world_invasion.invader(invader_code);
           const sprite = invader.sprite;
-
+          const check = invader.checkbox;
           if (x >= tpr) {
             x = 0;
             y++;
             cy += tilesize + GraphicsCity.tileoffset;
           }
-          const isvisibleinvader = GraphicsCity.IsInvaderVisible(this.mode, invader_code);
+          const isvisibleinvader = GraphicsCity.IsInvaderVisible(
+            this.mode,
+            invader_code
+          );
           sprite.visible = isvisibleinvader;
+          if (check) {
+            check.visible = sprite.visible && this.editmode;
+          }
           if (isvisibleinvader) {
             this.num_displayed_invaders++;
             sprite.position.set(
               x * (tilesize + GraphicsCity.tileoffset),
-              y * (tilesize + GraphicsCity.tileoffset));
+              y * (tilesize + GraphicsCity.tileoffset)
+            );
             sprite.width = tilesize;
             sprite.height = tilesize;
-            sprite.visible = true;
+            // checkbox
+
+            if (check && this.editmode) {
+              const pos = sprite.position;
+              check.position.set(pos.x + 5, pos.y + sprite.height - Gallery.Sizecheck - 5);
+              check.setSize(Gallery.Sizecheck, Gallery.Sizecheck);
+            }
             x++;
           }
         }
-        //cy += (y + 1) * (tilesize + GraphicsCity.tileoffset) + computed_offset;
         cy += tilesize + GraphicsCity.tileoffset + computed_offset;
       }
     }
@@ -176,7 +216,10 @@ export class Gallery extends Container {
     this.viewport.top = pos * this.viewport.worldHeight;
   }
 
-  public updateCityFontSize(city_header_container: any, computed_font_size: number) {
+  public updateCityFontSize(
+    city_header_container: any,
+    computed_font_size: number
+  ) {
     const citytext: Text = city_header_container?.getChildAt(0);
     citytext.style.fontSize = computed_font_size;
   }
@@ -192,7 +235,7 @@ export class Gallery extends Container {
     const city = world_invasion.cities[city_code];
     const cityContainer = this.getChildByLabel(city_code);
     const cityHeaderContainer = cityContainer?.getChildByLabel(
-      `${city_code}_header`,
+      `${city_code}_header`
     );
     const citytext = cityHeaderContainer?.getChildAt(0);
     const num_invaders = city.num_invaders;
@@ -203,13 +246,18 @@ export class Gallery extends Container {
     if (this.mode == "missing") {
       ttext = `${city.name}: missing ${num_invaders - num_flashed} / ${num_invaders}`;
     } else if (this.mode == "flashable") {
-      const num_flashable = City.GetFlashableNum(city_code, world_invasion.flasher);
+      const num_flashable = City.GetFlashableNum(
+        city_code,
+        world_invasion.flasher
+      );
 
       ttext = `${city.name}: missing ${num_invaders - num_flashed} / flashable ${num_flashable}`;
     }
 
     if (citytext && "text" in citytext) {
-      (citytext as { text: any; Text }).text = ttext.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      (citytext as { text: any; Text }).text = ttext
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
     }
   }
 
@@ -247,7 +295,6 @@ export class Gallery extends Container {
     }
   }
 
-
   public updateSprite(si_code: string) {
     const world_invasion = WorldInvasion.GetInstance();
     const flasher = world_invasion.flasher;
@@ -256,8 +303,12 @@ export class Gallery extends Container {
       si_code,
       si.state,
       flasher.isInvaderFlashed(si_code),
-      this.mode
+      this.mode,
+      this.editmode
     );
     si.sprite.texture = newTexture;
+    if (si.checbox) {
+      si.checkbox.checked = flasher.isInvaderFlashed(si_code);
+    }
   }
 }
