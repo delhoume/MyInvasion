@@ -160,7 +160,7 @@ export class MainScreen extends Container {
       text: editText,
       defaultView: "ninesplicebutton.png",
       disabledView: "ninesplicebuttongrey.png",
-    nineSliceSprite:  [12, 12, 12, 12],
+      nineSliceSprite: [12, 12, 12, 12],
     });
     this.editButton.anchor.set(0);
     this.editButton.position.set(2 * xoffset + modewidth, buttonstarty);
@@ -170,7 +170,7 @@ export class MainScreen extends Container {
     this.infoArea.addChild(this.editButton);
     this.editButton.onPress.connect(() => {
       if (this.editMode) return;
-        this.saveCurrentFlashes();
+      this.saveCurrentFlashes();
       this.setEditMode(true);
       this.updateScore();
     });
@@ -251,7 +251,7 @@ export class MainScreen extends Container {
     this.infoArea.addChild(this.doneButton);
     this.doneButton.onPress.connect(() => {
       this.setEditMode(false);
-       });
+    });
 
     const cancelText = new Text({ text: "Cancel", style: buttonsStyle });
     this.cancelButton = new FancyButton({
@@ -269,8 +269,8 @@ export class MainScreen extends Container {
     this.infoArea.addChild(this.cancelButton);
 
     this.cancelButton.onPress.connect(() => {
-      this.setEditMode(false);
       this.restoreFlashes();
+      this.setEditMode(false);
     });
 
     this.modeButton.onPress.connect(() => {
@@ -284,15 +284,15 @@ export class MainScreen extends Container {
         case "all":
           this.mode = "flashable";
           break;
-            case "flashable":
+        case "flashable":
           this.mode = "missing";
           break;
       }
 
       this.gallery.setMode(this.mode);
-       this.updateScore();
+      this.updateScore();
     });
-      this.gallery.updateAllSprites();
+    this.gallery.updateAllSprites();
     this.updateScore();
     this.gallery.layout();
     const tpr = userSettings.getTilesPerRow();
@@ -339,8 +339,8 @@ export class MainScreen extends Container {
 
   public setEditMode(value: boolean) {
     this.editButton.enabled = !value;
-       this.editMode = value;
-      this.gallery.setEditMode(value);
+    this.editMode = value;
+    this.gallery.setEditMode(value);
   }
 
   public capitalize(str: string) {

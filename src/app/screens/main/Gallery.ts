@@ -39,6 +39,7 @@ export class Gallery extends Container {
   public setEditMode(editmode: boolean) {
     this.editmode = editmode;
     this.updateAllSprites();
+    this.updateCitiesTexts()
     this.layout();
 
     if (editmode)
