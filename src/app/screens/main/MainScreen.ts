@@ -382,6 +382,7 @@ export class MainScreen extends Container {
     const invaders_displayed = this.gallery.num_displayed_invaders;
     var scoretext = "pseudo" in flasher.properties ? `${flasher.properties["pseudo"]}` : "";
     if ("date" in flasher.properties) scoretext += `  ${flasher.properties["date"]}`;
+  if ("rank" in flasher.properties) scoretext += `  rank ${flasher.properties["rank"]}`;
     scoretext += "\n\n";
     const citiesmsg = this.mode == "missing" ? `incomplete ${num_cities - cities_complete}` : `complete ${cities_complete}`;
 
