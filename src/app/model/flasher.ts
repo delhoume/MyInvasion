@@ -18,6 +18,9 @@ export class Flasher {
     if (flashfile) {
       const ff = new FlashFileParser();
       const tokens = ff.decodeString(flashfile);
+      // check for special names
+      var idx = tokens.indexOf("SPACE2ISS");
+      if (idx != -1) tokens[idx] = "SPACE_02";
       const cities: any = {};
       tokens.forEach((si_code: string) => {
         const city_code = si_code.split("_")[0];
@@ -49,7 +52,6 @@ public setProperty(name: string, value: string) {
     for (let c = 0; c < comments.length; ++c) {
       const comment = comments[c].comment;
       // check if name:value
-      console.log(comment);
       const idx = comment.indexOf(":");
       if (idx != -1) {
         const prop = comment.substring(0, idx).trimEnd();

@@ -2821,6 +2821,23 @@
         },
         {
           "alias": [
+            "preload/missing.jpg",
+            "missing.jpg"
+          ],
+          "src": [
+            "preload/missing@0.5x.webp",
+            "preload/missing@0.5x.jpg",
+            "preload/missing.webp",
+            "preload/missing.jpg"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
             "preload/overlays/state/blue.png",
             "blue.png"
           ],
@@ -2983,6 +3000,23 @@
         },
         {
           "alias": [
+            "preload/ui/checked.png",
+            "checked.png"
+          ],
+          "src": [
+            "preload/ui/checked@0.5x.webp",
+            "preload/ui/checked@0.5x.png",
+            "preload/ui/checked.webp",
+            "preload/ui/checked.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
             "preload/ui/ninesplicebutton.png",
             "ninesplicebutton.png"
           ],
@@ -3008,6 +3042,40 @@
             "preload/ui/ninesplicebutton2@0.5x.png",
             "preload/ui/ninesplicebutton2.webp",
             "preload/ui/ninesplicebutton2.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/ninesplicebuttonblack.png",
+            "ninesplicebuttonblack.png"
+          ],
+          "src": [
+            "preload/ui/ninesplicebuttonblack@0.5x.webp",
+            "preload/ui/ninesplicebuttonblack@0.5x.png",
+            "preload/ui/ninesplicebuttonblack.webp",
+            "preload/ui/ninesplicebuttonblack.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/ninesplicebuttongrey.png",
+            "ninesplicebuttongrey.png"
+          ],
+          "src": [
+            "preload/ui/ninesplicebuttongrey@0.5x.webp",
+            "preload/ui/ninesplicebuttongrey@0.5x.png",
+            "preload/ui/ninesplicebuttongrey.webp",
+            "preload/ui/ninesplicebuttongrey.png"
           ],
           "data": {
             "tags": {
@@ -3246,6 +3314,23 @@
             "preload/ui/slider_transp@0.5x.png",
             "preload/ui/slider_transp.webp",
             "preload/ui/slider_transp.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/ui/unchecked.png",
+            "unchecked.png"
+          ],
+          "src": [
+            "preload/ui/unchecked@0.5x.webp",
+            "preload/ui/unchecked@0.5x.png",
+            "preload/ui/unchecked.webp",
+            "preload/ui/unchecked.png"
           ],
           "data": {
             "tags": {

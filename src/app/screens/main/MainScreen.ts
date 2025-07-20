@@ -193,23 +193,25 @@ export class MainScreen extends Container {
     this.importButton.anchor.set(0);
 
     this.infoArea.addChild(this.importButton);
+
+    const filereader = new FileReader();
+    const inputElement = document.getElementById("fileElem");
+
+    inputElement.onchange = function (event) {
+      filereader.readAsText(event.target.files[0]);
+    }
+    filereader.onload = function () {
+      const contents = filereader.result;
+      const world_invasion = WorldInvasion.GetInstance();
+      const flasher = new Flasher();
+      flasher.init(contents);
+      world_invasion.initFromFlasher(flasher, t.mode);
+      t.gallery.updateAllSprites();
+      t.updateScore();
+      t.gallery.layout();
+    }
     this.importButton.onPress.connect(() => {
-      navigator.permissions.query({ name: "clipboard-read", requestedOrigin: window.location.origin }).then((result) => {
-        if (result.state === "granted") {
-          console.log("permission read granted");
-          navigator.clipboard.readText().then((text) => {
-            const world_invasion = WorldInvasion.GetInstance();
-            const flasher = new Flasher()
-            flasher.init(text);
-            world_invasion.initFromFlasher(flasher, this.mode);
-            this.gallery.updateAllSprites();
-            this.updateScore();
-            this.gallery.layout();
-          });
-        } else {
-          console.log("permission read not granted");
-        }
-      });
+      document.getElementById("fileElem")?.click();
     });
 
     const exportText = new Text({ text: "export", style: buttonsStyle });
@@ -380,11 +382,18 @@ export class MainScreen extends Container {
     const cities_flashed = flasher.getNumFlashedCities();
     const cities_displayed = this.gallery.num_displayed_cities;
     const invaders_displayed = this.gallery.num_displayed_invaders;
-    var scoretext = "pseudo" in flasher.properties ? `${flasher.properties["pseudo"]}` : "";
-    if ("date" in flasher.properties) scoretext += `  ${flasher.properties["date"]}`;
-  if ("rank" in flasher.properties) scoretext += `  rank ${flasher.properties["rank"]}`;
+    const pseudo = "pseudo" in flasher.properties ? flasher.properties["pseudo"] : "Anonymous";
+    document.title = `MyInvasion: ${pseudo}`
+    var scoretext = pseudo;
+    if ("date" in flasher.properties)
+      scoretext += `  ${flasher.properties["date"]}`;
+    if ("rank" in flasher.properties)
+      scoretext += `  rank ${flasher.properties["rank"]}`;
     scoretext += "\n\n";
-    const citiesmsg = this.mode == "missing" ? `incomplete ${num_cities - cities_complete}` : `complete ${cities_complete}`;
+    const citiesmsg =
+      this.mode == "missing"
+        ? `incomplete ${num_cities - cities_complete}`
+        : `complete ${cities_complete}`;
 
     this.scoreReport.text = `${scoretext} Cities: invaded ${num_cities} - displayed ${cities_displayed} - missing  ${num_cities - cities_flashed} - ${citiesmsg} \n\nInvaders: total ${num_invaders} - flashed ${num_flashed} - displayed ${invaders_displayed} `;
   }
