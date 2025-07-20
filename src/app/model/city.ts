@@ -30,9 +30,7 @@ export class City {
     this.points = params.pts;
 
     // will use
-    // await fetch(`https://awazleon.space/cities/info
-    // and
-    // await fetch(`https://awazleon.space/invaders/${city_code}/city`
+       // await fetch(`https://awazleon.space/invaders/${city_code}/city`
     // to: regular polling and automatic updates.
     // same for flasher
     const statuses = Assets.get("invaders.json");

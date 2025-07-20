@@ -143,7 +143,8 @@ export class MainScreen extends Container {
     this.modeButton = new FancyButton({
       text: modeText,
       defaultView: "ninesplicebutton.png",
-      nineSliceSprite: [12, 12, 12, 12],
+      pressedView: "ninesplicebuttonblack.png",
+        nineSliceSprite: [12, 12, 12, 12],
     });
     this.modeButton.position.set(xoffset, buttonstarty);
     this.modeButton.width = modewidth;
@@ -160,6 +161,7 @@ export class MainScreen extends Container {
       text: editText,
       defaultView: "ninesplicebutton.png",
       disabledView: "ninesplicebuttongrey.png",
+      pressedView: "ninesplicebuttonblack.png",
       nineSliceSprite: [12, 12, 12, 12],
     });
     this.editButton.anchor.set(0);
@@ -179,7 +181,8 @@ export class MainScreen extends Container {
     this.importButton = new FancyButton({
       text: importText,
       defaultView: "ninesplicebutton.png",
-      nineSliceSprite: [12, 12, 12, 12],
+      pressedView: "ninesplicebuttonblack.png",
+        nineSliceSprite: [12, 12, 12, 12],
     });
     this.importButton.width = subeditbuttonwidth;
     this.importButton.height = buttonheight;
@@ -213,6 +216,8 @@ export class MainScreen extends Container {
     this.exportButton = new FancyButton({
       text: exportText,
       defaultView: "ninesplicebutton.png",
+      pressedView: "ninesplicebuttonblack.png",
+            disabledView: "ninesplicebuttongrey.png",
       nineSliceSprite: [12, 12, 12, 12]
     });
     this.exportButton.width = subeditbuttonwidth;
@@ -238,6 +243,8 @@ export class MainScreen extends Container {
     this.doneButton = new FancyButton({
       text: doneText,
       defaultView: "ninesplicebutton.png",
+      pressedView: "ninesplicebuttonblack.png",
+      disabledView: "ninesplicebuttongrey.png",
       nineSliceSprite: [12, 12, 12, 12],
     });
     this.doneButton.width = subeditbuttonwidth;
@@ -257,7 +264,9 @@ export class MainScreen extends Container {
     this.cancelButton = new FancyButton({
       text: cancelText,
       defaultView: "ninesplicebutton.png",
-      nineSliceSprite: [12, 12, 12, 12],
+      pressedView: "ninesplicebuttonblack.png",
+      disabledView: "ninesplicebuttongrey.png",
+      nineSliceSprite: [12, 12, 12, 12]
     });
 
     this.cancelButton.width = subeditbuttonwidth;
@@ -339,6 +348,8 @@ export class MainScreen extends Container {
 
   public setEditMode(value: boolean) {
     this.editButton.enabled = !value;
+    this.doneButton.enabled = value;
+    this.cancelButton.enabled = value;
     this.editMode = value;
     this.gallery.setEditMode(value);
   }

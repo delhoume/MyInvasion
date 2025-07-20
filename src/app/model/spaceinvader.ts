@@ -10,6 +10,7 @@ export class SpaceInvader {
   public state: string = "A";
   public date: string = "";
   public sprite!: Sprite;
+  public checkbox: CheckBox;
 
 
 
