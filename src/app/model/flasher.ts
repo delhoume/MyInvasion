@@ -1,18 +1,21 @@
-import { Assets } from "pixi.js";
+import { Assets, vkFormatToGPUFormat } from "pixi.js";
 import { FlashFileParser } from "../utils/flashfile.js";
 import { WorldInvasion } from "./worldinvasion.js";
 
+type Comment = { line: number, comment: string };
+type Property = { name: string, value: string };
+
+
 export class Flasher {
-  public name: string;
+  public properties: any = {};
   public flashedCities: any;
 
-  constructor(name: string) {
-    this.name = name;
+  constructor() {
     this.flashedCities = {};
   }
 
   public init(flashfile: string) {
-   if (flashfile) {
+    if (flashfile) {
       const ff = new FlashFileParser();
       const tokens = ff.decodeString(flashfile);
       const cities: any = {};
@@ -24,14 +27,37 @@ export class Flasher {
         cities[city_code].push(si_code);
       });
       this.flashedCities = cities;
+      console.log(ff.comments);
+      this.parseFlashFileComments(ff.comments);
     }
-
   }
 
-  public load() {
-    const flashfile = Assets.get(`${this.name}.txt`);
+public getProperty(name: string) : string {
+  return this.properties[name];
+}
+
+public load(name: string) {
+    const flashfile = Assets.get(name);
     this.init(flashfile);
-   }
+  }
+
+public setProperty(name: string, value: string) {
+  this.properties[name] =  value;
+}
+
+  public parseFlashFileComments(comments: Comment[]) {
+    for (let c = 0; c < comments.length; ++c) {
+      const comment = comments[c].comment;
+      // check if name:value
+      console.log(comment);
+      const idx = comment.indexOf(":");
+      if (idx != -1) {
+        const prop = comment.substring(0, idx).trimEnd();
+        const value = comment.substring(idx + 1).trimStart();
+        this.setProperty(prop, value);
+      }
+    }
+  }
 
   public getTotalFlashes(): number {
     let total = 0;
@@ -72,7 +98,7 @@ export class Flasher {
     return (
       city_code in this.flashedCities &&
       this.flashedCities[city_code].length ==
-        WorldInvasion.GetInstance().cities[city_code].num_invaders
+      WorldInvasion.GetInstance().cities[city_code].num_invaders
     );
   }
 

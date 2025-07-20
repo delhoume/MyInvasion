@@ -144,7 +144,7 @@ export class MainScreen extends Container {
       text: modeText,
       defaultView: "ninesplicebutton.png",
       pressedView: "ninesplicebuttonblack.png",
-        nineSliceSprite: [12, 12, 12, 12],
+      nineSliceSprite: [12, 12, 12, 12],
     });
     this.modeButton.position.set(xoffset, buttonstarty);
     this.modeButton.width = modewidth;
@@ -182,7 +182,7 @@ export class MainScreen extends Container {
       text: importText,
       defaultView: "ninesplicebutton.png",
       pressedView: "ninesplicebuttonblack.png",
-        nineSliceSprite: [12, 12, 12, 12],
+      nineSliceSprite: [12, 12, 12, 12],
     });
     this.importButton.width = subeditbuttonwidth;
     this.importButton.height = buttonheight;
@@ -199,7 +199,7 @@ export class MainScreen extends Container {
           console.log("permission read granted");
           navigator.clipboard.readText().then((text) => {
             const world_invasion = WorldInvasion.GetInstance();
-            const flasher = new Flasher("NoName")
+            const flasher = new Flasher()
             flasher.init(text);
             world_invasion.initFromFlasher(flasher, this.mode);
             this.gallery.updateAllSprites();
@@ -217,7 +217,7 @@ export class MainScreen extends Container {
       text: exportText,
       defaultView: "ninesplicebutton.png",
       pressedView: "ninesplicebuttonblack.png",
-            disabledView: "ninesplicebuttongrey.png",
+      disabledView: "ninesplicebuttongrey.png",
       nineSliceSprite: [12, 12, 12, 12]
     });
     this.exportButton.width = subeditbuttonwidth;
@@ -254,6 +254,7 @@ export class MainScreen extends Container {
       buttonstarty + buttonrowheight
     );
     this.doneButton.anchor.set(0);
+    this.doneButton.enabled = false;
 
     this.infoArea.addChild(this.doneButton);
     this.doneButton.onPress.connect(() => {
@@ -276,7 +277,7 @@ export class MainScreen extends Container {
       buttonstarty + buttonrowheight
     );
     this.infoArea.addChild(this.cancelButton);
-
+    this.cancelButton.enabled = false;
     this.cancelButton.onPress.connect(() => {
       this.restoreFlashes();
       this.setEditMode(false);
@@ -379,8 +380,12 @@ export class MainScreen extends Container {
     const cities_flashed = flasher.getNumFlashedCities();
     const cities_displayed = this.gallery.num_displayed_cities;
     const invaders_displayed = this.gallery.num_displayed_invaders;
-    const completecitiesmsg = this.mode == "missing" ? `incomplete ${num_cities - cities_complete}` : `complete ${cities_complete}`;
-    this.scoreReport.text = `Cities: invaded ${num_cities} - displayed ${cities_displayed} - missing  ${num_cities - cities_flashed} - ${completecitiesmsg} \n\nInvaders: total ${num_invaders} - flashed ${num_flashed} - displayed ${invaders_displayed} `;
+    var scoretext = "pseudo" in flasher.properties ? `${flasher.properties["pseudo"]}` : "";
+    if ("date" in flasher.properties) scoretext += `  ${flasher.properties["date"]}`;
+    scoretext += "\n\n";
+    const citiesmsg = this.mode == "missing" ? `incomplete ${num_cities - cities_complete}` : `complete ${cities_complete}`;
+
+    this.scoreReport.text = `${scoretext} Cities: invaded ${num_cities} - displayed ${cities_displayed} - missing  ${num_cities - cities_flashed} - ${citiesmsg} \n\nInvaders: total ${num_invaders} - flashed ${num_flashed} - displayed ${invaders_displayed} `;
   }
 
   public saveCurrentFlashes() {

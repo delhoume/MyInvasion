@@ -1,16 +1,25 @@
 class FlashFileParser {
     current_city_code;
-    constructor() { }
+    comments;
+
+    constructor() {
+        this.comments = [];
+     }
 
     tokenize(contents) {
+        this.comments = [];
         let tokens = [];
         if (contents && contents.length > 0) {
             let lines = contents.split("\n");
             for (let l = 0; l < lines.length; ++l) {
                 let line = lines[l];
                 let comment_pos = line.indexOf('#');
-                if (comment_pos != -1)
+                if (comment_pos != -1) {
+                      // gather comments
+                    this.comments.push({ line: l, 
+                        comment: line.substring(comment_pos + 1).trim()});
                     line = line.substring(0, comment_pos);
+                }
                 let trick = line.replaceAll(".", " ");
                 let words = trick.split(" ");
                 for (let w = 0; w < words.length; ++w) {

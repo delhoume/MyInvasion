@@ -26,9 +26,9 @@ export class WorldInvasion {
     if (WorldInvasion.singleton) return WorldInvasion.singleton;
     WorldInvasion.singleton = new WorldInvasion();
     WorldInvasion.singleton.initFrom(Assets.get("cities.json"));
-    //const flasher = new Flasher("pariscmagic_10juillet_2025");;
-    const flasher = new Flasher("delhoume_latest");
-    flasher.load();
+    const flasher = new Flasher();
+    flasher.load("delhoume_latest.txt");
+    // flasher.load("pariscmagic_10juillet_2025.txt");
     WorldInvasion.singleton.initFromFlasher(flasher);
     return WorldInvasion.singleton;
   }
