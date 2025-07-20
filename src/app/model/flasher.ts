@@ -27,7 +27,7 @@ export class Flasher {
         cities[city_code].push(si_code);
       });
       this.flashedCities = cities;
-      console.log(ff.comments);
+   // console.log(ff.comments);
       this.parseFlashFileComments(ff.comments);
     }
   }
