@@ -8,13 +8,17 @@ type Property = { name: string, value: string };
 
 export class Flasher {
   public properties: any = {};
-  public flashedCities: any;
+  public flashedCities: any = {};
+  public flashedInvaders: any = {};
 
-  constructor() {
-    this.flashedCities = {};
+  constructor(flashfile: string) {
+    this.init(flashfile);
   }
 
   public init(flashfile: string) {
+    this.flashedInvaders = {};
+    this.properties = {};
+    this.flashedCities = {};
     if (flashfile) {
       const ff = new FlashFileParser();
       const tokens = ff.decodeString(flashfile);
@@ -28,25 +32,23 @@ export class Flasher {
           cities[city_code] = [];
         }
         cities[city_code].push(si_code);
+        this.flashedInvaders[si_code] = true;
       });
       this.flashedCities = cities;
-   // console.log(ff.comments);
+      // console.log(ff.comments);
       this.parseFlashFileComments(ff.comments);
     }
+    console.log(Object.keys(this.flashedInvaders).length);
   }
 
-public getProperty(name: string) : string {
-  return this.properties[name];
-}
-
-public load(name: string) {
-    const flashfile = Assets.get(name);
-    this.init(flashfile);
+  public getProperty(name: string): string {
+    return name in this.properties ? this.properties[name] : "";
   }
 
-public setProperty(name: string, value: string) {
-  this.properties[name] =  value;
-}
+
+  public setProperty(name: string, value: string) {
+    this.properties[name] = value;
+  }
 
   public parseFlashFileComments(comments: Comment[]) {
     for (let c = 0; c < comments.length; ++c) {
@@ -62,11 +64,12 @@ public setProperty(name: string, value: string) {
   }
 
   public getTotalFlashes(): number {
-    let total = 0;
-    for (const c in this.flashedCities) {
-      total += this.flashedCities[c].length;
-    }
-    return total;
+    return Object.keys(this.flashedInvaders).length;
+    // let total = 0;
+    // for (const c in this.flashedCities) {
+    //   total += this.flashedCities[c].length;
+    // }
+    // return total;
   }
 
   public getNumFlashedCities(): number {
@@ -112,6 +115,8 @@ public setProperty(name: string, value: string) {
   }
 
   public isInvaderFlashed(si_code: string) {
+   // return si_code in this.flashedInvaders && this.flashedInvaders == true;
+
     const city_code = si_code.split("_")[0];
     if (city_code in this.flashedCities) {
       const flashedCityInvaders = this.flashedCities[city_code];
@@ -129,6 +134,7 @@ public setProperty(name: string, value: string) {
       this.flashedCities[city_code] = [];
     }
     this.flashedCities[city_code].push(si_code);
+    this.flashedInvaders[si_code] = true;
   }
 
   public unflash(si_code: string) {
@@ -136,6 +142,7 @@ public setProperty(name: string, value: string) {
     const invaders = this.flashedCities[city_code];
     const idx = invaders.indexOf(si_code);
     this.flashedCities[city_code].splice(idx, 1);
+    delete this.flashedInvaders[si_code];
     // no need to remove the city if empty
   }
 

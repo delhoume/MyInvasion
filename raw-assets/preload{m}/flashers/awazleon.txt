@@ -1,5 +1,5 @@
-#awazleon
-#octobre 2024
+# pseudo:awazleon
+#  date:octobre 2024
 AIX_01+9
 AMS_02+2 06,14 17,21 23+3
 ANVR_02

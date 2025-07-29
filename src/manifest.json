@@ -2415,6 +2415,23 @@
         },
         {
           "alias": [
+            "preload/atlases/SPACE_00.png",
+            "SPACE_00.png"
+          ],
+          "src": [
+            "preload/atlases/SPACE_00@0.5x.webp",
+            "preload/atlases/SPACE_00@0.5x.png",
+            "preload/atlases/SPACE_00.webp",
+            "preload/atlases/SPACE_00.png"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
             "preload/atlases/SP_00.avif",
             "SP_00.avif"
           ],
@@ -2798,6 +2815,20 @@
           ],
           "src": [
             "preload/invaders.json"
+          ],
+          "data": {
+            "tags": {
+              "m": true
+            }
+          }
+        },
+        {
+          "alias": [
+            "preload/invaders_for_myinvasion.json",
+            "invaders_for_myinvasion.json"
+          ],
+          "src": [
+            "preload/invaders_for_myinvasion.json"
           ],
           "data": {
             "tags": {

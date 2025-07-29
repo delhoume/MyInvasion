@@ -37,6 +37,7 @@ export class SpaceInvader {
     var texture = Texture.from(si_code);
     if (!texture)
       texture = Assets.get("missing.jpg");
+
     const sprite = new Sprite({ texture: texture });
     //console.log(sprite.width, sprite.height);
     container.addChild(sprite);
@@ -51,18 +52,18 @@ export class SpaceInvader {
     }
     if (mode && mode == "all") {
       if (flashed) {
-        //const flashedmethod = "tintgreen";
-         const flashedmethod = "greenborder";
+    const flashedmethod = "greencorner";
+        //  const flashedmethod = "greencorner";
+         // const flashedmethod = "greenborder";
+         const greencol = 'rgb(80, 255,80)';
         switch (flashedmethod) {
-          case "tintgreen": {
-            const g = new Graphics().rect(bb.left, bb.top, bb.width, bb.height).
-              fill({ color: "00ff0044" });
-            container.addChild(g);
-
+          case "greentint": {
+           sprite.tint = greencol;
           } break;
           case "greenborder": {
             const g = new Graphics().rect(bb.left, bb.top, bb.width, bb.height).
-              stroke({ width: 5, color: "green" });
+              stroke({ width: 5, color: greencol });
+
             container.addChild(g);
 
           } break;
@@ -80,6 +81,7 @@ export class SpaceInvader {
 
     container.cacheAsTexture(true);
     const bakedtexture = engine().renderer.generateTexture(container);
+    container.destroy();
     return bakedtexture;
   }
 

@@ -7,6 +7,7 @@ import {
   Graphics,
   NineSliceSprite,
   Point,
+  Sprite,
   Text,
   TextStyle,
   Texture,
@@ -19,6 +20,8 @@ import { Gallery } from "./Gallery.ts";
 import { WorldInvasion } from "../../model/worldinvasion.ts";
 import { BackdropBlurFilter } from "pixi-filters";
 import { Flasher } from "../../model/flasher.ts";
+
+import { generateQrCodeMatrix, generateQrCodeImage } from 'dfts-qrcode';
 
 /** The screen that holds the app */
 export class MainScreen extends Container {
@@ -33,6 +36,7 @@ export class MainScreen extends Container {
   private doneButton: FancyButton;
   private cancelButton: FancyButton;
 
+  private newButton: FancyButton;
   private importButton: FancyButton;
   private exportButton: FancyButton;
   private modeButton: FancyButton;
@@ -130,7 +134,7 @@ export class MainScreen extends Container {
 
     const UIwidth = 500;
     const UIheight = 250;
-    const xoffset = 10;
+    const xoffset = 5;
     const yoffset = 5;
     const modewidth = (UIwidth - 3 * xoffset) / 2;
     const editwidth = modewidth;
@@ -138,6 +142,7 @@ export class MainScreen extends Container {
     const buttonheight = 24;
     const buttonrowheight = buttonheight + 10;
     const subeditbuttonwidth = (editwidth - xoffset) / 2;
+    const subeditthreebuttonwidth = (editwidth - xoffset * 2) / 3;
 
     const modeText = new Text({ text: "Mode", style: buttonsStyle });
     this.modeButton = new FancyButton({
@@ -177,6 +182,27 @@ export class MainScreen extends Container {
       this.updateScore();
     });
 
+    const newText = new Text({ text: "New", style: buttonsStyle });
+    this.newButton = new FancyButton({
+      text: newText,
+      defaultView: "ninesplicebutton.png",
+      pressedView: "ninesplicebuttonblack.png",
+      nineSliceSprite: [12, 12, 12, 12],
+    });
+    this.newButton.width = subeditthreebuttonwidth;
+    this.newButton.height = buttonheight;
+    this.newButton.position.set(
+      this.modeButton.x,
+      buttonstarty + buttonrowheight
+    );
+    this.newButton.anchor.set(0);
+    this.infoArea.addChild(this.newButton);
+    const defaultContents = "# pseudo:Sample test flashfile\n# date: 2025-07-22\nAMI_01+15 BAB_01+30 FTBL_10 12+ 15+5 PA_500 PA_1000 PA_1500+45";
+
+    this.newButton.onPress.connect(() => {
+      this.loadFlashfileContents(defaultContents);
+    });
+
     const importText = new Text({ text: "Import", style: buttonsStyle });
     this.importButton = new FancyButton({
       text: importText,
@@ -184,10 +210,10 @@ export class MainScreen extends Container {
       pressedView: "ninesplicebuttonblack.png",
       nineSliceSprite: [12, 12, 12, 12],
     });
-    this.importButton.width = subeditbuttonwidth;
+    this.importButton.width = subeditthreebuttonwidth;
     this.importButton.height = buttonheight;
     this.importButton.position.set(
-      this.modeButton.x,
+      this.modeButton.x + subeditthreebuttonwidth + xoffset,
       buttonstarty + buttonrowheight
     );
     this.importButton.anchor.set(0);
@@ -202,13 +228,7 @@ export class MainScreen extends Container {
     }
     filereader.onload = function () {
       const contents = filereader.result;
-      const world_invasion = WorldInvasion.GetInstance();
-      const flasher = new Flasher();
-      flasher.init(contents);
-      world_invasion.initFromFlasher(flasher, t.mode);
-      t.gallery.updateAllSprites();
-      t.updateScore();
-      t.gallery.layout();
+      t.loadFlashfileContents(contents);
     }
     this.importButton.onPress.connect(() => {
       document.getElementById("fileElem")?.click();
@@ -222,10 +242,10 @@ export class MainScreen extends Container {
       disabledView: "ninesplicebuttongrey.png",
       nineSliceSprite: [12, 12, 12, 12]
     });
-    this.exportButton.width = subeditbuttonwidth;
+    this.exportButton.width = subeditthreebuttonwidth;
     this.exportButton.height = buttonheight;
     this.exportButton.position.set(
-      this.modeButton.x + subeditbuttonwidth + xoffset,
+      this.modeButton.x + 2 * (subeditthreebuttonwidth + xoffset),
       buttonstarty + buttonrowheight
     );
     this.exportButton.anchor.set(0);
@@ -235,12 +255,54 @@ export class MainScreen extends Container {
       const world_invasion = WorldInvasion.GetInstance();
       const flasher = world_invasion.flasher;
       const contents = flasher.getFlashFile();
-      navigator.permissions.query({ name: "clipboard-write", requestedOrigin: window.location.origin }).then((result) => {
-        if (result.state === "granted") {
-          navigator.clipboard.writeText(contents).then(() => { })
-        };
-      });
+
+      // also download as text
+      const a = document.createElement('a');
+
+      // set up a data uri with the text
+      a.href = `data:text/plain,${contents}`;
+
+      // set the download attribute so it downloads and uses this as a filename
+      a.download = `${world_invasion.flasher.getProperty("pseudo")}_flashfile_export.txt`;
+
+      // stick it in the document
+      document.body.appendChild(a);
+
+      // click it
+      a.click();
+      document.body.removeChild(a);
+      //s and display as qrcode
+      const qrcodeMatrix = generateQrCodeMatrix(contents, { mode: 'octet' });
+      const cont = new Container();
+      const texture = Texture.WHITE;
+      const twidth = 5;
+      const theight = 5;
+      const msize = qrcodeMatrix.length;
+      cont.addChild(new Graphics().rect(0, 0, (msize + 2) * twidth, (msize + 2) * theight).fill({ color: "white" }));
+      for (let y = 0; y < msize; ++y) {
+        const row = qrcodeMatrix[y];
+        for (let x = 0; x < row.length; ++x) {
+          if (row[x] == 1) {
+            const sprite = new Sprite(texture);
+            sprite.tint = "0x000000";
+            sprite.position.set((x + 1) * twidth, (y + 1) * theight);
+            sprite.width = twidth;
+            sprite.height = theight;
+            cont.addChild(sprite);
+          }
+        }
+      }
+      cont.cacheAsTexture(true);
+      const bakedtexture = engine().renderer.generateTexture(cont);
+      const nsprite = new Sprite(bakedtexture);
+      const xpos = (engine().screen.width - nsprite.width) / 2;
+      const ypos = (engine().screen.height - nsprite.height) / 2;
+      nsprite.position.set(xpos, ypos);
+      nsprite.eventMode = "static";
+      nsprite.on("pointerup", () => { nsprite.destroy(); });
+      this.addChild(nsprite);
     });
+
     const doneText = new Text({ text: "Done", style: buttonsStyle });
     this.doneButton = new FancyButton({
       text: doneText,
@@ -300,11 +362,10 @@ export class MainScreen extends Container {
           this.mode = "missing";
           break;
       }
-
       this.gallery.setMode(this.mode);
       this.updateScore();
     });
-    this.gallery.updateAllSprites();
+    //this.gallery.updateAllSprites();
     this.updateScore();
     this.gallery.layout();
     const tpr = userSettings.getTilesPerRow();
@@ -377,11 +438,12 @@ export class MainScreen extends Container {
     const num_invaders = world_invasion.num_invaders;
     const num_cities = world_invasion.sorted_cities_codes.length;
     const flasher = world_invasion.flasher;
-    const num_flashed = flasher.getTotalFlashes();
+    const num_flashed_invaders = flasher.getTotalFlashes();
+    const num_not_flashed_invaders = num_invaders - num_flashed_invaders;
+    const num_flashable_invaders  = world_invasion.getNumFlashableInvaders();
     const cities_complete = flasher.getNumCompleteCities();
     const cities_flashed = flasher.getNumFlashedCities();
-    const cities_displayed = this.gallery.num_displayed_cities;
-    const invaders_displayed = this.gallery.num_displayed_invaders;
+    const num_flashable_cities = world_invasion.getNumFlashableCities();
     const pseudo = "pseudo" in flasher.properties ? flasher.properties["pseudo"] : "Anonymous";
     document.title = `MyInvasion: ${pseudo}`
     var scoretext = pseudo;
@@ -389,13 +451,39 @@ export class MainScreen extends Container {
       scoretext += `  ${flasher.properties["date"]}`;
     if ("rank" in flasher.properties)
       scoretext += `  rank ${flasher.properties["rank"]}`;
-    scoretext += "\n\n";
-    const citiesmsg =
-      this.mode == "missing"
+    const citiesmsgcommon = `Cities: invaded ${num_cities} `;
+    var citiesmsg : string = "";
+    switch (this.mode) {
+      case "all":
+        case "flashedonly":
+          citiesmsg = `flashed: ${cities_flashed} - complete: ${cities_complete}`; break;
+      case "missing":
+        citiesmsg = `incomplete ${num_cities - cities_complete}`; break;
+      case "flashable":
+        citiesmsg = `flashable: ${num_flashable_cities}`; break;
+    }
+      (this.mode == "missing" || this.mode == "flashable")
         ? `incomplete ${num_cities - cities_complete}`
         : `complete ${cities_complete}`;
-
-    this.scoreReport.text = `${scoretext} Cities: invaded ${num_cities} - displayed ${cities_displayed} - missing  ${num_cities - cities_flashed} - ${citiesmsg} \n\nInvaders: total ${num_invaders} - flashed ${num_flashed} - displayed ${invaders_displayed} `;
+    const invadersmsgcommon = `Invaders: total ${num_invaders}`;
+    var invadersmsg: string = "";
+    switch (this.mode) {
+      case "missing":
+        invadersmsg = ` not flashed: ${num_not_flashed_invaders}`; break;
+      case "flashable":
+        invadersmsg = ` flashable: ${num_flashable_invaders}`; break;
+      case "flashedonly":
+        invadersmsg = ` flashed: ${num_flashed_invaders}`; break;
+      }
+    this.scoreReport.text = `${scoretext} \n\n ${citiesmsgcommon} - ${citiesmsg} \n\n ${invadersmsgcommon} - ${invadersmsg} `;
+  }
+  public loadFlashfileContents(contents: string) {
+    const world_invasion = WorldInvasion.GetInstance();
+    const flasher = new Flasher(contents);
+    world_invasion.initFromFlasher(flasher);
+    this.gallery.updateAllSprites();
+    this.updateScore();
+    this.gallery.layout();
   }
 
   public saveCurrentFlashes() {
@@ -407,15 +495,16 @@ export class MainScreen extends Container {
 
   public restoreFlashes() {
     const world_invasion = WorldInvasion.GetInstance();
-    const flasher = world_invasion.flasher;
-    flasher.init(this.savedFlashed);
+    const flasher = new Flasher(this.savedFlashed);
+    world_invasion.initFromFlasher(flasher);
+    this.updateScore();
     this.gallery.layout();
   }
 
   /** Update the screen */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public update(_time: Ticker) {
-    this.gallery.update();
+    //   this.gallery.update();
     this.updateScore();
   }
 

@@ -25,7 +25,6 @@ export class GraphicsCity {
 
 
   static IsInvaderVisible(mode: string, si_code: string): boolean {
-    const city_code = si_code.split("_")[0];
            const world_invasion = WorldInvasion.GetInstance();
       switch(mode) {
         case "flashedonly": return world_invasion.flasher.isInvaderFlashed(si_code);

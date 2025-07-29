@@ -3,7 +3,6 @@ import { City } from "./city";
 import { SpaceInvader } from "./spaceinvader";
 import { Assets } from "pixi.js";
 import { Flasher } from "./flasher";
-import { engine } from "../getEngine";
 import { MainScreen } from "../screens/main/MainScreen";
 
 export class WorldInvasion {
@@ -14,7 +13,7 @@ export class WorldInvasion {
   public flasher!: Flasher;
   public sorted_flashed_cities_codes: any;
 
-  private static singleton: WorldInvasion;
+  private static singleton: WorldInvasion = null;
 
   private constructor() {
     this.num_cities = 0;
@@ -26,18 +25,18 @@ export class WorldInvasion {
     if (WorldInvasion.singleton) return WorldInvasion.singleton;
     WorldInvasion.singleton = new WorldInvasion();
     WorldInvasion.singleton.initFrom(Assets.get("cities.json"));
-    const flasher = new Flasher();
-    flasher.load("delhoume_latest.txt");
-    // flasher.load("pariscmagic_10juillet_2025.txt");
+    const firstflashes: string = Assets.get("delhoume_latest.txt");
+    const flasher = new Flasher(firstflashes);
     WorldInvasion.singleton.initFromFlasher(flasher);
     return WorldInvasion.singleton;
   }
 
-  public initFrom(desc: any) {
-    this.num_cities = desc.cities.number;
+  public initFrom(cities: any) {
+    this.num_cities = Object.keys(cities).length;
+    cities["SPACE"].invaders = 2;
     this.num_invaders = 0;
-    for (const c in desc.cities.details) {
-      const cityObj = desc.cities.details[c];
+    for (const c in cities) {
+      const cityObj = cities[c];
       const city = new City(cityObj);
       this.num_invaders += city.num_invaders;
       this.cities[c] = city;
@@ -80,7 +79,7 @@ export class WorldInvasion {
       if (this.flasher.isCityFlashed(city_code)) {
         this.sorted_flashed_cities_codes.push(city_code);
         for (const si_code in city.invaders) {
-          city.invaders[si_code].flashed = this.flasher.isInvaderFlashed;
+          city.invaders[si_code].flashed = this.flasher.isInvaderFlashed(si_code);
         }
       } else {
         for (const si_code in city.invaders) {
@@ -92,7 +91,7 @@ export class WorldInvasion {
         const si = city.invaders[si_code];
         if (si) {
           const texture = SpaceInvader.BuildTexture(si_code, "state" in si ? si.state : "U",
-                     this.flasher.isInvaderFlashed(si_code), MainScreen.DefaultMode);
+            this.flasher.isInvaderFlashed(si_code), MainScreen.DefaultMode, false);
           si.sprite.texture = texture;
         }
       }
@@ -110,6 +109,35 @@ export class WorldInvasion {
   //     console.log(filename, contents);
   //     console.log(this);
   // }
+
+  public getNumFlashableCities(): number {
+    var flashablecities = 0;
+    const flasher = this.flasher;
+    for (let c in this.cities) {
+      if (!flasher.isCityFullyFlashed(c)) {
+        flashablecities++;
+      }
+    }
+    return flashablecities;
+  }
+
+  public getNumFlashableInvaders(): number {
+    var flashableinvaders = 0;
+    const flasher = this.flasher;
+    for (let c in this.cities) {
+      let city = this.cities[c];
+      if (!flasher.isCityFullyFlashed) {
+        for (const si_code in city.invaders) {
+          const si = city.invaders[si_code];
+          const goodstate = si.state == "A" || si.state == "DG";
+          if (goodstate && !flasher.isInvaderFlashed(si_code)) {
+            flashableinvaders++;
+          }
+        }
+      }
+    }
+    return flashableinvaders
+  }
 
   public invader(invader_code: string): SpaceInvader {
     const { city_code } = SpaceInvader.CodeToParts(invader_code);

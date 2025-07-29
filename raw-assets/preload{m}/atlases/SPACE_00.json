@@ -1,14 +1,14 @@
 {
   "frames": {
     "SPACE_01": {
-      "frame": { "x": 0, "y": 0, "w": 128, "h": 128 },
-      "sourceSize": { "w": 128, "h": 128 },
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 128 }
+      "frame": { "x": 0, "y": 0, "w": 256, "h": 256 },
+      "sourceSize": { "w": 256, "h": 256 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 256 }
     },
-    "SPACE_02": {
-      "frame": { "x": 128, "y": 0, "w": 128, "h": 128 },
-      "sourceSize": { "w": 128, "h": 128 },
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 128 }
+       "SPACE_02": {
+      "frame": { "x": 256, "y": 0, "w": 256, "h": 256 },
+      "sourceSize": { "w": 256, "h": 256 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 256 }
     }
   },
   "meta": {
@@ -16,7 +16,7 @@
     "version": "5.0.0",
     "image": "SPACE_00.avif",
     "format": "RGBA8888",
-    "size": { "w": 256, "h": 128 },
+    "size": [512, 256],
     "scale": "1"
   }
 }

@@ -32,16 +32,14 @@ export class Gallery extends Container {
 
   setMode(mode: string) {
     this.mode = mode;
+    this.updateAllSprites();
     this.layout();
     this.updateCitiesTexts();
   }
 
   public setEditMode(editmode: boolean) {
     this.editmode = editmode;
-    this.updateAllSprites();
-    this.updateCitiesTexts()
-    this.layout();
-
+     this.layout();
     if (editmode)
       this.startShaking();
     else
@@ -58,7 +56,7 @@ export class Gallery extends Container {
         GraphicsCity.BuildCityName(
           city.name,
           city.num_invaders,
-          world_invasion.flasher.getCityFlashedNum(c)
+          world_invasion.flasher?.getCityFlashedNum(c)
         )
       );
       const cityInvadersContainer = new Container({ label: `${c}_invaders` });
@@ -66,7 +64,7 @@ export class Gallery extends Container {
       for (let i = 0; i < city.num_invaders; ++i) {
         const invader_code = City.InvaderCode(c, i);
         const invader = world_invasion.invader(invader_code);
-        const flashed = world_invasion.flasher.isInvaderFlashed(invader_code);
+        const flashed = world_invasion.flasher?.isInvaderFlashed(invader_code);
         const texture: Texture = SpaceInvader.BuildTexture(
           invader_code,
           invader.state,
@@ -114,7 +112,7 @@ export class Gallery extends Container {
   }
 
   public restartShake() {
-    if (this.firstShake?.criteriaMet()) {
+    if (this.firstShake && this.firstShake.criteriaMet()) {
       //      console.log("called");
       this.startShaking();
     }
@@ -125,7 +123,7 @@ export class Gallery extends Container {
     // get viewport location
     const pos = this.viewport.top / this.viewport.worldHeight;
 
-    // gcompute tilesize
+    // compute tilesize
     const tpr = userSettings.getTilesPerRow();
     const app = engine();
     const windowWidth = app.screen.width;
@@ -291,7 +289,7 @@ export class Gallery extends Container {
     const world_invasion = WorldInvasion.GetInstance();
     for (let city_code in world_invasion.cities) {
       for (let si_code in world_invasion.cities[city_code].invaders) {
-        this.updateSprite(si_code);
+       this.updateSprite(si_code);
       }
     }
   }
@@ -307,9 +305,9 @@ export class Gallery extends Container {
       this.mode,
       this.editmode
     );
-    si.sprite.texture = newTexture;
-    if (si.checbox) {
-      si.checkbox.checked = flasher.isInvaderFlashed(si_code);
-    }
+   // si.sprite.texture = newTexture;
+    // if (si.checkbox) {
+    //   si.checkbox.checked = flasher.isInvaderFlashed(si_code);
+    // }
   }
 }
